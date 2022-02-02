@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.support.SupportMapper">
+	<!-- insert -->
+	<insert id="insertSupportData" parameterType="sptdto">
+		insert into support (idx, id, email, addr, hp, present_name, present_option, price, support_date, end_date) 
+		values (#{idx}, #{id}, #{email}, #{addr}, #{hp}, #{present_name}, #{present_option}, #{price}, now(), #{end_date})
+	</insert>
+	<!-- 후원자수 추가 -->
+	<update id="addSupporter" parameterType="int">
+		update project set number_support=number_support+1 where idx=#{idx}
+	</update>
+	<!-- 후원금액 추가 -->
+	<update id="addTotalAmount" parameterType="int">
+		update project set total_amount=total_amount+#{pstP} where idx=#{idx}
+	</update>
+	<!-- 후원자 이메일 가져오기 -->
+	<select id="getEmail" parameterType="String" resultType="String">
+		select email from member where id=#{id};
+	</select>
+	<!-- 후원자 핸드폰 번호 가져오기 -->
+	<select id="getHp" parameterType="String" resultType="String">
+		select hp from member where id=#{id};
+	</select>
+	<!-- 후원자 배송정보 가져오기 -->
+	<select id="getAddr" parameterType="String" resultType="String">
+		select addr,addr2 from delivery where id=#{id} and pin=1
+	</select>
+</mapper>

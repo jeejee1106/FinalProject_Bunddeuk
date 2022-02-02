@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="layout" template="/WEB-INF/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/layout/header.jsp"></put-attribute>
+		<put-attribute name="main" value="/WEB-INF/layout/main.jsp"></put-attribute>
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"></put-attribute>
+	</definition>
+	
+	<!-- wild card -->
+	<definition name="/*/*" extends="layout">
+		<put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
+	</definition>
+	
+	
+	<!-- 채팅창띄우기위해서 새로운 레이아웃 등록 -->
+	<!-- layout2.jsp와 main2.jsp 생성 -->
+	<definition name="layout2" template="/WEB-INF/layout/layout2.jsp">
+		<put-attribute name="main2" value="/WEB-INF/layout/main2.jsp"/>
+	</definition>
+	
+	<definition name="/chat/*/*" extends="layout2">  
+		<put-attribute name="main2" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+</tiles-definitions>

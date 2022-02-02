@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.project.DetailMapper">
+	<!-- 프로젝트 전체 데이터 반환 -->
+	<select id="getData" parameterType="int" resultType="pdto">
+		select * from project where idx=#{idx}
+	</select>
+	<!-- end_date의 다음날 날짜 출력 -->
+	<select id="getPaymentDate" parameterType="int" resultType="String">
+		select date_add(end_date,INTERVAL 1 DAY) from project where idx=#{idx}
+	</select>
+	<!-- 작가의 프로필 사진 가져오기 -->
+	<select id="getCreatorImage" parameterType="String" resultType="String">
+		select ifnull(photo, 'basic.jpg') from member where id=#{id}
+	</select>
+	<!-- 작가 소개 가져오기 -->
+	<select id="getCreatorIntro" parameterType="String" resultType="String">
+		select ifnull(introduce, '안녕하세요. 문의 사항은 메세지를 보내주세요.') from member where id=#{id}
+	</select>
+	<!-- 주소데이터가 없는 멤버의 주소를 x로 출력 -->
+	<select id="getAddr" parameterType="String" resultType="ddto">
+		select ifnull(max(addr),'x')as addr, ifnull(max(addr2),'x') as addr2 from delivery where id=#{id} and pin=1
+	</select>
+	<!-- 로그인된 멤버의 핸드폰번호 가져오기 -->
+	<update id="setHp" parameterType="mdto">
+		update member set hp=#{hp} where id=#{id}
+	</update>
+	<!-- 로그인된 멤버의 이메일 가져오기 -->
+	<update id="setEmail" parameterType="mdto">
+		update member set email=#{email} where id=#{id}
+	</update>
+	<!-- 배송지 테이블에 데이터 넣기 -->
+	<insert id="insertDelivery" parameterType="ddto">
+		insert into delivery(name, id, addr, addr2, hp, pin)
+		values (#{name}, #{id}, #{addr}, #{addr2}, #{hp}, 1)
+	</insert>
+	<!-- 좋아요 되어있는지 체크하기 -->
+	<select id="getLikeCheck" parameterType="HashMap" resultType="int">
+		select count(*) from liked where idx=#{idx} and id=#{id}
+	</select>
+	<!-- liked 테이블에 insert -->
+	<insert id="insertLikeProject" parameterType="HashMap">
+		insert into liked (idx, id) values (#{idx}, #{id})
+	</insert>
+	<!-- liked테이블에서 delete -->
+	<delete id="deleteLikeProject" parameterType="HashMap">
+		delete from liked where idx=#{idx} and id=#{id}
+	</delete>
+	<!-- 선물 정보 가져오기 -->
+	<select id="getPresentData" parameterType="int" resultType="pstdto">
+		select * from present where idx = #{idx}
+	</select>
+	<!-- 이미 후원한 프로젝트인지 체크하기 -->
+	<select id="getSupportCheck" parameterType="HashMap" resultType="int">
+		select count(*) from support where idx=#{idx} and id=#{id}
+	</select>
+</mapper>

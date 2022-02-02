@@ -1,0 +1,353 @@
+/* editor */
+.page{
+	width: 1080px;
+	margin: 0px auto;
+}
+ul.list>li{
+	width: 120px;
+	text-align: center;
+	margin-top: 35px;
+}
+.menu{
+	font-size: 13px;
+	cursor: pointer;
+	font-weight: bold;
+	color: #dcdcdc;
+}
+ul.list{
+	width: 600px;
+    margin: 0px auto;
+    align-items: center;
+    white-space: nowrap;
+}
+.area{
+	z-index:10;
+}
+
+/* layout */
+.media {
+	display: flex;
+	justify-content: space-between;
+}
+.border_line{
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	
+}
+.editor_line{
+	margin-bottom: 30px; 
+	padding: 20px;
+	width: 100%
+}
+.layout1 {
+	width: 600px;
+	margin-bottom: 100px;
+}
+
+.textform, .sel {
+	width: 100%;
+	padding: 11px 0px;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+}
+
+.file_box {
+	width: 100%;
+	height: 400px;
+	padding: 50px;
+	border: 1px dashed #cccccc;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.textform {
+	margin: 0px;
+}
+
+.sub_title {
+	margin-left: 30px;
+	display: flex;
+}
+
+.groundBorder {
+	border: 1px solid #cccccc;
+	padding: 20px 5px;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.img {
+	width: 80%;
+	margin-left: 50px;
+}
+
+.main_title {
+	margin: 0px 0px auto;
+	display: block;
+	width: 380px;
+}
+
+.sub_text {
+	color: #696969
+}
+
+.sub_font {
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+.filebox input[type="file"] { /* 파일 필드 숨기기 */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+.label_box{
+	width: 300px; 
+	background-color: white; 
+	border: 0px solid white; 
+	text-align: center;
+}
+.final-btn,.save{
+	float: right;
+	display: flex;
+	z-index: 999;
+	margin-left: 20px;
+}
+.passbtn_box{
+	width: 1080px;
+	margin: 0px auto;
+}
+.present_box{
+	background-color: width; 
+	border: 1px solid #cccccc; 
+	padding: 20px 50px; 
+	height: 10%; 
+	margin-top: 10px;
+	display: flex;
+}
+.strong_font{
+	font-size: 1.5em;
+}
+.present_del_btn{
+	margin-left: 50px; 
+	font-size: 1.3em; 
+	background-color: white; 
+	border: 1px solid silver; 
+	color: gray;
+}
+.playPay,.text_length,.present_length{
+	float: right;
+}
+.searchclear{
+	cursor: pointer;
+}
+.project_back{
+ background-color: white;
+}
+.classynav{
+	width: 1080px;
+	margin: 0px auto;
+}
+.backColor{
+	background-color: white;
+}
+
+/* default */
+.project_back{
+	height: 90px;
+}
+.bunddeuk{
+	width: 150px; 
+	margin-top: 27px; 
+	z-index: 999;
+}
+#span_css3,#span_css2,.iconStar,#reward_name >p>span,
+#rewardPay>p>span,#reward_option>p>span{
+	color: red; 
+	font-size: 15px;
+}
+#subFont,#reward_sub_font,#form1,#form2{
+	width: 250px;
+}
+.imgView{
+	width: 200px;
+}
+#layout4{
+	margin-top:30px; 
+	margin-left: 200px;
+}
+.uploadImg{
+	margin-left: 10px;
+}
+.filebox >label{
+	width: 115px; 
+	text-align: center;
+}
+#layout3{
+	margin-top: 20px; margin-left: 100px;
+}
+
+/* funding */
+.goalText{
+	background-color: #fdf4f3; 
+	padding: 30px 50px; 
+	width: 100%;
+}
+.goalText >span,#text_css,#span_css{
+	color: red; 
+	font-size: 12px;
+}
+#borderGround{
+	height: 350px;
+}
+#goalPayCss,#polict_css1,.policy_css2{
+	width: 250px; 
+	margin: 20px;
+}
+#target{
+	width: 90%; 
+	text-align:right; 
+	margin-left: 20px;
+}
+.den_text,.den_text2{
+	float: right; 
+	margin-right: 35px; 
+	color:red;
+}
+.madeGoalPay{
+	width: 90%; 
+	height:150px; 
+	background-color: #fcfcfc; 
+	margin: 25px 30px; 
+	padding: 20px 20px; 
+	border-radius: 5px;
+}
+.dateData{
+	display: flex; 
+	width: 100%; 
+	height: 100px;
+}
+.startDateForm >p,.fundingTime>p{
+	margin-bottom: 2px;
+}
+#start_date{
+	width: 300px;
+}
+#time_start{
+	width: 280px;
+}
+.fundingTime{
+	width: 100%; 
+	height: 60px;
+}
+.fundingTime2{
+	width: 100%; 
+	height: 90px;
+}
+.num_nights{
+	text-align:center; 
+	font-weight: bold;
+}
+.endDateForm{
+	width: 100%; 
+	height: 90px; 
+	margin-top: 20px;
+}
+.endDate_form{
+	display: flex; 
+	width: 100%;
+}
+
+/* reward */
+.reward_boxForm{
+	background-color: white; 
+	border: none;
+}
+#rewardForm{
+	width: 350px;
+}
+.rewardBox{
+	width: 70%;
+}
+.present_box2{
+	width: 30px;
+}
+#boxLayout{
+	margin-top: 30px;
+}
+.boxLayout2{
+	margin: 40px;
+}
+#present_name,#price{
+	width: 100%;
+}
+.option_form{
+	width: 95%;
+}
+
+/* story */
+.goalText2{
+	background-color: #fdf4f3; 
+	padding: 30px 50px; 
+	width: 80%;
+}
+#border_line_box{
+	width: 70%; 
+	margin: 30px;
+}
+.back_color{
+	background-color: #fdf4f3; 
+	padding: 30px 50px; 
+	width: 80%;
+}
+#span_css2{
+	font-size: 11px;
+}
+.box_css{
+	margin-bottom: 30px; 
+	width: 100%;
+}
+/* policy */
+#box_css3{
+	height: 400px;
+}
+.polict_css1> span,.policy_css2>span{
+	color:red; 
+	font-size: 1.2em;
+}
+#anticipated_problem,#anticipated,#copy{
+	font-size:13px; 
+	margin-left:15px; 
+	width: 95%; 
+	height: 180px;
+}
+.box_css3{
+	background-color: white; 
+	border: none;
+}
+
+/* Button */
+.save_btn,.final_btn{
+	cursor: auto;
+	color: white;
+	background-color: #cbcbcb;
+}

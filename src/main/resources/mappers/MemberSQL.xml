@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.member.MemberMapper">
+	<select id="getAllMembers" resultType="mdto">
+		select * from member order by id asc
+	</select>
+	<insert id="insertMember" parameterType="mdto">
+		insert into member(name, id, pass, email, url, join_date, oauth)
+		values (#{name}, #{id}, #{pass}, #{email}, #{url}, now(), #{oauth})
+	</insert>
+	<select id="getIdCheck" parameterType="String" resultType="int">
+		select count(*) from member where id = #{id}
+	</select>
+	<select id="getNameCheck" parameterType="String" resultType="int">
+		select count(*) from member where name = #{name}
+	</select>
+	<select id="getUrlCheck" parameterType="String" resultType="int">
+		select count(*) from member where url = #{url}
+	</select>
+	<select id="getEmailCheck" parameterType="String" resultType="int">
+		select count(*) from member where email = #{email} and auth_status= 1
+	</select>
+	<select id="getCheckPass" parameterType="HashMap" resultType="int">
+		select count(*) from member where num=#{num} and pass=#{pass}
+	</select>
+	<select id="getMember" parameterType="Integer" resultType="mdto">
+		select * from member where num = #{num}
+	</select>
+	<update id="updateMemberName" parameterType="mdto">
+		update member set name = #{name} where num = #{num}
+	</update>
+	
+	<update id="updateMemberPhoto" parameterType="mdto">
+		update member set photo = #{photo} where num = #{num}
+	</update>
+	
+	<update id="updateMemberUrl" parameterType="mdto">
+		update member set url = #{url} where num = #{num}
+	</update>
+	
+	<update id="updateMemberIntroduce" parameterType="mdto">
+		update member set introduce = #{introduce} where num = #{num}
+	</update>
+	 
+	<update id="updateMemberPrivacy" parameterType="mdto">
+		update member set privacy = #{privacy} where num = #{num}
+	</update>
+	
+	<update id="updateMemberPass" parameterType="mdto">
+		update member set pass = #{pass} where num = #{num}
+	</update>
+	
+	<update id="updateEmailPass" parameterType="mdto">
+		update member set pass = #{pass} where email = #{email} and auth_status= 1
+	</update>
+	
+	<update id="updateMemberHp" parameterType="mdto">
+		update member set hp = #{hp} where num = #{num}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		delete from member where num = #{num}
+	</delete> 
+	<select id="getName" parameterType="String" resultType="String">
+		select name from member where id = #{id}
+	</select>
+	<select id="getIdUrl" parameterType="String" resultType="String">
+		select id from member where url = #{url}
+	</select>
+	<select id="getAll" parameterType="String" resultType="mdto">
+		select * from member where id = #{id}
+	</select>
+	<select id="memberByEmail" parameterType="String" resultType="mdto">
+		select * from member where email = #{email} and auth_status= 1
+	</select>
+	<select id="getAllProfile" parameterType="HashMap" resultType="mdto">
+		select * from member where id = #{id} and url = #{url}
+	</select>
+	<select id="login" parameterType="HashMap" resultType="int">
+		select count(*) from member where id = #{id} and pass = #{pass}
+	</select>
+	
+	<update id="updateMemberAuthkey" parameterType="mdto">
+		update member set email = #{email}, authkey = #{authkey} where num = #{num}
+	</update>
+	
+	<update id="updateMemberStatus" parameterType="mdto">
+		update member set auth_status = 1 where email = #{email} and authkey = #{authkey}
+	</update>
+	
+	
+	<!-- 추가 -->
+   <select id="getUrl" parameterType="String" resultType="String">
+      SELECT url FROM member WHERE id=#{id}
+   </select>
+   <select id="getPhoto" parameterType="String" resultType="String">
+      SELECT photo FROM member WHERE id=#{id}
+   </select>
+   <select id="getIntroduce" parameterType="String" resultType="String">
+      SELECT introduce FROM member WHERE id=#{id}
+   </select>
+   <!-- /추가 -->
+	
+</mapper>

@@ -1,0 +1,113 @@
+.list-select{
+    box-sizing: border-box;
+    position: relative;
+}
+.list-select .wrap{
+	display: inline-flex;
+    padding-right: 50px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+.list-gore{
+	display: flex;
+    position: relative;
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    margin: 0px 8px 0px 0px;
+    border-radius: 3px;
+    border: 1px solid rgb(230, 230, 230);
+    background: rgb(255, 255, 255);
+    color: rgb(72, 72, 72);
+    padding: 0px;
+    overflow: hidden;
+}
+.list-gore-btn{
+	outline: none;
+	cursor: pointer;
+    position: relative;
+    padding: 0px 8px;
+    border: 0px;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    color: rgb(85, 85, 85);
+    font-weight: normal;
+}
+.list-state-btn{
+	outline: none;
+	cursor: pointer;
+    position: relative;
+    padding: 0px 8px;
+    border: 0px;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    color: rgb(85, 85, 85);
+    font-weight: normal;
+}
+.list-percent-btn{
+	outline: none;
+	cursor: pointer;
+    position: relative;
+    padding: 0px 8px;
+    border: 0px;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    color: rgb(85, 85, 85);
+    font-weight: normal;
+}
+.cancel-search{
+	border: 1px solid #dcdcdc;
+	border-radius: 3px;
+	padding: 6px;
+	background-color: rgb(242, 242, 242);
+	font-size: 10pt;
+	cursor: pointer;
+}
+
+.category-list {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
+.project-list-mini{
+	max-width: 330px;
+	margin-bottom: 55px;
+	margin-right: 30px;
+}
+/* .category-list > a:nth-child(-n+3) {
+	margin-top:0;
+}
+.category-list > a:hover {
+	text-decoration:underline;	
+}
+.category-list > a:nth-child(3n) {
+	margin-right:0;	
+} */
+.thumbnail-image img {
+	width: 330px;
+	height: 240px;
+	border-radius: 5px;
+}
+.main-project-title{
+	font-size: 15pt;
+	font-weight: bold;
+	height: 60px;
+	margin: 8px 0;
+}
+.title-line{
+	border-bottom: 2px solid #ff6347;
+	margin: 10px 0;
+}
+.project-totalAmount{
+	font-size: 13pt;
+}
+.percentageAchieved2{
+	color: #ff6347;
+	font-size: 11pt;
+	font-weight: bold;
+	margin-left: 10px;
+}
+/* .list-chul-ajax:after{
+	content:"";
+	display:block;
+	clear:both;
+} */

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.project.ProjectMapper">
+	<insert id="insertCategory" parameterType="pdto">
+		insert into project (category,id,name) values (#{category },#{id},#{name})
+	</insert>
+	<select id="getMAxIdx" resultType="int">
+		select ifnull(max(idx),0) from project
+	</select>
+	<update id="storyUpdate" parameterType="pdto">
+		update project set project_goal = #{project_goal}, project_budget = #{project_budget},
+		project_schedule = #{project_schedule}, project_team_intro = #{project_team_intro},
+		project_present_intro = #{project_present_intro} where idx = #{idx}
+	</update>
+	<update id="defaultUpdate" parameterType="pdto">
+		update project set category = #{category}, title = #{title},
+		thumbnail = #{thumbnail} where idx = #{idx}
+	</update>
+	<update id="fundingUpdate" parameterType="pdto">
+		update project set target_amount = #{target_amount}, start_date = #{start_date},
+		time_start = #{time_start}, end_date = #{end_date} where idx = #{idx}
+	</update>
+	<update id="policyUpdate" parameterType="pdto">
+		update project set anticipated_problem = #{anticipated_problem} where idx = #{idx}
+	</update>
+	<select id="getData" parameterType="String" resultType="pdto">
+		select * from project where idx = #{idx}
+	</select>
+	<insert id="insertPresent" parameterType="pstdto">
+		insert into present (idx, present_name, present_option, price) values (#{idx}, #{present_name}, #{present_option}, #{price})
+	</insert>
+	<select id="getMaxNum" resultType="int">
+		select ifnull(max(num),0) from present
+	</select>
+	<delete id="deletePresent" parameterType="int">
+		delete from present where num = #{num}
+	</delete>
+	<select id="getPresentData" parameterType="int" resultType="pstdto">
+		select * from present where idx = #{idx}
+	</select>
+	<update id="progressUpdata" parameterType="pdto">
+		update project set audit = #{audit} where idx = #{idx}
+	</update>
+</mapper>

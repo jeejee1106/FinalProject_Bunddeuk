@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.profile.ProfileMapper">
+	<!-- 내가 만든 리스트 전체 -->
+	<select id="getCreativeProject" parameterType="String" resultType="pdto">
+		SELECT * FROM project WHERE id=#{id} ORDER BY idx desc
+	</select>
+	<!-- idx 에 대한 프로젝트 데이터 반환 -->
+	<select id="getProject" parameterType="String" resultType="pdto">
+		SELECT * FROM project WHERE idx=#{idx}
+	</select>
+	<!-- creative project delete -->
+	<delete id="deleteCreativeProject" parameterType="String">
+		DELETE FROM project WHERE idx=#{idx}
+	</delete>
+	<!-- 내가 만든 프로젝트 갯수 -->
+	<select id="getCreativeAuditCount" parameterType="String" resultType="String">
+		SELECT COUNT(CASE WHEN audit=#{audit} THEN 1 END) FROM project WHERE id=#{id}
+	</select>
+	
+	<!-- 후원한 프로젝트 리스트 -->
+	<select id="getSupportProject" parameterType="String" resultType="sdetaildto">
+		SELECT s.*, p.title, p.thumbnail, p.category, p.name, p.total_amount FROM support AS s JOIN project AS p ON s.idx=p.idx WHERE s.id=#{id} ORDER BY num DESC
+	</select>
+	<!-- 후원한 프로젝트 데이터 반환 -->
+	<select id="getSupportData" parameterType="String" resultType="sdetaildto">
+		SELECT s.*, p.title, p.thumbnail, p.category, p.name, p.total_amount FROM support AS s JOIN project AS p ON s.idx=p.idx WHERE s.num=#{num}
+	</select>
+	<!-- 후원한 프로젝트 취소(삭제) -->
+	<delete id="deleteSupport" parameterType="String">
+		DELETE FROM support WHERE num=#{num}
+	</delete>
+	<!-- 후원 취소 시 project db에서 금액, 후원자수 마이너스 -->
+	<update id="minusTotalAmountNumberPeople" parameterType="String">
+		UPDATE project p INNER JOIN support s ON p.idx=s.idx SET p.number_support=p.number_support-1, p.total_amount=p.total_amount-s.price WHERE s.num=#{num}
+	</update>
+	
+	<!-- 후원자 리스트 -->
+ 	<select id="getSponsorList" parameterType="HashMap" resultType="sdetaildto">
+		SELECT s.*, p.name, p.idx FROM support AS s JOIN project AS p ON s.idx=p.idx WHERE p.idx=#{idx} AND p.name=#{name} ORDER BY num DESC LIMIT #{start}, #{perpage}
+	</select>
+	<!-- 후원자 총 명수 -->
+	<select id="getTotalSponsorCount" parameterType="String" resultType="int">
+		SELECT COUNT(p.idx) FROM support AS s JOIN project AS p ON s.idx=p.idx WHERE p.idx=#{idx} AND p.name=#{name} ORDER BY num DESC
+	</select>
+	<!-- 후원자 정보(번호에 대한) -->
+	<select id="getSponsorMemberData" parameterType="String" resultType="sdetaildto">
+		SELECT s.*, p.idx, p.thumbnail, p.title, p.category FROM support AS s JOIN project AS p  ON s.idx=p.idx WHERE num=#{num}
+	</select>
+	
+	<!-- 찜한 프로젝트 리스트 -->
+	<select id="getLikedProject" parameterType="String" resultType="ldto">
+		SELECT l.*, p.title, p.thumbnail, p.category, p.name, p.start_date, p.end_date, p.total_amount FROM liked AS l JOIN project AS p ON l.idx=p.idx WHERE l.id=#{id} ORDER BY num DESC
+	</select>
+	<!-- 찜한 프로젝트 삭제 -->
+	<delete id="deleteLikedProject" parameterType="String">
+		DELETE FROM liked WHERE num=#{num}
+	</delete>
+	
+	
+</mapper>

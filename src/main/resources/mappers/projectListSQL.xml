@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.project.ProjectListMapper">
+	<!-- project 갯수 가져오기 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from project 
+		<where>
+			<if test="category!='no'">
+				 audit = 3 and end_date >=now() and now() >= start_date and category=#{category}
+			</if>
+		</where>
+	</select>
+	<!-- 카테고리 또는 검색 조건 없이 기본 출력 -->
+	<select id="allProjects" resultType="pdto">
+		select * from project where audit = 3 and end_date >=now() and now() >= start_date order by idx desc limit 8
+	</select>
+	<select id="popProjects" resultType="pdto">
+		select * from project where audit = 3 and end_date >=now() and now() >= start_date order by number_support desc limit 8
+	</select>
+	<select id="endProjects" resultType="pdto">
+		select * from project where audit = 3 and end_date >=now() and now() >= start_date and date_add(now(),interval 10 day) > end_date order by idx asc limit 8 
+	</select>
+	<select id="newProjects" resultType="pdto">
+		select * from project where audit = 3 and end_date >=now() and now() >= start_date order by start_date desc limit 8
+	</select>	
+	<select id="bookedProjects" resultType="pdto">
+		select * from project  where audit = 3 and start_date > now() order by start_date asc limit 8
+	</select>	
+	
+	<!--조건에 따라 출력 -->
+	<select id="getAllProjects" parameterType="String" resultType="pdto">
+		<choose>
+			<!-- 검색시 -->
+			<when test="category=='no' and state == 'no' and percent == 'no' and search != 'no'">
+					select * from project where audit = 3 and title like concat('%',#{search},'%')
+			</when>
+			<!-- 공개예정선택 -->
+			<when test="state == 'book'">
+				<!--audit = 3 실제 사용시  -->	
+				select * from project where audit = 3
+				<if test="category!='no'">
+					and category = #{category}
+				</if>
+				<if test="percent!='no'">
+					<choose>
+						<when test="percent=='75down'">
+							and 75 > (total_amount / target_amount)*100
+						</when>
+						<when test="percent=='75to100'">
+							and (total_amount / target_amount)*100 > 75 and 100 > (total_amount / target_amount)*100
+						</when>
+						<when test="percent=='100up'">
+							and (total_amount / target_amount)*100 > 100
+						</when>
+					</choose>
+				</if>
+				<if test="search !='no'">
+					and title like concat('%',#{search},'%')  
+				</if>
+				and start_date > now() order by start_date asc limit 8
+			</when>
+			<!-- 공개예정 미선택 -->
+			<when test="state != 'book'">
+				<!--audit = 3 and end_date >=now() and now() >= start_date 실제 사용시  -->
+				select * from project where audit = 3 and end_date > now() and now() > start_date
+				<!-- 카테고리 선택 -->
+				<if test="category!='no'">
+					and category = #{category}
+				</if>	
+				<!-- 퍼센트 선택 -->
+				<if test="percent != 'no'">
+					<choose>
+						<when test="percent=='75down'">
+							and 75 > (total_amount / target_amount)*100
+						</when>
+						<when test="percent=='75to100'">
+							and (total_amount / target_amount)*100 > 75 and 100 > (total_amount / target_amount)*100
+						</when>
+						<when test="percent=='100up'">
+							and (total_amount / target_amount)*100 > 100
+						</when>
+					</choose>
+				</if>
+				<if test="search !='no'">
+					and title like concat('%',#{search},'%')  
+				</if>
+				<!-- 상태가 선택 -->
+				<if test="state != 'no'">
+					<choose>
+						<!-- 최신글선택 -->
+						<when test="state=='endsoon'">
+					 		and date_add(now(),interval 10 day) > end_date
+					 	</when>
+						<!-- 마감임박순 선택 -->
+						<when test="state=='new'">
+							order by start_date desc limit 10
+						</when>
+					 	<!-- 인기글 선택 -->
+					 	<when test="state=='pop'">
+					 		order by number_support desc limit 10
+					 	</when>
+					</choose>
+				</if>
+				<!-- 모두 미선택 -->
+				<if test="category=='no' and state == 'no' and percent == 'no'">
+					order by idx desc
+				</if>
+			</when>
+		</choose>		
+	</select>
+</mapper>

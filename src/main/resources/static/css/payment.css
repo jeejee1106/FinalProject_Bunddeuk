@@ -1,0 +1,104 @@
+.project-info{
+	display: flex;
+	margin-top: 20px;
+}
+.project-info-img{
+	max-width: 160px;
+	margin-right: 20px;
+}
+.final-payment-info{
+	min-height: 50px;
+	padding:10px 15px;
+	border: 1px solid #dcdcdc;
+	border-radius: 5px;
+	text-align:right;
+	line-height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.final-title{
+	float:left;
+	color: tomato;
+}
+.final-payment-notice{
+	padding: 0 15px;
+}
+.final-notice{
+	margin: 15px 0 20px 0;
+	font-size: 12px;
+}
+.final-payment-check input{
+	zoom: 1.5;
+}
+.payment-info-title{
+	font-weight: bold;
+	font-size: 12pt;
+	margin-bottom: 8px;
+}
+.info-table{
+	border: 1px solid #dcdcdc;
+	border-collapse: collapse;
+	width: 650px;
+	margin-bottom: 30px;
+}
+.info-table th, .info-table td{
+	padding: 15px 15px;
+}
+.payment-content{
+	display: flex;
+}
+.payment-left{
+	width: 670px;
+	margin-right: 30px;
+}
+.payment-right{
+	width: 400px;
+	margin-top: 25px;
+}
+.down-icon{
+	float: right;
+}
+.btn-final-payment-support{
+	border: none;
+	width: 380px;
+	margin: 15px 0;
+	height: 50px;
+	border-radius: 5px;
+	color: white;
+	background-color: #cbcbcb;
+	font-size: 12pt;
+	font-weight: bold;
+}
+.final-payment-check-privacy-content-tb{
+	font-size: 8pt;
+	margin-bottom: 15px;
+}
+.final-payment-check-privacy-content-tb td{
+	padding: 3px;
+}
+.final-payment-check-content {
+	font-size: 9pt;
+}
+.final-payment-check-privacy{
+	margin-bottom: 20px;
+}
+.plus-icon{
+	margin-left: 50px;
+	cursor: pointer;
+}
+.hp-text{
+	width: 70px;
+}
+.email-text{
+	width: 100px;
+}
+.btn-add-info{
+	width: 70px;
+	height: 25px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-left: 30px;
+	background-color: #dda0dd;
+	color: white;
+}

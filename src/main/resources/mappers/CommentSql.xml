@@ -1,0 +1,78 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.comment.CommentMapper">
+	<!-- insert -->
+	<insert id="insertComment" parameterType="CMDTO">
+		insert into comment (pnum, writer, content, writetime, grp, grph, grps, fix) 
+		values (#{pnum}, #{writer}, #{content}, now(), #{grp}, #{grph}, #{grps}, #{fix})
+	</insert>
+	
+	<select id="getMaxNum" resultType="int">
+		select ifnull(max(num),0) from comment
+	</select>
+	
+	<select id="getCommentList" parameterType="int" resultType="CMDTO">
+		select c.num, c.pnum, c.writer, c.content, c.writetime, c.parent, c.parent_num, c.fix, c.grp, c.grph, c.grps, c.tempdel ,m.photo from comment c left outer join member m
+	    on c.writer = m.id where pnum = #{pnum} 
+	    <choose>
+	    	<when test="order == 1">
+			    order by fix desc, grp asc, grph asc;  
+	    	</when>
+	    	<when test="order == 2">
+			    order by fix desc, grp desc, grph asc;  
+	    	</when>
+	    </choose>
+	</select>
+	
+	<select id="changeHierarchy" parameterType="int" resultType="int">
+		select max(grph) from comment where grp = #{grp} 
+	</select>
+	
+	<!-- update -->
+	<update id="updateComment" parameterType="String">
+		update comment set content = #{content} where num = #{num}
+	</update>
+	
+	<update id="updateParent" parameterType="String">
+		update comment set parent = #{parent} where num = #{num}
+	</update>
+	<update id="updateParentNum" parameterType="int">
+		update comment set parent_num = #{parent_num} where num = #{num}
+	</update>
+	<select id="getParentContent" parameterType="int" resultType="String">
+		select content from comment where num = #{num}
+	</select>
+	
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from comment where num = #{num}
+	</delete>
+	<update id="deleteTemp" parameterType="int">
+		update comment set tempdel = 1 where num = #{num}
+	</update>
+	<select id="countGrp" parameterType="int" resultType="int">
+		select count(*) from comment where grp = #{grp}	
+	</select>
+	<select id="countTempdel" parameterType="int" resultType="int">
+		select count(*) from comment where  grp = #{grp} and tempdel = 1
+	</select>
+	<delete id="deleteBranchComment" parameterType="int">
+		delete from comment where grp = #{grp}
+	</delete>
+	
+	<update id="resetFix">
+		update comment set fix = 0;
+	</update>
+	<update id="fixComment" parameterType="int">
+		update comment set fix = 1 where grp = #{grp}
+	</update>
+	<update id="cancelFix" parameterType="int">
+		update comment set fix = 0 where grp = #{grp}
+	</update>
+	<select id="checkFix" parameterType="int" resultType="int">
+		select max(fix) from comment where grp = #{grp}
+	</select>
+	<!-- 갯수 -->
+	<select id="countComment" parameterType="int" resultType="int">
+		select count(num) from comment where pnum = #{pnum} and tempdel != 1
+	</select>
+</mapper>

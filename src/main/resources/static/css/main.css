@@ -1,0 +1,55 @@
+.totalLayout{
+	margin-top: 45px;
+}
+.totalLayout-title{
+	margin: 20px 0
+}
+.list-titles {
+	color: black;
+	font-size: 20px;
+}
+.main-lists:after {
+	content:"";
+	display:block;
+	clear:both;
+}
+.main-lists{
+	display: flex;
+	flex-wrap: wrap;
+}
+.project-list-mini{
+	max-width: 250px;
+	margin-bottom: 55px;
+	margin-right: 20px;
+}
+.category-name{
+	margin-top: 15px;
+	color: gray;
+}
+.main-lists .thumbnail-image img {
+	width: 270px;
+	height: 186px;
+}
+.main-project-title{
+	font-size: 11pt;
+	font-weight: bold;
+	height: 40px;
+	margin: 8px 0;
+}
+.percentageAchieved{
+	color: #ff6347;
+	font-size: 11pt;
+	font-weight: bold;
+}
+.bottom_text{
+	position: absolute;
+	margin-top: -150px;
+	margin-left: 20px;
+}
+.bottom_text>h6,.bottom_text>h2{
+	color: white;
+}
+.bottom_logo{
+	position:relative;
+	height: 250px;
+}

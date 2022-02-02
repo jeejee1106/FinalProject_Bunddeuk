@@ -1,0 +1,194 @@
+.project-intro{
+	width: 1200px;
+	height: 215px;
+	text-align: center;
+	line-height: 60px;
+	margin-top: 50px;
+}
+.project-intro-title{
+	font-weight: bold;
+	margin: 10px 0;
+}
+.profile-img img{
+	width:30px;
+	height: 30px;
+	border-radius: 100px;
+	cursor: pointer;
+}
+.project-intro-creator-name, .project-intro-category{
+	font-weight: bold;
+}
+.project-main{
+	display:inline-block;
+}
+.project-main-img img{
+	margin-top:-410px;
+}
+.project-sub-aside{
+	display:inline-block;
+	margin:10px 0px 0px 30px;
+
+}
+
+.project-sub{
+	margin-bottom: 20px;
+}
+.project-sub-value{
+	font-size: 30pt;
+}
+.project-sub-per{
+	margin-left: 10px;
+	font-size: 13pt;
+	font-weight: bold;
+}
+.funding-info{
+	border: 1px solid #dcdcdc;
+	width: 400px;
+	padding: 15px 20px 15px 20px;
+	margin: 20px 0px 20px 0px;
+	font-size: 12pt;
+}
+button{
+	border: none;
+	cursor: pointer;
+}
+.project-sub-heart{
+	margin: 0 40px;
+	cursor: pointer;
+	font-size: 20pt;
+}
+.btn-support{
+	width: 200px;
+	height: 50px;
+	font-size: 12pt;
+	font-weight: bold;
+	border-radius: 5px;
+	color: white;
+	background-color: skyblue;
+	
+}
+.content-navigation-container{
+	border-top: 1px solid #dcdcdc;
+	border-bottom: 1px solid #dcdcdc;
+	height: 60px;
+	margin: 25px 0;
+	line-height: 60px;
+}
+.btn-project-plan{
+	margin-right: 15px;
+}
+.content-navigation a{
+	font-size: 11pt;
+	font-weight: bold;
+	cursor: pointer;
+}
+.btn-creator-message{
+	width: 200px;
+	height: 50px;
+	
+}
+.project-content{
+	display: flex;
+	word-break: break-all;
+}
+.project-plan, .project-community{
+	width:700px;
+}
+.content-sub{
+	max-width:350px;
+	margin:0px 0px 0px 40px;
+}
+.sub-title, .creator-name{
+	font-size: 11pt;
+	font-weight: bold;
+}
+.sub-creator{
+	border: 1px solid #dcdcdc;
+	width: 350px;
+	padding: 15px 15px 0px 15px;
+	margin-bottom: 20px;
+}
+
+.creator-message{
+	text-align:center;
+}
+
+.sub-creator div{
+	margin: 0px 0px 15px 0px;
+}
+.creator-intro{
+	font-size: 10pt;
+	color: gray;
+}
+.present-title{
+	padding-top: 20px;
+}
+.present-option{
+	border: 1px solid #dcdcdc;
+	margin-top: 10px;
+	padding: 15px 15px 15px 15px;
+}
+.present-name{
+	font-size: 11pt;
+}
+.present-price{
+	margin-bottom: 15px;
+	font-size: 16pt;
+	font-weight: bold;
+}
+.community_all_text{
+	padding: 10px;
+}
+.btn-present-support{
+	width: 318px;
+	margin-top: 15px;
+	height: 50px;
+	border-radius: 5px;
+	color: white;
+	background-color: skyblue;
+	font-size: 12pt;
+	font-weight: bold;
+}
+.message-modal{ 
+	display:none;
+	position:fixed;
+	width:100%;
+	height:100%;
+	background: rgba(0,0,0,0.8);
+	top:0;
+	left:0;
+	z-index: 1000;
+}
+.modal-content{
+	width:600px;
+	height:500px;
+	background:#fff;
+	border-radius:10px;
+	position:absolute;
+	box-sizing:border-box;
+	padding:30px 30px 30px 30px;
+	top: calc(50% - 250px);
+	left: calc(50% - 300px);
+}
+.message-title{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.message-title2{
+	float: right;
+	cursor: pointer;
+}
+.word-count{
+	float: right;
+}
+#btn-send{
+	width: 540px;
+	height: 50px;
+	margin-top: 10px;
+	font-size: 12pt;
+	font-weight: bold;
+	border-radius: 5px;
+	color: white;
+	background-color: #dda0dd;
+}

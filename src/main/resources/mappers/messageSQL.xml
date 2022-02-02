@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.message.MessageMapper">
+	<!-- 받은 메세지 리스트  -->
+	<select id="getReceivedMessageList" parameterType="HashMap" resultType="msgdto">
+		SELECT * 
+		FROM message
+		WHERE recv_name=#{recv_name} 
+		ORDER BY num desc LIMIT #{start}, #{perpage}
+	</select>
+	<!-- 보낸 메세지 리스트 -->
+	<select id="getSentMessageList" parameterType="HashMap" resultType="msgdto">
+		SELECT * 
+		FROM message
+		WHERE send_name=#{send_name}
+		ORDER BY num desc LIMIT #{start}, #{perpage}
+	</select>
+	<!-- num 에 대한 메세지 반환 -->
+	<select id="getMessage" parameterType="String" resultType="msgdto">
+		SELECT * 
+		FROM message 
+		WHERE num=#{num}
+	</select>
+	<!-- insert -->
+	<insert id="reply" parameterType="msgdto">
+		INSERT INTO message (id,send_name,recv_name,send_time,content,read_chk,inquiry_type)
+		VALUES (#{id},#{send_name},#{recv_name},now(),#{content},0,#{inquiry_type})
+	</insert>
+	<!-- 메세지 읽음, 안읽음 -->
+	<update id="updateReadCount" parameterType="String">
+		UPDATE message msg INNER JOIN member mem 
+		ON msg.recv_name=#{name} 
+		SET msg.read_chk=msg.read_chk+1 
+		WHERE msg.num=#{num}
+	</update>
+	<!-- 받은 메세지 총 갯수 -->
+	<select id="getReceivedTotalCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM message WHERE recv_name=#{recv_name}
+	</select>
+	<!-- 보낸 메세지 총 갯수 -->
+	<select id="getSentTotalCount" parameterType="String" resultType="int">
+		SELECT count(*) FROM message WHERE send_name=#{send_name}
+	</select>
+</mapper>

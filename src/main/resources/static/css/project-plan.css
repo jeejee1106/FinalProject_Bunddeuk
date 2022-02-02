@@ -1,0 +1,43 @@
+.plan-menu{
+	width: 700px;
+	height: 50px;
+	background-color: white;
+}
+.plan-list li a {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0px 16px;
+    border-radius: 23px;
+    color: rgb(61, 61, 61);
+    border: 1px solid rgb(240, 240, 240);
+    font-size: 12px;
+}
+.plan-list li a:hover{
+	border: 2px solid #afeeee;
+}
+
+.plan-list li {
+    list-style: none;
+    margin-right: 11px;
+    float: left;
+}
+.project-story{
+	clear: both;
+}
+.story-section div:nth-child(1){
+	font-size:15pt;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.trust-sub-title{
+	margin-bottom: 10px;
+	font-size:11pt;
+	font-weight: bold;
+	color: gray;
+}
+.jbFixed {
+        position: fixed;
+        top: 0px;
+      }

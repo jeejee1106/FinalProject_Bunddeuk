@@ -1,0 +1,443 @@
+/* admin */
+.HeaderWrap {
+    -webkit-text-size-adjust: 100%;
+    color: rgba(0, 0, 0, 0.87);
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    height: 100%;
+    margin: 0px auto;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    position: relative;
+    width: 1080px;
+}
+.HeaderLeft {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    word-break: break-all;
+    box-sizing: inherit;
+    background: transparent;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-weight: bold;
+    color: rgb(13, 13, 13);
+}
+.ggMYrs {
+    display: inline-flex;
+    align-self: center;
+    margin-right: 9px;
+    width: 16px;
+    margin-right: 9px;
+    margin-left: 20px;
+}
+a.HeaderLeft span {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    word-break: break-all;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    font-weight: bold;
+    color: rgb(13, 13, 13);
+    box-sizing: inherit;
+    display: inline;
+}
+
+.Container {
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 1.7em;
+    color: rgba(0, 0, 0, 0.87);
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    position: relative;
+    height: auto;
+    padding: 0px;
+    width: 1032px;
+    margin: 0px auto;
+}
+.ProjectIntroWrapper {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    word-break: break-all;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: #3d3d3d;
+    box-sizing: inherit;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    user-select: none;
+    width: auto;
+    margin-bottom: 32px;
+}
+.inner {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: #3d3d3d;
+    user-select: none;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    width: 1032px;
+    padding: 32px 0px;
+    align-items: start;
+}
+.ImgArea {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    color: #3d3d3d;
+    user-select: none;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    width: 152px;
+}
+.ProjectInfo {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-weight: 400;
+    color: #3d3d3d;
+    user-select: none;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    position: relative;
+    flex: 1 1 0%;
+    margin-left: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.015em;
+}
+.intro {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    user-select: none;
+    word-break: break-all;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    box-sizing: inherit;
+    font-weight: bold;
+    color: rgb(158, 158, 158);
+    font-size: 12px;
+    line-height: 19px;
+    letter-spacing: -0.01em;
+}
+.title {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    color: #3d3d3d;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    box-sizing: inherit;
+    word-break: break-all;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    line-height: 45px;
+    letter-spacing: -0.030em;
+}
+.aprvlButton {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    user-select: none;
+    word-break: break-all;
+    letter-spacing: -0.015em;
+    box-sizing: inherit;
+    background: transparent;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    display: flex;
+    height: 42px;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(109, 109, 109);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    transition: all 0.3s ease-in-out 0s;
+    margin-top: 0px;
+    position: absolute;
+    width: 187px;
+    top: 20px;
+    right: 0px;
+	color: rgb(61, 61, 61);
+    font-weight: bold;
+	background: rgb(240, 240, 240);
+}
+.refusalButton {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    user-select: none;
+    word-break: break-all;
+    letter-spacing: -0.015em;
+    box-sizing: inherit;
+    background: transparent;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    display: flex;
+    height: 42px;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(109, 109, 109);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    transition: all 0.3s ease-in-out 0s;
+    margin-top: 50px;
+    position: absolute;
+    width: 187px;
+    top: 20px;
+    right: 0px;
+    color: rgb(61, 61, 61);
+    font-weight: bold;
+}
+.auditWrap {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    letter-spacing: -0.015em;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    margin-top: 40px;
+    display: flex;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(13, 13, 13);
+}
+.ProjectContents {
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 1.7em;
+    color: rgba(0, 0, 0, 0.87);
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    order: 1;
+    width: auto;
+    max-width: 650px;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    margin: 0px 0.5rem 0px 0px;
+    padding: 25px 0px 40px;
+
+}
+.StoryWrap {
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 1.7em;
+    color: rgba(0, 0, 0, 0.87);
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    margin-top: -25px;
+    padding: 0px 15px 30px;
+}
+.StorySection {
+    -webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 1.7em;
+    color: rgba(0, 0, 0, 0.87);
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    border-bottom: 1px solid rgb(230, 230, 230);
+    padding: 32px 0px;
+    margin: 0px;
+}
+.StorySectionTitle {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    display: flex;
+    color: rgb(13, 13, 13);
+    font-weight: 700;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 18px !important;
+    line-height: 28px !important;
+    font-family: NotoSansKR, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+.storyContent {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    max-width: 620px;
+    overflow-x: hidden;
+    color: #3d3d3d;
+    font-size: 16px;
+    line-height: 28px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.resultCounter1 {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-weight: 400;
+    color: #3d3d3d;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    line-height: 44px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    order: 1;
+    width: 57%;
+    margin-top: 25px;
+    margin-left: 28px;
+}
+.resultCounter1>span {
+	-webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    word-break: break-all;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    line-height: 44px;
+    box-sizing: inherit;
+    color: rgb(255, 87, 87);
+}
+.meminfo {
+	cursor: pointer;
+}
+.table-container {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    font-family: 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Arial, 'NotoSansKR', sans-serif;
+    font-weight: 400;
+    color: #3d3d3d;
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: -0.02em;
+    box-sizing: inherit;
+    word-break: break-all;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    width: 1080px;
+    margin: 0px auto;
+    overflow-x: hidden;
+    padding: 14px 24px 24px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.wait {
+	color: #FF523B;
+}
+.pagination .page-item:first-child {
+	margin-right: 0px;
+}
+.pagination .page-item:last-child {
+    margin-left: 0px;
+}

@@ -1,0 +1,44 @@
+.book-project{
+	display: flex;
+	margin-top: 90px;
+	margin-bottom: 60px;
+}
+.project-intro{
+	width: 500px;
+	height: 215px;
+	margin: 0 40px 0 10px;
+	line-height: 30px;
+}
+.project-intro-category{
+	color: gray;
+}
+.creator-info{
+	margin: 17px 0;
+}
+.profile-img img{
+	width:20px;
+	height: 20px;
+	border-radius: 100px;
+}
+.project-intro-creator-name{
+	font-weight: bold;
+}
+.project-main-img, .project-main-img img{
+	max-width: 500px;
+	max-height: 350px;
+}
+.project-intro-creator-name{
+	font-size: 12pt;
+}
+.creator-intro{
+	color: #696969;
+	margin-bottom: 13px;
+}
+.present-info, .start-date{
+	font-weight: bold;
+}
+.fa-calendar-check-o, .fa-gift{
+	color: tomato;
+	font-size: 13pt;
+	margin-right: 10px;
+}

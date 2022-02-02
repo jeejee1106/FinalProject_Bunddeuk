@@ -1,0 +1,92 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.chat.ChatMapper">
+
+	<select id="getRoomNumber"  parameterType="CDTO" resultType="String">
+	    select room from chat
+	    where (recv_id = #{recv_id} and send_id=#{send_id} and exit_count != 1) or (send_id = #{recv_id} and recv_id=#{send_id} and exit_count != 1)
+	    limit 0,1
+	</select>
+
+	<select id="getMaxRoom" resultType="Int">
+	    select ifnull(max(room),0) from chat
+	</select>
+	
+	<insert id="sendMessage" parameterType="CDTO">
+	    <choose>
+	        <when test="room != 0">
+	            insert into chat values(0, #{room}, #{send_id}, #{recv_id}, now(), now(), #{content}, 0, 0, 0);
+	        </when>
+	        <otherwise>
+	            insert into chat values(0, #{room}, #{send_id}, #{recv_id}, now(), now(), #{content}, 0, 0, 0);
+	        </otherwise>
+	    </choose>
+	</insert>
+	
+	<select id="getRoomContentList" parameterType="CDTO" resultType="CDTO">
+	    select c.num, c.room, c.send_id, c.recv_id, date_format(c.send_time, '%Y-%m-%d %H:%i') send_time, c.read_time, c.content, c.read_check, m.photo,
+	    c.exit_id, c.exit_count from chat c left outer join member m
+	    on c.send_id = m.id where room=#{room}
+	   <!--  <choose>
+	        <when test="room != 0">
+	            where room=#{room}
+	        </when>
+	        <otherwise>
+	            where (recv_id = #{recv_id} and send_id = #{id}) or (send_id = #{recv_id} and recv_id = #{id})
+	        </otherwise>
+	    </choose> -->
+	</select>
+	<select id="getChatList" parameterType="CDTO" resultType="CDTO">
+	    select num, room, send_id, recv_id, date_format(send_time, '%Y-%m-%d %H:%i') send_time, read_time, content, read_check,
+	    exit_id, exit_count
+	    from chat
+	    where num in (select max(num) from chat group by room) and (send_id = #{id} or recv_id=#{id})
+	    and exit_id != #{id} 
+	    order by num desc;
+	</select>
+	
+	<!-- get number of unread message-->
+	<select id="countUnreadMessage" parameterType="CDTO" resultType="Int">
+	    select count(num) from chat 
+	    where recv_id=#{id} and read_check=0 and room=#{room}
+	</select>
+	
+	<!--change message status from unread to read-->
+	<update id="changeMessageReadCheck" parameterType="CDTO">
+	    update chat set read_check=1  where room=#{room} and read_check=0 and recv_id=#{id}
+	</update>
+	
+	<!-- readtime -->
+	<update id="changeMessageReadTime" parameterType="CDTO">
+	    update chat set read_time = now()  where room=#{room} and read_check=0 and recv_id=#{id}
+	</update>
+	
+	<!-- profile   -->
+	<select id="getOtherProfile" parameterType="CDTO" resultType="String">
+	    select photo from member
+	    <choose>
+	        <when test="send_id == id">
+	            where id = #{recv_id}
+	        </when>
+	        <otherwise>
+	            where id = #{send_id}
+	        </otherwise>
+	    </choose>
+	</select>
+	
+	<select id="countExitId" parameterType="String" resultType="int">
+		select exit_count from chat where room = #{room} limit 0,1
+	</select>
+	
+	<select id="getExitId" parameterType="String" resultType="String">
+		select exit_id from chat where room = #{room} limit 0,1
+	</select>
+	
+	<update id="updateExitId" parameterType="String">
+		update chat set exit_id = #{exit_id}, exit_count = 1 where room = #{room};
+	</update>
+	
+	<delete id="deleteRoom" parameterType="String">
+		delete from chat where room = #{room}
+	</delete>
+	
+</mapper>
