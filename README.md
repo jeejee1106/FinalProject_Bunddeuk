@@ -43,15 +43,15 @@
   
 ### 4.2. Controller
 ![controller](https://user-images.githubusercontent.com/84839167/148033035-514d2a0d-8125-4e1b-8422-8b3f2e1e3645.jpg)
-- **요청 처리** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/55a28b6944e515280e5be9e7395988d8efcb82b6/src/main/java/data/project/DetailController.java#L22)
+- **요청 처리** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/93d3e30a44ad5838b36332b8ae8f968419dc9fb7/src/main/java/data/project/DetailController.java#L22)
   - Controller에서는 화면단에서 넘어온 요청을 받고, Service, Mapper Interface를 통해 사용자가 요청한 정보를 불러옵니다.
-- **결과 응답** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/55a28b6944e515280e5be9e7395988d8efcb82b6/src/main/webapp/WEB-INF/project_detail/projectDetail.jsp#L189)
+- **결과 응답** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/93d3e30a44ad5838b36332b8ae8f968419dc9fb7/src/main/webapp/WEB-INF/project_detail/projectDetail.jsp#L189)
   - Service 계층에서 넘어온 로직 처리 결과를 화면단에 응답해줍니다.
   - 사용자가 리스트에서 선택한 프로젝트의 정보가 상세페이지가 나타나게 됩니다.
 
 ### 4.3. Service
 ![service](https://user-images.githubusercontent.com/84839167/148083716-4f125f91-9c93-4c39-a0f5-f9af19e5a3e5.png)
-- **상세 페이지 Mapper Method 호출** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/1ec443a430802ead67e3c8ed36e2d3d70f4e9be9/src/main/java/data/project/DetailService.java#L12)
+- **상세 페이지 Mapper Method 호출** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/93d3e30a44ad5838b36332b8ae8f968419dc9fb7/src/main/java/data/project/DetailService.java#L12)
   - Service는 프로젝트의 상세페이지와 사용자의 정보를 받을 Method를 호출합니다.
   - 이때 호출된 Method는 MyBatis와 연결 되며, db에서 사용자의 정보나 프로젝트의 정보 등을 가져오며,
   - 사용자가 해당 프로젝트를 찜 했는지, 또는 이미 후원을 했는지, 기본 정보가 입력이 되어  등을 체크합니다.
@@ -60,7 +60,7 @@
 
 ### 4.4. Mapper
 ![mapper](https://user-images.githubusercontent.com/84839167/148793806-73537088-8063-4089-955a-766a9747fc0a.png)
-- **컨텐츠 저장** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/1ec443a430802ead67e3c8ed36e2d3d70f4e9be9/src/main/resources/mappers/supportSQL.xml#L3)
+- **컨텐츠 저장** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/93d3e30a44ad5838b36332b8ae8f968419dc9fb7/src/main/resources/mappers/supportSQL.xml#L3)
   - 결제(후원)를 완료하면 Mapper.xml 파일에서 SQL문을 실행하며, 실행 결과를 다시 반환 합니다.
   - 결제(후원)을 완료한 사용자와 프로젝트 정보는 DB에 저장됩니다.
   - 저장된 컨텐츠는 다시 Mapper - Service - Controller를 거쳐 화면단에 출력됩니다.
