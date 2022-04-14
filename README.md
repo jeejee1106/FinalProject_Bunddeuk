@@ -6,13 +6,13 @@
 - 그 결과 쇼핑몰과 비슷한 성격이지만, 여러 기능이 더해진 <b>펀딩사이트</b>를 제작하게 되었습니다.   
 - 대표적인 크라우드펀딩 사이트인 <b>텀블벅</b>을 벤치마킹하여 개발하였습니다.
 
-</br>
+<br>
 
 ## 1. 제작 기간 & 참여 인원
 - 2021년 11월 15일 ~ 12월 15일
 - 팀 프로젝트 (5명)
 
-</br>
+<br>
 
 ## 2. 사용 기술
 ### `Back-end`
@@ -28,24 +28,34 @@
   - CSS
   - BootStrap 4.1
   
-</br>
+<br>
 
 ## 3. ERD 설계
 <img src="https://user-images.githubusercontent.com/84839167/148019551-4897a90d-bf4e-4895-8ba2-1fadd0ef65be.png" width="550px" height="400px" title="erd" alt="ERD"></img>
 
-<br/>
+<br>
 
 ## 4. 기능 구현
-이 서비스에서 제가 구현한 기능은 등록된 펀딩 프로젝트의 `상세페이지`와 프로젝트 `결제(후원)` 기능입니다.  
-사용자는 원하는 프로젝트의 상세 내용을 볼 수 있으며, 선물(제품)을 선택한 후 결제(후원)를 완료합니다.
+  - #### `정기결제`
+    - Open API(아임포트)를 활용한 카카오 정기결제 기능 구현
+
+  - #### `쪽지 보내기`
+    - 사용자 간 쪽지를 주고 받을 수 있도록 쪽지 전송 기능 구현
+
+  - #### `Front-end`
+    - Javascript, J-Query를 사용해 메인페이지 & 상세페이지 제작
+
+<br>
+
+## 5. 핵심 기능 설명 & 트러블 슈팅
+#### 1. Open API를 활용한 카카오 정기결제
 <details>
-<summary><b>핵심 기능 설명 펼치기</b></summary>
-<div markdown="1">
-  
-### 4.1. 전체 흐름
+  <summary>📌핵심 기능 설명</summary>
+
+#### 1. 전체 흐름
 ![flow](https://user-images.githubusercontent.com/84839167/148017767-2b4df319-6119-40c5-af8a-99bd185a4ad6.jpg)
   
-### 4.2. Controller
+#### 2. Controller
 ![controller](https://user-images.githubusercontent.com/84839167/148033035-514d2a0d-8125-4e1b-8422-8b3f2e1e3645.jpg)
 - **요청 처리** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/93d3e30a44ad5838b36332b8ae8f968419dc9fb7/src/main/java/data/project/DetailController.java#L22)
   - Controller에서는 화면단에서 넘어온 요청을 받고, Service, Mapper Interface를 통해 사용자가 요청한 정보를 불러옵니다.
@@ -53,7 +63,7 @@
   - Service 계층에서 넘어온 로직 처리 결과를 화면단에 응답해줍니다.
   - 사용자가 리스트에서 선택한 프로젝트의 정보가 상세페이지가 나타나게 됩니다.
 
-### 4.3. Service
+#### 3. Service
 ![service](https://user-images.githubusercontent.com/84839167/148083716-4f125f91-9c93-4c39-a0f5-f9af19e5a3e5.png)
 - **상세 페이지 Mapper Method 호출** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/93d3e30a44ad5838b36332b8ae8f968419dc9fb7/src/main/java/data/project/DetailService.java#L12)
   - Service는 프로젝트의 상세페이지와 사용자의 정보를 받을 Method를 호출합니다.
@@ -62,20 +72,17 @@
   - key값을 넣어 value값을 받아야 한다면 HashMap에 넣어 보내줍니다.
   - (parameter의 데이터 타입이 int, String으로 다른 타입이기 때문에 Value값은 Object로 받았습니다.)
 
-### 4.4. Mapper
+#### 4. Mapper
 ![mapper](https://user-images.githubusercontent.com/84839167/148793806-73537088-8063-4089-955a-766a9747fc0a.png)
 - **컨텐츠 저장** :pushpin: [코드 확인](https://github.com/jeejee1106/FinalProject_Bunddeuk/blob/93d3e30a44ad5838b36332b8ae8f968419dc9fb7/src/main/resources/mappers/supportSQL.xml#L3)
   - 결제(후원)를 완료하면 Mapper.xml 파일에서 SQL문을 실행하며, 실행 결과를 다시 반환 합니다.
   - 결제(후원)을 완료한 사용자와 프로젝트 정보는 DB에 저장됩니다.
   - 저장된 컨텐츠는 다시 Mapper - Service - Controller를 거쳐 화면단에 출력됩니다.
-</div>
 </details>
-
-</br>
-
-## 5. 핵심 트러블 슈팅
-
-### 5.1. 정기결제 시스템
+<details>
+  <summary>⚽트러블 슈팅</summary>
+  
+  #### `정기결제가 아닌 일반 결제로 동작함`
 - 저는 이 서비스에서 결제 시스템을 꼭 구현하고자 했습니다.  
 - 처음엔 결제 API를 끌어다 쓴 후 기능 구현이 끝났다고 생각했습니다.
 - 그러나 아래의 **일반 결제 코드 및 설정** 으로 기능을 구현하니 후원 후 바로 결제가 되는 문제가 발생했습니다.
@@ -123,7 +130,7 @@ IMP.request_pay({ // param
 - 일반결제는 즉시 결제가 완료되었다는 메세지가 오며, 아임포트의 결제 내역에도 결제금액이 바로 출력됩니다.
 - 저희 서비스는 펀딩 프로젝트 선택 후 바로 결제하는 시스템이 아닌, 지정된 날짜에 맞춰서 결제가 진행되는  
 `정기 결제 시스템`이 필요했기 때문에  
-- 아래 **개선된 코드**와 같이 아임포트의 설정을 변경하고 customer_uid로 빌링키를 발급받아  
+- 아래 **개선된 코드**와 같이 아임포트의 설정을 변경하고 customer_uid로 빌링키를 등록해  
 정기결제 시스템을 구현할 수 있었습니다.
 <details>
 <summary><b>개선된 코드</b></summary>
@@ -170,6 +177,9 @@ IMP.request_pay({
 </details>
 
 - 코드를 개선한 후 정기결제가 완료되었다는 메세지로 바뀌었고, 아임포트의 결제 내역에도 0원이 출력된 것을 확인할 수 있습니다.
+</details>
+
+<br>
 
 ## 6. 그 외 트러블 슈팅
 
