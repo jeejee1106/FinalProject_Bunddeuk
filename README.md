@@ -213,21 +213,6 @@ CREATE TABLE  noticeboard1 (
   - 특수문자를 인코딩 해주는 방법과 Mapping을 GET에서 POST로 바꿔주는 방법이 있는데,  
   Mapping을 바꿔주는 방법으로 문제 해결
 </details>
-
-<details>
-  <summary><b>주소 출력시 도로명 주소와 상세주소의 위치가 바뀌어서 출력됨</b></summary>
-  <div markdown="1">
-  
-```xml
-<!-- 주소데이터가 없는 멤버의 주소를 x로 출력 -->
-<select id="getAddr" parameterType="String" resultType="ddto">
-  select ifnull(max(addr),'x')as addr, ifnull(max(addr2),'x') as addr2 from delivery where id=#{id} and pin=1
-</select>
-```
-  
-  - addr과 addr2의 위치를 바꿔썼었음. 올바른 위치로 바꿔주니 정상적으로 출력. 이 문제를 프로젝트가 끝난후에야 알게되었다..
-</div>
-</details>
     
 <details>
   <summary><b>텀플벅 프로젝트 데이터의 저작권 문제</b></summary>
