@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,22 +18,20 @@ import data.project.ProjectListMapper;
 public class SupportController {
 
 	@Autowired
-	SupportService service;
+	SupportService supportService;
 	@Autowired
 	ProjectListMapper listMapper;
 	
 	@PostMapping("/project_support/success")
-	public ModelAndView supportSuccess(SupportDTO dto, HttpSession session, int idx, int supportNum, int pstP) {
-		ModelAndView mview = new ModelAndView();
+	public String supportSuccess(SupportDTO dto, HttpSession session, int idx, int supportNum, int pstP, Model model) {
 		String sessionId = (String)session.getAttribute("id");
 		
-		dto.setHp(service.getHp(sessionId));
-		dto.setEmail(service.getEmail(sessionId));
-		dto.setAddr(service.getAddr(sessionId));
-		service.insertSupportData(dto);
-		service.addSupporter(idx);
-		//System.out.println(pstP);
-		service.addTotalAmount(pstP, idx);
+		dto.setHp(supportService.getHp(sessionId));
+		dto.setEmail(supportService.getEmail(sessionId));
+		dto.setAddr(supportService.getAddr(sessionId));
+		supportService.insertSupportData(dto);
+		supportService.addSupporter(idx);
+		supportService.addTotalAmount(pstP, idx);
 		
 		//랜덤으로 리스트 뽑아서 추천 프로젝트 출력
 		List<ProjectDTO> alist=listMapper.allProjects();
@@ -48,19 +46,18 @@ public class SupportController {
 						continue;
 					}
 				}
-			}
-			for(int i=0; i<4; i++) {
 				recommendList.add(alist.get(randomNumber[i]));
 			}
-			mview.addObject("recommendList",recommendList);
+//			for(int i=0; i<4; i++) {
+//				recommendList.add(alist.get(randomNumber[i]));
+//			}
+			model.addAttribute("recommendList",recommendList);
 		}else {
-			mview.addObject("recommendList",alist);
+			model.addAttribute("recommendList",alist);
 		}
 	      
-		mview.addObject("supportNum", supportNum+1);
+		model.addAttribute("supportNum", supportNum+1);
 		
-		mview.setViewName("/project_detail/supportSuccess");
-		
-		return mview;
+		return "/project_detail/supportSuccess";
 	}
 }

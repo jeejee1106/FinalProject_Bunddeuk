@@ -119,8 +119,6 @@
 			    }
 			});
 		});
-		
-		
 	});
 </script>
 <div class="container project-payment">
@@ -156,7 +154,6 @@
 		<input type="hidden" name="idx" value="${dto.idx}">
 		<input type="hidden" name="supportNum" value="${dto.number_support}">
 		<input type="hidden" name="end_date" value="${dto.end_date}">
-		<%-- <input type="hidden" name="addr" value="${addr}"> --%>
 		<input type="hidden" name="present_name" value="${pstN}">
 		<input type="hidden" name="present_option" value="${pstO}">
 		<input type="hidden" name="price" value="${pstP}">
@@ -168,7 +165,6 @@
 		<input type="hidden" name="ajax_addr" id="ajax_addr">
 		<input type="hidden" name="ajax_email" id="ajax_email">
 		<input type="hidden" name="ajax_hp" id="ajax_hp">
-	
 	
 		<div class="payment-content">
 			<div class="payment-left">
