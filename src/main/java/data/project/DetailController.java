@@ -23,7 +23,7 @@ import data.mysetting.DeliveryDTO;
 public class DetailController {
 
 	@Autowired
-	DetailService service;
+	DetailService detailService;
 	@Autowired
 	MessageService messageService;
 	@Autowired
@@ -33,21 +33,21 @@ public class DetailController {
 	public ModelAndView getDetailData(int idx, String key, HttpSession session) {
 		String id = (String)session.getAttribute("id");
 		String name = memberService.getName(id);
-		int likeCheck = service.getLikeCheck(idx, id);
-		int supportCheck = service.getSupportCheck(idx, id);
+		int likeCheck = detailService.getLikeCheck(idx, id);
+		int supportCheck = detailService.getSupportCheck(idx, id);
 		
 		ModelAndView mview = new ModelAndView();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date today = java.sql.Date.valueOf(sdf.format(new Date()));
 		
-		ProjectDTO dto = service.getData(idx);
-		List<PresentDTO> pstList = service.getPresentData(idx);
+		ProjectDTO dto = detailService.getData(idx);
+		List<PresentDTO> pstList = detailService.getPresentData(idx);
 		
-		String creatorImage = service.getCreatorImage(dto.getId());
-		String creatorIntro = service.getCreatorIntro(dto.getId());
-		String pymDate1 = service.getPaymentDate(idx).substring(0,4);
-		String pymDate2 = service.getPaymentDate(idx).substring(5,7);
-		String pymDate3 = service.getPaymentDate(idx).substring(8,10);
+		String creatorImage = detailService.getCreatorImage(dto.getId());
+		String creatorIntro = detailService.getCreatorIntro(dto.getId());
+		String pymDate1 = detailService.getPaymentDate(idx).substring(0,4);
+		String pymDate2 = detailService.getPaymentDate(idx).substring(5,7);
+		String pymDate3 = detailService.getPaymentDate(idx).substring(8,10);
 		float totalAmount = dto.getTotal_amount();
 		float targetAmount = dto.getTarget_amount();
 		int percentageAchieved = (int)Math.round((totalAmount / targetAmount * 100));
@@ -71,9 +71,9 @@ public class DetailController {
 	@GetMapping("/project/bookdetail")
 	public ModelAndView getBookDetailData(int idx) {
 		ModelAndView mview = new ModelAndView();
-		ProjectDTO dto = service.getData(idx);
-		String creatorImage = service.getCreatorImage(dto.getId());
-		String creatorIntro = service.getCreatorIntro(dto.getId());
+		ProjectDTO dto = detailService.getData(idx);
+		String creatorImage = detailService.getCreatorImage(dto.getId());
+		String creatorIntro = detailService.getCreatorIntro(dto.getId());
 		
 		mview.addObject("dto", dto);
 		mview.addObject("creatorImage", creatorImage);
@@ -91,13 +91,13 @@ public class DetailController {
 		String loginok = (String)session.getAttribute("loginok");
 		String id = (String)session.getAttribute("id");
 		
-		ProjectDTO dto = service.getData(idx);
+		ProjectDTO dto = detailService.getData(idx);
 		MemberDTO mdto = memberService.getAll(id);
-		DeliveryDTO ddto = service.getAddr(id);
+		DeliveryDTO ddto = detailService.getAddr(id);
 		
-		String pymDate1 = service.getPaymentDate(idx).substring(0,4);
-		String pymDate2 = service.getPaymentDate(idx).substring(5,7);
-		String pymDate3 = service.getPaymentDate(idx).substring(8,10);
+		String pymDate1 = detailService.getPaymentDate(idx).substring(0,4);
+		String pymDate2 = detailService.getPaymentDate(idx).substring(5,7);
+		String pymDate3 = detailService.getPaymentDate(idx).substring(8,10);
 		float totalAmount = dto.getTotal_amount();
 		float targetAmount = dto.getTarget_amount();
 		int percentageAchieved = (int)Math.round((totalAmount / targetAmount * 100));
@@ -132,14 +132,14 @@ public class DetailController {
 	@ResponseBody
 	@PostMapping("/payment/hpUpdate")
 	public String setHp(MemberDTO dto) {
-		service.setHp(dto);
+		detailService.setHp(dto);
 		return dto.getHp();
 	}
 	
 	@ResponseBody
 	@PostMapping("/payment/emailUpdate")
 	public String setEmail(MemberDTO dto) {
-		service.setEmail(dto);
+		detailService.setEmail(dto);
 		return dto.getEmail();
 	}
 	
@@ -152,7 +152,7 @@ public class DetailController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		
-		service.insertDelivery(ddto);
+		detailService.insertDelivery(ddto);
 		
 		return ddto.getAddr() + " " + ddto.getAddr2();
 	}
@@ -160,12 +160,12 @@ public class DetailController {
 	@ResponseBody
 	@PostMapping("/liked/check")
 	public int likedCheck(int idx, String id) {
-		int check = service.getLikeCheck(idx, id);
+		int check = detailService.getLikeCheck(idx, id);
 		
 		if(check == 0) {
-			service.insertLikeProject(idx, id);
+			detailService.insertLikeProject(idx, id);
 		}else {
-			service.deleteLikeProject(idx, id);
+			detailService.deleteLikeProject(idx, id);
 		}
 		return check;
 	}

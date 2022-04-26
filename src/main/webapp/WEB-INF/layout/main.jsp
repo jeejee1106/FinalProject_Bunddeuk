@@ -140,6 +140,7 @@ $(function() {
 	});
 })
 </script>
+
 <!-- Start Banner Hero -->
 <input type="hidden" id="counter2">
 <div id="wrapper" style="margin-top: 30px;">
@@ -190,7 +191,6 @@ $(function() {
 </div>
 
 <!-- End Banner Hero -->
-		
 		
 <div class="totalLayout">	
 	<div class="totalLayout-title">
@@ -292,7 +292,7 @@ $(function() {
 		<img src="${root}/image/bottom-logo-img.png">
 		<div class="bottom_text">
 		<h6>좋은 아이디어를 가지고 있으신가요?</h6>
-		<h2>텀블벅과 함께 마음 속</h2>
+		<h2>번뜩이와 함께 마음 속</h2>
 		<h2>프로젝트를 실현하세요</h2>
 		</div>
 	</div>
