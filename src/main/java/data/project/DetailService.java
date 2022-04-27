@@ -32,6 +32,11 @@ public class DetailService {
 		return mapper.getCreatorIntro(id);
 	}
 	
+	public MemberDTO getCreatorInfo(String id) {
+		return mapper.getCreatorInfo(id);
+	}
+	
+	
 	//세션아이디를 통해 addr값 가져오기
 	public DeliveryDTO getAddr(String id) {
 		return mapper.getAddr(id);

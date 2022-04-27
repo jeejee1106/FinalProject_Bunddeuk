@@ -9,6 +9,21 @@
 	<select id="getPaymentDate" parameterType="int" resultType="String">
 		select date_add(end_date,INTERVAL 1 DAY) from project where idx=#{idx}
 	</select>
+	
+	
+	
+	<!-- 실험 : 작가정보 한번에 가져오기 -->
+	<!-- <select id="getCreatorInfo" parameterType="String" resultType="mdto">
+		select ifnull(photo, 'basic.jpg'), ifnull(introduce, '안녕하세요. 문의 사항은 메세지를 보내주세요.') from member where id=#{id}
+	</select> -->
+	
+	<!-- 실험 : 작가정보 한번에 가져오기 -->
+	<select id="getCreatorInfo" parameterType="String" resultType="mdto">
+		select photo, introduce from member where id=#{id}
+	</select>
+	
+	
+	
 	<!-- 작가의 프로필 사진 가져오기 -->
 	<select id="getCreatorImage" parameterType="String" resultType="String">
 		select ifnull(photo, 'basic.jpg') from member where id=#{id}
@@ -21,11 +36,11 @@
 	<select id="getAddr" parameterType="String" resultType="ddto">
 		select ifnull(max(addr),'x')as addr, ifnull(max(addr2),'x') as addr2 from delivery where id=#{id} and pin=1
 	</select>
-	<!-- 로그인된 멤버의 핸드폰번호 가져오기 -->
+	<!-- 로그인된 멤버의 핸드폰번호 넣어주기 -->
 	<update id="setHp" parameterType="mdto">
 		update member set hp=#{hp} where id=#{id}
 	</update>
-	<!-- 로그인된 멤버의 이메일 가져오기 -->
+	<!-- 로그인된 멤버의 이메일 넣어주기 -->
 	<update id="setEmail" parameterType="mdto">
 		update member set email=#{email} where id=#{id}
 	</update>

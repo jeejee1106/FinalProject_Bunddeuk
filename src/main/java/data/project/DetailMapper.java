@@ -14,6 +14,11 @@ public interface DetailMapper {
 	public String getPaymentDate(int idx);
 	public String getCreatorImage(String id);
 	public String getCreatorIntro(String id);
+	
+	
+	public MemberDTO getCreatorInfo(String id);
+	
+	
 	public DeliveryDTO getAddr(String id);
 	public void setHp(MemberDTO dto);
 	public void setEmail(MemberDTO dto);

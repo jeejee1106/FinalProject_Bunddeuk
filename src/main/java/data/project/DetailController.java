@@ -1,9 +1,12 @@
 package data.project;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
@@ -38,24 +41,39 @@ public class DetailController {
 		
 		ModelAndView mview = new ModelAndView();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date today = java.sql.Date.valueOf(sdf.format(new Date()));
+		java.sql.Date today = java.sql.Date.valueOf(sdf.format(new Date())); //현재 날짜(오늘) 구하기
 		
-		ProjectDTO dto = detailService.getData(idx);
+		ProjectDTO projectDto = detailService.getData(idx);
 		List<PresentDTO> pstList = detailService.getPresentData(idx);
 		
-		String creatorImage = detailService.getCreatorImage(dto.getId());
-		String creatorIntro = detailService.getCreatorIntro(dto.getId());
+//		String creatorImage = detailService.getCreatorImage(projectDto.getId());
+//		String creatorIntro = detailService.getCreatorIntro(projectDto.getId());
+		
+		MemberDTO memberDto = detailService.getCreatorInfo(projectDto.getId());
+		if(memberDto.getIntroduce()==null) {
+			memberDto.setIntroduce("안녕하세요. 문의 사항은 메세지를 보내주세요.");
+		}
+		if(memberDto.getPhoto()==null) {
+			memberDto.setPhoto("basic.jpg");
+		}
+		
 		String pymDate1 = detailService.getPaymentDate(idx).substring(0,4);
 		String pymDate2 = detailService.getPaymentDate(idx).substring(5,7);
 		String pymDate3 = detailService.getPaymentDate(idx).substring(8,10);
-		float totalAmount = dto.getTotal_amount();
-		float targetAmount = dto.getTarget_amount();
+		
+		float totalAmount = projectDto.getTotal_amount();
+		float targetAmount = projectDto.getTarget_amount();
 		int percentageAchieved = (int)Math.round((totalAmount / targetAmount * 100));
 		
-		mview.addObject("creatorIntro", creatorIntro);
-		mview.addObject("creatorImage", creatorImage);
+//		mview.addObject("creatorIntro", creatorIntro);
+//		mview.addObject("creatorImage", creatorImage);
+		
+		
+		mview.addObject("memberDto", memberDto);
+		
+		
 		mview.addObject("pymDate", pymDate1 + "년 " + pymDate2 + "월 " + pymDate3 + "일");
-		mview.addObject("dto", dto);
+		mview.addObject("dto", projectDto);
 		mview.addObject("pstList", pstList);
 		mview.addObject("today", today);
 		mview.addObject("name", name);

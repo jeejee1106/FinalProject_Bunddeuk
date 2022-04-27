@@ -40,9 +40,9 @@
 			<div class="project-sub-title">남은시간 ${pstdto.present_name }</div>
 			<div>
 				<span class="project-sub-value">
-					<fmt:parseDate value="${today }" var="strPlanDate" pattern="yyyy-MM-dd"/>
+					<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>
 					<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate" />
-					<fmt:parseDate value="${dto.end_date }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+					<fmt:parseDate value="${dto.end_date}" var="endPlanDate" pattern="yyyy-MM-dd"/>
 					<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate" />
 					${endDate - strDate }
 				</span>
@@ -108,7 +108,8 @@
 				</span>
 			</div>
 			<div class="creator-intro">
-				${creatorIntro }
+				<%-- ${creatorIntro } --%>
+				${memberDto.introduce}
 			</div>
 			<div class="creator-message">
 				<button type="button" class="btn-creator-message">
