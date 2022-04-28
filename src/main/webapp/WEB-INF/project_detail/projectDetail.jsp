@@ -108,7 +108,7 @@
 				</span>
 			</div>
 			<div class="creator-intro">
-				<%-- ${creatorIntro } --%>
+				${creatorIntro }
 				${memberDto.introduce}
 			</div>
 			<div class="creator-message">

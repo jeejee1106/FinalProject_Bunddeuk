@@ -15,23 +15,17 @@ public class DetailService {
 	@Autowired
 	DetailMapper mapper;
 
+	//프로젝트 전체 데이터 반환
 	public ProjectDTO getData(int idx) {
 		return mapper.getData(idx);
 	}
+	
+	//최종 결제 날짜 가져오기
 	public String getPaymentDate(int idx) {
 		return mapper.getPaymentDate(idx);
 	}
 	
-	//작가의 프로필 이미지 가져오기
-	public String getCreatorImage(String id) {
-		return mapper.getCreatorImage(id);
-	}
-	
-	//작가 소개 가져오기
-	public String getCreatorIntro(String id) {
-		return mapper.getCreatorIntro(id);
-	}
-	
+	//작가 소개, 작가 프로필 이미지 가져오기
 	public MemberDTO getCreatorInfo(String id) {
 		return mapper.getCreatorInfo(id);
 	}

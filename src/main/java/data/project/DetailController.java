@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,30 +33,20 @@ public class DetailController {
 	@Autowired
 	MemberService memberService;
 	
+	//공개된 프로젝트의 디테일 페이지
 	@GetMapping("/project/detail")
-	public ModelAndView getDetailData(int idx, String key, HttpSession session) {
+	public String getDetailData(int idx, String key, HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
 		String name = memberService.getName(id);
 		int likeCheck = detailService.getLikeCheck(idx, id);
 		int supportCheck = detailService.getSupportCheck(idx, id);
 		
-		ModelAndView mview = new ModelAndView();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date today = java.sql.Date.valueOf(sdf.format(new Date())); //현재 날짜(오늘) 구하기
 		
 		ProjectDTO projectDto = detailService.getData(idx);
 		List<PresentDTO> pstList = detailService.getPresentData(idx);
-		
-//		String creatorImage = detailService.getCreatorImage(projectDto.getId());
-//		String creatorIntro = detailService.getCreatorIntro(projectDto.getId());
-		
 		MemberDTO memberDto = detailService.getCreatorInfo(projectDto.getId());
-		if(memberDto.getIntroduce()==null) {
-			memberDto.setIntroduce("안녕하세요. 문의 사항은 메세지를 보내주세요.");
-		}
-		if(memberDto.getPhoto()==null) {
-			memberDto.setPhoto("basic.jpg");
-		}
 		
 		String pymDate1 = detailService.getPaymentDate(idx).substring(0,4);
 		String pymDate2 = detailService.getPaymentDate(idx).substring(5,7);
@@ -65,39 +56,28 @@ public class DetailController {
 		float targetAmount = projectDto.getTarget_amount();
 		int percentageAchieved = (int)Math.round((totalAmount / targetAmount * 100));
 		
-//		mview.addObject("creatorIntro", creatorIntro);
-//		mview.addObject("creatorImage", creatorImage);
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("pymDate", pymDate1 + "년 " + pymDate2 + "월 " + pymDate3 + "일");
+		model.addAttribute("dto", projectDto);
+		model.addAttribute("pstList", pstList);
+		model.addAttribute("today", today);
+		model.addAttribute("name", name);
+		model.addAttribute("percentageAchieved", percentageAchieved);
+		model.addAttribute("likeCheck", likeCheck);
+		model.addAttribute("supportCheck", supportCheck);
 		
-		
-		mview.addObject("memberDto", memberDto);
-		
-		
-		mview.addObject("pymDate", pymDate1 + "년 " + pymDate2 + "월 " + pymDate3 + "일");
-		mview.addObject("dto", projectDto);
-		mview.addObject("pstList", pstList);
-		mview.addObject("today", today);
-		mview.addObject("name", name);
-		mview.addObject("percentageAchieved", percentageAchieved);
-		mview.addObject("likeCheck", likeCheck);
-		mview.addObject("supportCheck", supportCheck);
-		
-		mview.setViewName("/project_detail/projectDetail");
-		
-		return mview;
+		return "/project_detail/projectDetail";
 	}
 	
+	//공개예정 프로젝트 디테일 페이지
 	@GetMapping("/project/bookdetail")
-	public ModelAndView getBookDetailData(int idx) {
-		ModelAndView mview = new ModelAndView();
-		ProjectDTO dto = detailService.getData(idx);
-		String creatorImage = detailService.getCreatorImage(dto.getId());
-		String creatorIntro = detailService.getCreatorIntro(dto.getId());
+	public String getBookDetailData(int idx, Model model) {
+		ProjectDTO projectDto = detailService.getData(idx);
+		MemberDTO memberDto = detailService.getCreatorInfo(projectDto.getId());
 		
-		mview.addObject("dto", dto);
-		mview.addObject("creatorImage", creatorImage);
-		mview.addObject("creatorIntro", creatorIntro);
-		mview.setViewName("/project_detail/projectBookDetail");
-		return mview;
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("projectDto", projectDto);
+		return "/project_detail/projectBookDetail";
 	}
 	
 	@PostMapping("/project/payment")
