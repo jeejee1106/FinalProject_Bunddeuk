@@ -75,7 +75,7 @@ $(function(){
 			프로젝트 목적
 		</div>
 		<div class="purpose-content">
-			${dto.project_goal }
+			${projectDto.project_goal }
 		</div>
 	</div>
 	<hr>
@@ -84,7 +84,7 @@ $(function(){
 			프로젝트 예산
 		</div>
 		<div class="budget-content">
-			${dto.project_budget }
+			${projectDto.project_budget }
 		</div>
 	</div>
 	<hr>
@@ -93,7 +93,7 @@ $(function(){
 			프로젝트 일정
 		</div>
 		<div class="schedule-content">
-			${dto.project_schedule }
+			${projectDto.project_schedule }
 		</div>
 	</div>
 	<hr>
@@ -102,7 +102,7 @@ $(function(){
 			프로젝트 팀 소개
 		</div>
 		<div class="team-intro-content">
-			${dto.project_team_intro}
+			${projectDto.project_team_intro}
 		</div>
 	</div>
 	<hr>
@@ -111,7 +111,7 @@ $(function(){
 			선물 설명
 		</div>
 		<div class="present-intro-content">
-			${dto.project_present_intro }
+			${projectDto.project_present_intro }
 		</div>
 	</div>
 	<hr>
@@ -123,7 +123,7 @@ $(function(){
 			예상되는 어려움
 		</div>
 		<div class="anticipated_problem-content">
-			${dto.anticipated_problem }
+			${projectDto.anticipated_problem }
 		</div>
 		<hr>
 		<div class="exchange_refund-title trust-sub-title">

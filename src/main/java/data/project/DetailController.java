@@ -45,7 +45,7 @@ public class DetailController {
 		java.sql.Date today = java.sql.Date.valueOf(sdf.format(new Date())); //현재 날짜(오늘) 구하기
 		
 		ProjectDTO projectDto = detailService.getData(idx);
-		List<PresentDTO> pstList = detailService.getPresentData(idx);
+		List<PresentDTO> presentList = detailService.getPresentData(idx);
 		MemberDTO memberDto = detailService.getCreatorInfo(projectDto.getId());
 		
 		String pymDate1 = detailService.getPaymentDate(idx).substring(0,4);
@@ -58,8 +58,8 @@ public class DetailController {
 		
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("pymDate", pymDate1 + "년 " + pymDate2 + "월 " + pymDate3 + "일");
-		model.addAttribute("dto", projectDto);
-		model.addAttribute("pstList", pstList);
+		model.addAttribute("projectDto", projectDto);
+		model.addAttribute("presentList", presentList);
 		model.addAttribute("today", today);
 		model.addAttribute("name", name);
 		model.addAttribute("percentageAchieved", percentageAchieved);

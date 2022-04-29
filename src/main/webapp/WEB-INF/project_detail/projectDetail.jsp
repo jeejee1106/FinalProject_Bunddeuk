@@ -12,17 +12,17 @@
 <!-- start project main -->
 <div class="container">
 	<div class="project-intro">
-		<span class="project-intro-category">${dto.category }</span>
-		<h1 class="project-intro-title">${dto.title } </h1>
+		<span class="project-intro-category">${projectDto.category }</span>
+		<h1 class="project-intro-title">${projectDto.title } </h1>
 		<span class="profile-img">
-			<img alt="프로필" src="../profile_image/${creatorImage}" class="creator-image" id=${dto.id }>
+			<img alt="프로필" src="../profile_image/${creatorImage}" class="creator-image" id=${projectDto.id }>
 		</span>
-		<span class="project-intro-creator-name">${dto.name}</span>
-		<input type="hidden" id="creatorId" value="${dto.id }">
+		<span class="project-intro-creator-name">${projectDto.name}</span>
+		<input type="hidden" id="creatorId" value="${projectDto.id }">
 	</div>
 	<div class="project-main">
 		<div class="project-main-img">
-			<img alt="프로젝트 커버 이미지" src="/thumbnail_image/${dto.thumbnail}" style="width: 650px; height: 500px">
+			<img alt="프로젝트 커버 이미지" src="/thumbnail_image/${projectDto.thumbnail}" style="width: 650px; height: 500px">
 		</div>
 	</div>
 	<div class="project-sub-aside">
@@ -30,19 +30,19 @@
 			<div class="project-sub-title">모인금액</div>
 			<div>
 				<span class="project-sub-value">
-					<fmt:formatNumber value="${dto.total_amount }"/>
+					<fmt:formatNumber value="${projectDto.total_amount }"/>
 				</span>
 				<span>원</span>
 				<span class="project-sub-per">${percentageAchieved }%</span>
 			</div>
 		</div>
 		<div class="project-sub">
-			<div class="project-sub-title">남은시간 ${pstdto.present_name }</div>
+			<div class="project-sub-title">남은시간</div>
 			<div>
 				<span class="project-sub-value">
 					<fmt:parseDate value="${today}" var="strPlanDate" pattern="yyyy-MM-dd"/>
 					<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate" />
-					<fmt:parseDate value="${dto.end_date}" var="endPlanDate" pattern="yyyy-MM-dd"/>
+					<fmt:parseDate value="${projectDto.end_date}" var="endPlanDate" pattern="yyyy-MM-dd"/>
 					<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate" />
 					${endDate - strDate }
 				</span>
@@ -53,14 +53,14 @@
 		<div class="project-sub">
 			<div class="project-sub-title">후원자</div>
 			<div>
-				<span class="project-sub-value">${dto.number_support }</span>
+				<span class="project-sub-value">${projectDto.number_support }</span>
 				<span>명</span>
 			</div>
 		</div>
 		<div class="funding-info" style="background-color: #f0ffff">
 			<div class="funding-info-title" style="font-weight: bold;">펀딩 진행중</div>
 			<span class="funding-info-content">
-				목표금액인 <fmt:formatNumber value="${dto.target_amount}"/> 원이 모여야만 결제됩니다.
+				목표금액인 <fmt:formatNumber value="${projectDto.target_amount}"/> 원이 모여야만 결제됩니다.
 				<br>
 				결제는 ${pymDate}에 다함께 진행됩니다.
 			</span>
@@ -101,14 +101,13 @@
 			</div>
 			<div class="creator-profile">
 				<span class="profile-img">
-					<img alt="프로필" src="../profile_image/${creatorImage}" class="creator-image" id=${dto.id }>
+					<img alt="프로필" src="../profile_image/${creatorImage}" class="creator-image" id=${projectDto.id }>
 				</span>
 				<span class="creator-name">
-					${dto.name }
+					${projectDto.name }
 				</span>
 			</div>
 			<div class="creator-intro">
-				${creatorIntro }
 				${memberDto.introduce}
 			</div>
 			<div class="creator-message">
@@ -123,7 +122,7 @@
 			</div>
 			<div class="present-option">
 			<form action="payment" method="post" onsubmit="return paycheck();">
-				<input type="hidden" name="idx" value="${dto.idx }" id="dto-idx">
+				<input type="hidden" name="idx" value="${projectDto.idx }" id="dto-idx">
 				<div class="present-price">
 					1,000원+
 				</div>
@@ -135,27 +134,27 @@
 				</button>
 			</form>
 			</div>
-			<c:forEach var="pstdto" items="${pstList}">
+			<c:forEach var="presentDto" items="${presentList}">
 			<form action="payment" method="post" onsubmit="return paycheck();">
 				<div class="present-option">
-					<input type="hidden" name="idx" value="${dto.idx }">
-					<input type="hidden" name="pstN" value="${pstdto.present_name }">
-					<input type="hidden" name="pstP" value="${pstdto.price }">
+					<input type="hidden" name="idx" value="${projectDto.idx }">
+					<input type="hidden" name="pstN" value="${presentDto.present_name }">
+					<input type="hidden" name="pstP" value="${presentDto.price }">
 					<div class="present-price" >
-						<fmt:formatNumber value="${pstdto.price }"/>원+
+						<fmt:formatNumber value="${presentDto.price }"/>원+
 					</div>
 					<div>
-						<span class="present-name" data-pstName="${pstdto.present_name }">
-							> ${pstdto.present_name }
+						<span class="present-name" data-pstName="${presentDto.present_name }">
+							> ${presentDto.present_name }
 						</span>
 						<span class="present-description" >
 							<c:choose>
-								<c:when test="${pstdto.present_option == null}">
+								<c:when test="${presentDto.present_option == null}">
 								</c:when>
 								<c:otherwise>
 									<b style="margin-left:20px; font-size:8pt; color:gray">옵션선택</b>
 									<select name="pstO" id="" class="pstOption" style="width:150px;">
-										<c:set var="present_option" value="${pstdto.present_option}" />
+										<c:set var="present_option" value="${presentDto.present_option}" />
 										<c:set var="splitStr" value="${fn:split(present_option, ',') }" />
 										<c:forEach var="option" items="${splitStr }">
 											<option value="${option}">${option}</option>
@@ -165,8 +164,8 @@
 							</c:choose>
 						</span>
 					</div>
-					<button type="submit" class="btn-present-support" data-price="${pstdto.price }">
-						<fmt:formatNumber value="${pstdto.price }"/>원 후원하기
+					<button type="submit" class="btn-present-support" data-price="${presentDto.price }">
+						<fmt:formatNumber value="${presentDto.price }"/>원 후원하기
 					</button>
 				</div>
 				</form>
@@ -196,7 +195,7 @@
 							받는사람
 						</td>
 						<td>
-							<input type="text" readonly="readonly" id="recv_name" value="${dto.name}">
+							<input type="text" readonly="readonly" id="recv_name" value="${projectDto.name}">
 						</td>
 					</tr>
 					<tr>

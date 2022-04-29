@@ -4,12 +4,12 @@
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="/css/project-community.css">
 <div class="container2">
-	<input type="hidden" id="pnum" name="pnum" value="${dto.idx}"> 
+	<input type="hidden" id="pnum" name="pnum" value="${projectDto.idx}"> 
 	<c:choose>
 		<c:when test="${sessionScope.loginok == 'yes'}">
 			<div class="comment-container">
 				<form id="comment" action="../comment/insert" method="post">
-					<input type="hidden" name="pnum" value="${dto.idx}"> 
+					<input type="hidden" name="pnum" value="${projectDto.idx}"> 
 					<input type="hidden" id="loginUser"name="writer" value="${sessionScope.id}">
 					<textarea name="content" class="comment" placeholder="커뮤니티가 더 훈훈해지는 댓글을 남겨주세요."></textarea>
 					<div class="btn-container">
@@ -113,7 +113,7 @@ $(function () {
                data: {pnum:num, order:order},
                success : function(data) {
             	countComment();
-               	let projectWriter = '${dto.id}'
+               	let projectWriter = '${projectDto.id}'
                 let s = ''; 
                	for(i=0; i<data.length; i++){
                		
