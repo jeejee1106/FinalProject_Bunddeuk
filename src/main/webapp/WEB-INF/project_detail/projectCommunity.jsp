@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="/css/project-community.css">
@@ -38,7 +37,7 @@
 
 <script>
 $(function () {
-	//정렬
+	/* //정렬
 	$(".order-asc").click(function() {
 		$(".comment-order").val("1")
 		$(".order-desc").css({
@@ -466,7 +465,7 @@ $(function () {
                 alert(xhr + " : " + status);
             }
         }); 
-	}
+	} */
 	
 })	
 </script>

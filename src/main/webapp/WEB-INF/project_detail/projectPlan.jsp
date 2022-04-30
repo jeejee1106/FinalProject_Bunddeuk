@@ -1,52 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="/css/project-plan.css">
-<script type="text/javascript">
-$(document).ready(function(){
-	var jbOffset = $('.plan-menu').offset();
-	$(window).scroll(function(){
-		if ($(document).scrollTop() > jbOffset.top) {
-			$('.plan-menu').addClass('jbFixed').css({"height" : "78px", "line-height": "78px"});
-		}
-		else {
-			$('.plan-menu').removeClass('jbFixed').css({"height" : "", "line-height": ""});
-		}
-	});
-});
-$(function(){
-	//plan 네비바 색상변경
-	$(".plan-list-title").click(function(){
-		$(this).css('background', '#afeeee');
-		$(this).parent().siblings().children().css('background', 'none'); 
-	});
-	var menuHeight = $('.plan-menu').outerHeight();
-	//plan 네비바 클릭 시 해당영역으로 스크롤 이동
-	$(".plan-list-purpose").click(function(event){
-		event.preventDefault();
-		$('html,body').animate({scrollTop:$("#purpose").offset().top - menuHeight}, 500);
-	});
-	$(".plan-list-budget").click(function(event){
-		event.preventDefault();
-		$('html,body').animate({scrollTop:$("#budget").offset().top - menuHeight - 30}, 500);
-	});
-	$(".plan-list-schedule").click(function(event){
-		event.preventDefault();
-		$('html,body').animate({scrollTop:$("#schedule").offset().top - menuHeight - 30}, 500);
-	});
-	$(".plan-list-team-intro").click(function(event){
-		event.preventDefault();
-		$('html,body').animate({scrollTop:$("#team-intro").offset().top - menuHeight - 30}, 500);
-	});
-	$(".plan-list-present-intro").click(function(event){
-		event.preventDefault();
-		$('html,body').animate({scrollTop:$("#present-intro").offset().top - menuHeight - 30}, 500);
-	});
-	$(".plan-list-trust-safety").click(function(event){
-		event.preventDefault();
-		$('html,body').animate({scrollTop:$("#trust-safety").offset().top - menuHeight - 30}, 500);
-	});
-});
-</script>
+
 <div class="plan-menu">
 	<ul class="plan-list" id="plan-list">
 		<li>
