@@ -1,6 +1,8 @@
 $(document).ready(function(){
     var topBar = $("#topBar").offset();
     
+
+	//detail 페이지에서는 헤더 고정 풀기
     $(window).scroll(function(){
         var docScrollY = $(document).scrollTop()
         var barThis = $("#topBar")
@@ -36,6 +38,7 @@ $(function(){
 	loginId = $("#id").val();
 	var likeCheck = $("#likeCheck").val();
 	
+	//좋아요를 눌렀다면 하트 빨갛게
 	if(likeCheck == 1){
 		$(".project-sub-heart").html("<i class='fa fa-heart' style='color: red;'></i>");
 	}
@@ -203,6 +206,7 @@ $(function(){
 		getCommentList()
 	})
 	countComment()
+	
 	//컨텐트내용표시
 	$(document).on("click",".parent-writer", function() {
 		let parentName = $(this).text().replace(/^./, "");
@@ -243,10 +247,11 @@ $(function(){
 		}
 	})
 	getCommentList();
+	
 	//getlist
 	function getCommentList() {
-		let loginCheck = '${sessionScope.loginok}';
-	    let loginUser = '${sessionScope.id}';	
+		let loginCheck = $("#sessionScope").val();
+	    let loginUser = $("#loginUser").val();	
 		let num = $("#pnum").val();
 		let order = $(".comment-order").val();
        	$.ajax({
@@ -256,7 +261,7 @@ $(function(){
                data: {pnum:num, order:order},
                success : function(data) {
             	countComment();
-               	let projectWriter = '${projectDto.id}'
+               	let projectWriter = $("#creator-id");
                 let s = ''; 
                	for(i=0; i<data.length; i++){
                		
@@ -265,26 +270,31 @@ $(function(){
                		if(data[i].tempdel == 1){
                 		s +="<span class ='delete-msg'>댓글이 삭제되었습니다.</span>"
                		}else{
-               			
+               			 if(data[i].fix == 1 && data[i].grph == 0){
+		                	s += "&nbsp;<span style='color:red'><i class='fa fa-thumb-tack'></i></span>";	
+		                }
+	                	if(data[i].grph == 0 && loginCheck=='yes' && loginUser == projectWriter){
+		                	if(data[i].fix != 1){
+		                		s += "<button title='댓글을 고정합니다.' class='fix-style fix'><i class='fa fa-thumb-tack'></i></button><br>";	
+		                	}else{
+		                		s += "<button title='댓글고정을 취소합니다.' class='fix-style cancel-fix'><i class='fa fa-times'></i></button><br>";	
+		                	}
+	                	}
 	                	if(data[i].grph != 0){
 						s += "<img class='re-image' src='../profile_image/re.png'> ";
 	                	}
-
 	                	if(data[i].photo == null){
-							s += "<img class='profile-photo' title='"+data[i].writer+"님의 프로필페이지로 이동합니다.' src='../profile_image/basic.jpg' id='"+data[i].writer+"'>";
-		                } else{
-                			s += "<img class='profile-photo' title='"+data[i].writer+"님의 프로필페이지로 이동합니다.' src='../profile_image/"+data[i].photo+"' id='"+data[i].writer+"'>";
+						s += "<img class='profile-photo' title='"+data[i].writer+"님의 프로필페이지로 이동합니다.' src='../profile_image/basic.jpg' id='"+data[i].writer+"'>";
+		                }else{
+                		s += "<img class='profile-photo' title='"+data[i].writer+"님의 프로필페이지로 이동합니다.' src='../profile_image/"+data[i].photo+"' id='"+data[i].writer+"'>";
 		                }
-
 	                	s += "<span class='re-writer-name'>&nbsp;"+data[i].writer+"</span>";
 	                	if(data[i].writer == projectWriter){
-	                		s += "<span class='project-writer'>창작자</span>";
+	                	s += "<span class='project-writer'>창작자</span>";
 	                	}
-
 	                	if(data[i].fix == 1 && data[i].grph == 0){
 		                	s += "&nbsp;<span class='fix-msg'><i class='fa fa-thumb-tack'></i> "+projectWriter+"님이 고정함</span>";	
 		                }
-
 	                	if(data[i].grph == 0 && loginCheck=='yes' && loginUser == projectWriter){
 		                	if(data[i].fix != 1){
 		                		s += "<button class='fix-style fix'><i class='fa fa-thumb-tack'></i></button><br>";	
@@ -293,8 +303,8 @@ $(function(){
 		                	}
 	                	}
 	                	if(data[i].parent != 'no' && data[i].parent != data[i].writer){
-		                	s += "<div class='parent-writer'>@"+data[i].parent+"</div>"
-		                	s += "<input type='hidden' id='parentNum' value='"+data[i].parent_num+"'>"
+	                	s += "<div class='parent-writer'>@"+data[i].parent+"</div>"
+	                	s += "<input type='hidden' id='parentNum' value='"+data[i].parent_num+"'>"
 	                	}
 	                	if(data[i].grps > 0){
 		                	s += "<pre style ='width:475px;' class='re-content'>"+data[i].content+"</pre>";
@@ -304,7 +314,7 @@ $(function(){
 	                	s += "<span id='time'>"+data[i].writetime+"</span>";
 	                	
 	                	if(loginCheck == 'yes'){
-	                		s += "<button class='fix-style reply'><span style='color:gray;'>답글</span></button>";
+	                	s += "<button class='fix-style reply'><span style='color:gray;'>답글</span></button>";
 		                	if(data[i].writer == loginUser){
 	                			s += "<button class='re-del-option'><span><i class='fa fa-ellipsis-v'></i></span></button>";
 				                s += "<button class='fix-style up-loc re-update'><span><i class='fa fa-pencil'></i> 수정</span></button>";
@@ -320,7 +330,7 @@ $(function(){
 	                	s += "<input type='hidden' id='grps' value='"+data[i].grps+"'>";
 	                	s += "<input type='hidden' id='content' value='"+data[i].content+"'>"
 	                	s += "<input type='hidden' id='tempdel' value='"+data[i].tempdel+"'>"
-                		s += "</div>";
+                	s += "</div>";
                		}
                 	s += "<div class='update-form'></div>";
                 	s += "<div class='reply-form'></div>";
@@ -330,6 +340,7 @@ $(function(){
                	$(".re-update").hide();
                	$(".delete-btn").hide();
                	$(".re-del-option").hide();
+               	
                }, 
                error : function(xhr, status) {
                    alert(xhr + " : " + status);
@@ -362,7 +373,8 @@ $(function(){
             }
         }); 
 	})
-	//check
+	
+	//댓글 글자수 제한
 	$(".comment").keyup(function(){
 		let content = $(this).val()
 		let contentSize = (content.length+content.split('\n').length-1);
@@ -375,16 +387,19 @@ $(function(){
 		}
 	})
 	
-	//hide
+	//대댓글 폼 숨기기
 	$(document).on("click",".hide-btn", function() {
 		$(this).parent().siblings(".reply-comment").val("")
 		$(".reply-form").hide()
 		
 	})
+	
+	//'답글'버튼 누르면 폼 나오는 건데 굳이 스크립트로 말고 html에 만들어서 hide, show하면 되지 않을까
 	$(document).on("click",".reply", function() {
 		$(".reply-form").hide()
 		$(".update-form").hide()
 		$(this).parent().next().next(".reply-form").show()
+		let loginUser = $("#loginUser").val();
 		let parent = $(this).siblings("#parent").val()
 		let parentNum = $(this).siblings("#num").val()
 		let pnum = $(this).siblings("#pnum").val() 
@@ -394,7 +409,7 @@ $(function(){
 		let s = ""
 		s += "<form action='../comment/reply' class='reply-form' method='post'>";
 			s += "<div class='reply-container'>";
-				s += "<input type='hidden' name='writer' value='${sessionScope.id}'>";
+				s += "<input type='hidden' name='writer' value='" + loginUser + "'>";
 				s += "<input type='hidden' name='parent' value='"+parent+"'>";
 				s += "<input type='hidden' name='parent_num' value='"+parentNum+"'>";
 				s += "<input type='hidden' name='pnum' value='"+pnum+"'>";
@@ -411,6 +426,8 @@ $(function(){
 		s += "</form>";
 		$(this).parent().siblings('.reply-form').html(s)
 	})
+	
+	//답글 등록 버튼 기능
 	$(document).on("click",".reply-btn", function() {
 		let comment = $(this).parent().siblings(".reply-comment")
 		if(comment.val().length == 0){
@@ -432,11 +449,13 @@ $(function(){
             success : function() {
             	getCommentList();
             }, 
-            error : function(xhr, status) {
-                alert(xhr + " : " + status);
+            error : function(xhr, status, error) {
+                alert("댓글 등록 에러 : " + xhr + " : " + status + ", error : " + error);
             }
         }); 	 
 	})
+	
+	//답글 폼 글자수 키업 이벤트
 	$(document).on("keyup",".reply-comment", function() {
 		let content = $(this).val()
 		let contentSize = ($(this).val().length+$(this).val().split('\n').length-1);
@@ -447,9 +466,8 @@ $(function(){
 			$(".count-reply").html('500')
 			return;
 		}
-		
-		
 	})
+	
 	//show comment
 	$(document).on("mouseenter",".show-comment", function() {
 		$(this).children(".re-del-option").show();
@@ -468,6 +486,7 @@ $(function(){
 		$(this).siblings(".delete-btn").toggle()
 		
 	});
+	
 	//삭제
 	$(document).on("click",".delete-btn", function() {
 		let check = confirm("삭제하시겠습니까?")
@@ -525,6 +544,7 @@ $(function(){
 		}
 		
 	})
+	
 	//update
 	$(document).on("click",".update-btn", function() {
 		let check = confirm("수정하시겠습니까?")
@@ -602,6 +622,7 @@ $(function(){
             }
         }); 
 	}
+	
 	
 });
 
