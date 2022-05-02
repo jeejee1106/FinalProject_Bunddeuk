@@ -48,9 +48,6 @@ public class SupportController {
 				}
 				recommendList.add(alist.get(randomNumber[i]));
 			}
-//			for(int i=0; i<4; i++) {
-//				recommendList.add(alist.get(randomNumber[i]));
-//			}
 			model.addAttribute("recommendList",recommendList);
 		}else {
 			model.addAttribute("recommendList",alist);

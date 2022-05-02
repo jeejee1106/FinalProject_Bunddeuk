@@ -75,18 +75,16 @@ public class DetailController {
 		ProjectDTO projectDto = detailService.getData(idx);
 		MemberDTO memberDto = detailService.getCreatorInfo(projectDto.getId());
 		
-		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("projectDto", projectDto);
+		model.addAttribute("memberDto", memberDto);
 		return "/project_detail/projectBookDetail";
 	}
 	
 	@PostMapping("/project/payment")
-	public ModelAndView getPaymentData(int idx, String key, HttpSession session, String pstN, String pstO, String pstP) {
-		ModelAndView mview = new ModelAndView();
+	public String getPaymentData(int idx, String key, HttpSession session, String pstN, String pstO, String pstP, Model model) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date today = java.sql.Date.valueOf(sdf.format(new Date()));
 		
-		String loginok = (String)session.getAttribute("loginok");
 		String id = (String)session.getAttribute("id");
 		
 		ProjectDTO dto = detailService.getData(idx);
@@ -101,7 +99,6 @@ public class DetailController {
 		int percentageAchieved = (int)Math.round((totalAmount / targetAmount * 100));
 		String addr = ddto.getAddr();
 		String addr2 = ddto.getAddr2();
-		//System.out.println(addr + addr2);
 		
 		if(pstN == null && pstO == null && pstP == null) {
 			pstN = "선물 없이 후원하기";
@@ -112,19 +109,17 @@ public class DetailController {
 			pstO = "없음";
 		}
 		
-		mview.addObject("pymDate", pymDate1 + "년 " + pymDate2 + "월 " + pymDate3 + "일");
-		mview.addObject("dto", dto);
-		mview.addObject("today", today);
-		mview.addObject("percentageAchieved", percentageAchieved);
-		mview.addObject("mdto", mdto);
-		mview.addObject("addr", addr+ " " + addr2);
-		mview.addObject("pstN", pstN);
-		mview.addObject("pstO", pstO);
-		mview.addObject("pstP", pstP);
-	
-		mview.setViewName("/project_detail/payment");
+		model.addAttribute("pymDate", pymDate1 + "년 " + pymDate2 + "월 " + pymDate3 + "일");
+		model.addAttribute("dto", dto);
+		model.addAttribute("today", today);
+		model.addAttribute("percentageAchieved", percentageAchieved);
+		model.addAttribute("mdto", mdto);
+		model.addAttribute("addr", addr+ " " + addr2);
+		model.addAttribute("pstN", pstN);
+		model.addAttribute("pstO", pstO);
+		model.addAttribute("pstP", pstP);
 		
-		return mview;
+		return "/project_detail/payment";
 	}
 	
 	@ResponseBody

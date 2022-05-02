@@ -31,10 +31,7 @@ public class CommentController {
 	@PostMapping("/comment/reply")
 	public void reply(CommentDTO commentDTO) {
 		int fixCheck = commentService.checkFix(commentDTO.getGrp());
-		/*
-		 * System.out.println("fixchekc"+fixCheck);
-		 * System.out.println("grph넘버"+commentDTO.getGrph());
-		 */
+		
 		if (commentDTO.getGrph() == 0) {
 			commentDTO.setParent("no");
 		}
@@ -61,7 +58,6 @@ public class CommentController {
 	@ResponseBody
 	@PostMapping("/comment/delete")
 	public void delete(int num, int grp, int grph, int tempdel, HttpSession session) {
-		/* System.out.println("num"+num+"grp"+grp+"grph"+grph+"tempDel"+tempdel); */
 		int grpCount = commentService.countGrp(grp);
 		if(grph == 0) {
 			if(grpCount == 1){
@@ -72,14 +68,16 @@ public class CommentController {
 			}
 		}else {
 			commentService.deleteComment(num);
+			
 			grpCount = commentService.countGrp(grp);
 			tempdel = commentService.countTempdel(grp);
-			/* System.out.println(tempdel+"tempdel값"); */
+			
 			if(grpCount == 1 && tempdel == 1){
 				commentService.deleteBranchComment(grp);
 			}
 		}
 	}
+	
 	@ResponseBody
 	@PostMapping("/comment/update")
 	public void delete(String num, String comment) {
@@ -92,16 +90,19 @@ public class CommentController {
 		commentService.resetFix();
 		commentService.fixComment(grp);
 	}
+	
 	@ResponseBody
 	@PostMapping("/comment/cancelFix")
 	public void cancelFix(int grp) {
 		commentService.cancelFix(grp);
 	}
+	
 	@ResponseBody
 	@PostMapping("/comment/getComment")
 	public String getComment(int num) {
 		return commentService.getParentContent(num);
 	}
+	
 	@ResponseBody
 	@PostMapping("/comment/countComment")
 	public int countComment(int pnum) {
