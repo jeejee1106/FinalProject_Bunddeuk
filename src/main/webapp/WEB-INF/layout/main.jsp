@@ -140,63 +140,53 @@ $(function() {
 })
 </script>
 
-<!-- Start Banner Hero -->
+<!-- Start Banner -->
 <input type="hidden" id="counter2">
 <div id="wrapper" style="margin-top: 30px;">
-        <!-- 1/5 -->
-        <div id="counter"></div>
+    <!-- 1/5 -->
+    <div id="counter"></div>
     <div id="slider-wrap" class="bannerWallpaper">
 		<ul id="slider">
          	<li>
-         	<a href="/project/detail?idx=408&key=detail">
-			<img src="${root }/img/bg-img/myhert.jpg">
-			</a>
+	         	<a href="/project/detail?idx=408&key=detail">
+				<img src="${root }/img/bg-img/myhert.jpg">
+				</a>
           	</li>
-          
          	<li>
-			<a href="/project/detail?idx=411&key=detail">
-			<img src="${root }/img/bg-img/400face3.jpg">			
-			</a>
+				<a href="/project/detail?idx=411&key=detail">
+				<img src="${root }/img/bg-img/400face3.jpg">			
+				</a>
           	</li>
-          
          	<li>
-			<a href="/project/detail?idx=420&key=detail">
-			<img src="${root }/img/bg-img/sochang3.jpg">
-            </a>
+				<a href="/project/detail?idx=420&key=detail">
+				<img src="${root }/img/bg-img/sochang3.jpg">
+	            </a>
             </li>
-           
          	<li>
-         	<a href="/project/detail?idx=414&key=detail">         	
-			<img src="${root }/img/bg-img/timebook.jpg">
-			</a>
+	         	<a href="/project/detail?idx=414&key=detail">         	
+				<img src="${root }/img/bg-img/timebook.jpg">
+				</a>
             </li>
-           
          	<li>
-         	<a href="/layout/teamProfile">
-			<img src="${root }/img/bg-img/teamimg.jpg">
-            </a>
+	         	<a href="/layout/teamProfile">
+				<img src="${root }/img/bg-img/teamimg.jpg">
+	            </a>
             </li>
 		</ul>
 	</div>
-    <div id="" class="testLayout">
-    		<div class="sub_benner" id="slider2">
-<!--     		<h2>가장 나다운</h2><h2>2022를 찾아보세요 </h2>
-    		<p>200가지 역대 최대 달력*다이어리 기획전 </p> -->
-    		</div>
-    </div>
-         <!--controls-->
-        <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
-        <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+  	<div class="sub_benner" id="slider2"></div>
+    <!--controls-->
+    <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
+    <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
 </div>
-
-<!-- End Banner Hero -->
+<!-- End Banner -->
 		
 <div class="totalLayout">	
 	<div class="totalLayout-title">
 		<a class="list-titles" title="모든 프로젝트" href="/listchul/listChul?state=no&category=no">모든 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${alist}">
+		<c:forEach var="dto" items="${allProjectList}">
 			<div class="project-list-mini">
 				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">
@@ -220,7 +210,7 @@ $(function() {
 		<a class="list-titles" title="인기 프로젝트" href="/listchul/listChul?state=pop&category=no">인기 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${plist}">
+		<c:forEach var="dto" items="${popularProjectList}">
 			<div class="project-list-mini">
 				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">
@@ -229,6 +219,7 @@ $(function() {
 					<div class="category-name">
 						${dto.category } ㅣ ${dto.name }
 					</div>
+					
 					<div class="main-project-title">
 						${dto.title}
 					</div>
@@ -244,7 +235,7 @@ $(function() {
 		<a class="list-titles" title="마감임박 프로젝트" href="/listchul/listChul?state=endsoon&category=no">마감임박 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${elist}">
+		<c:forEach var="dto" items="${closingProjectList}">
 			<div class="project-list-mini">
 				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">
@@ -268,7 +259,7 @@ $(function() {
 		<a class="list-titles" title="신규 프로젝트" href="/listchul/listChul?state=new&category=no">신규 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${nlist}">
+		<c:forEach var="dto" items="${newProjectList}">
 			<div class="project-list-mini">
 				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">

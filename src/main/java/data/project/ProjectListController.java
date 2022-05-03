@@ -21,21 +21,16 @@ public class ProjectListController {
 		List<ProjectDTO> popularProjectList = projectListService.getPopularProjects();
 		List<ProjectDTO> closingProjectList = projectListService.getClosingProjects();
 		List<ProjectDTO> newProjectList = projectListService.getNewProjects();
-		model.addAttribute("alist",allProjectList);
-		model.addAttribute("plist",popularProjectList);
-		model.addAttribute("elist",closingProjectList);
-		model.addAttribute("nlist",newProjectList);
+		model.addAttribute("allProjectList",allProjectList);
+		model.addAttribute("popularProjectList",popularProjectList);
+		model.addAttribute("closingProjectList",closingProjectList);
+		model.addAttribute("newProjectList",newProjectList);
 		return "/layout/main";
-	}
-	
-	@GetMapping("/layout/teamProfile")
-	public String teamFrofile() {
-		return "/layout/teamProfile";
 	}
 	
 	@GetMapping("/listchul/listChul")
 	public String projectList (Model model, String category,String state,String percent,String search) {
-		//System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listChul태스트용");
+		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listChul태스트용");
 		if(search == null) {
 			search = "no";
 		}
@@ -48,6 +43,12 @@ public class ProjectListController {
 		model.addAttribute("search",search);
 		return "/listchul/listChul";
 	}
+	
+	@GetMapping("/layout/teamProfile")
+	public String teamProfile() {
+		return "/layout/teamProfile";
+	}
+	
 	@ResponseBody
 	@GetMapping("/listchul/listAll")
 	public List<ProjectDTO> alist(String category,String state,String percent, String search)
