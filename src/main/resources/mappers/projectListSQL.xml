@@ -10,25 +10,34 @@
 			</if>
 		</where>
 	</select>
-	<!-- 카테고리 또는 검색 조건 없이 기본 출력 -->
-	<select id="allProjects" resultType="pdto">
+	
+	<!-- 모든 프로젝트 - 카테고리 또는 검색 조건 없이 기본 출력 -->
+	<select id="getAllProjects" resultType="pdto">
 		select * from project where audit = 3 and end_date >=now() and now() >= start_date order by idx desc limit 8
 	</select>
-	<select id="popProjects" resultType="pdto">
+	
+	<!-- 인기 프로젝트 리스트 -->
+	<select id="getPopularProjects" resultType="pdto">
 		select * from project where audit = 3 and end_date >=now() and now() >= start_date order by number_support desc limit 8
 	</select>
-	<select id="endProjects" resultType="pdto">
+	
+	<!-- 마감임박 프로젝트 리스트 -->
+	<select id="getClosingProjects" resultType="pdto">
 		select * from project where audit = 3 and end_date >=now() and now() >= start_date and date_add(now(),interval 10 day) > end_date order by idx asc limit 8 
 	</select>
-	<select id="newProjects" resultType="pdto">
+	
+	<!-- 신규 프로젝트 리스트 -->
+	<select id="getNewProjects" resultType="pdto">
 		select * from project where audit = 3 and end_date >=now() and now() >= start_date order by start_date desc limit 8
 	</select>	
+	
+	<!-- 공개예정 프로젝트 리스트 -->
 	<select id="bookedProjects" resultType="pdto">
 		select * from project  where audit = 3 and start_date > now() order by start_date asc limit 8
 	</select>	
 	
 	<!--조건에 따라 출력 -->
-	<select id="getAllProjects" parameterType="String" resultType="pdto">
+	<select id="getConditionProjects" parameterType="String" resultType="pdto">
 		<choose>
 			<!-- 검색시 -->
 			<when test="category=='no' and state == 'no' and percent == 'no' and search != 'no'">

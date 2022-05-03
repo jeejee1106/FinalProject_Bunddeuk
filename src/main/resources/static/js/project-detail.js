@@ -657,7 +657,6 @@ $(document).on("click","#btn-send",function(){
 function paycheck() {
 	var rs = "";
 	var supportCheck = $("#supportCheck").val();
-	alert(supportCheck);
 	var rs = "";
 	if(supportCheck!=0 && loginok!=''){
 		alert("이미 후원한 프로젝트 입니다.")

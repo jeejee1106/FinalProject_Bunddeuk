@@ -11,21 +11,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ProjectListController {
+	
 	@Autowired
 	ProjectListService projectListService;
 	
 	@GetMapping("/")
 	public String mainList(Model model) {
-		List<ProjectDTO> allProjectList = projectListService.allProjects();
-		List<ProjectDTO> popProjectList = projectListService.popProjects();
-		List<ProjectDTO> endProjectList = projectListService.endProjects();
-		List<ProjectDTO> newProjectList = projectListService.newProjects();
+		List<ProjectDTO> allProjectList = projectListService.getAllProjects();
+		List<ProjectDTO> popularProjectList = projectListService.getPopularProjects();
+		List<ProjectDTO> closingProjectList = projectListService.getClosingProjects();
+		List<ProjectDTO> newProjectList = projectListService.getNewProjects();
 		model.addAttribute("alist",allProjectList);
-		model.addAttribute("plist",popProjectList);
-		model.addAttribute("elist",endProjectList);
+		model.addAttribute("plist",popularProjectList);
+		model.addAttribute("elist",closingProjectList);
 		model.addAttribute("nlist",newProjectList);
 		return "/layout/main";
 	}
+	
 	@GetMapping("/layout/teamProfile")
 	public String teamFrofile() {
 		return "/layout/teamProfile";
@@ -38,7 +40,7 @@ public class ProjectListController {
 			search = "no";
 		}
 		int totalCount=projectListService.getTotalCount();
-		List<ProjectDTO> list= projectListService.getAllProjects(category,state,percent,search);
+		List<ProjectDTO> list= projectListService.getConditionProjects(category,state,percent,search);
 		model.addAttribute("list",list);
 		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("category",category);
@@ -54,7 +56,7 @@ public class ProjectListController {
 			search = "no";
 		}
 		//System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listAll태스트용");
-		return projectListService.getAllProjects(category,state,percent,search);
+		return projectListService.getConditionProjects(category,state,percent,search);
 	}
 
 }

@@ -16,22 +16,28 @@ public class ProjectListService {
 	public int getTotalCount() {
 		return mapper.getTotalCount();
 	}
-	public List<ProjectDTO> getAllProjects (String category,String state,String percent,String search) {
-		return mapper.getAllProjects(category,state,percent,search);
+	
+	public List<ProjectDTO> getAllProjects(){
+		return mapper.getAllProjects();
 	}
-	public List<ProjectDTO> allProjects(){
-		return mapper.allProjects();
-	};
-	public List<ProjectDTO> endProjects(){
-		return mapper.endProjects();
-	};
-	public List<ProjectDTO> newProjects(){
-		return mapper.newProjects();
-	};
-	public List<ProjectDTO> popProjects(){
-		return mapper.popProjects();
-	};
+	
+	public List<ProjectDTO> getPopularProjects(){
+		return mapper.getPopularProjects();
+	}
+
+	public List<ProjectDTO> getClosingProjects(){
+		return mapper.getClosingProjects();
+	}
+	
+	public List<ProjectDTO> getNewProjects(){
+		return mapper.getNewProjects();
+	}
+	
 	public List<ProjectDTO> bookedProjects(){
 		return mapper.bookedProjects();
+	}
+	
+	public List<ProjectDTO> getConditionProjects (String category,String state,String percent,String search) {
+		return mapper.getConditionProjects(category,state,percent,search);
 	}
 }
