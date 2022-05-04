@@ -55,6 +55,7 @@ public class CommentController {
 		List<CommentDTO> list = commentService.getCommentList(pnum, order);
 		return list;
 	}
+	
 	@ResponseBody
 	@PostMapping("/comment/delete")
 	public void delete(int num, int grp, int grph, int tempdel, HttpSession session) {

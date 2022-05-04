@@ -184,7 +184,7 @@ $(function(){
 	/*********************************************************
 	***************** 댓글 스크립트 (community) ******************
 	**********************************************************/
-	//정렬
+	//정렬 - 오래된순 (등록순)
 	$(".order-asc").click(function() {
 		$(".comment-order").val("1")
 		$(".order-desc").css({
@@ -195,6 +195,8 @@ $(function(){
 		})
 		getCommentList()
 	})
+
+	//정렬 - 최신순
 	$(".order-desc").click(function() {
 		$(".comment-order").val("2")
 		$(".order-asc").css({
@@ -342,8 +344,8 @@ $(function(){
                	$(".re-del-option").hide();
                	
                }, 
-               error : function(xhr, status) {
-                   alert(xhr + " : " + status);
+               error : function(xhr, status, error) {
+                   alert("댓글리스트 에러" + xhr + " : " + status + "에러원인 : " + error);
                }
            }); 
 	}
@@ -611,14 +613,14 @@ $(function(){
 	function countComment() {
 		let pnum = $("#pnum").val();
 		$.ajax({
-            url : "../comment/countComment",
-            type : 'post', 
+            url : "/comment/countComment",
+            type : "post", 
             data : {pnum:pnum},
             success : function(data) {
             	$(".commentCount").text(data)
             }, 
             error : function(xhr, status) {
-                alert(xhr + " : " + status);
+                alert("countComment에러" + xhr + " : " + status);
             }
         }); 
 	}
@@ -630,7 +632,6 @@ $(document).on("click","#btn-send",function(){
 	var content = $("#message-content").val();
 	var inquiry_type = $("#inquiry_type").val();
 	var recv_name= $("#recv_name").val(); // 상대방 name
-	var send_name = $("#send_name").val(); // 나의 name
 	if(content==""){
 		alert("메세지 내용을 입력하세요.");
 		return;

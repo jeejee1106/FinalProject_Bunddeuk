@@ -7,11 +7,10 @@
 		<c:when test="${sessionScope.loginok == 'yes'}">
 			<div class="comment-container">
 				<form id="comment" action="../comment/insert" method="post">
-					<input type="hidden" name="pnum" id="pnum" value="${projectDto.idx}"> 
-					<input type="hidden" id="loginUser"name="writer" value="${sessionScope.id}">
 					<textarea name="content" class="comment" placeholder="커뮤니티가 더 훈훈해지는 댓글을 남겨주세요."></textarea>
 					<div class="btn-container">
-						<span class="count-content countLength">0</span><span class="countLength">/500</span><button type="button" class="base-btn btn-loc send-btn">등록</button>
+						<span class="count-content countLength">0</span><span class="countLength">/500</span>
+						<button type="button" class="base-btn btn-loc send-btn">등록</button>
 					</div>
 				</form>
 			</div>
@@ -33,6 +32,7 @@
 		<input id="profileId" type="hidden" name="id">
 	</form>
 </div>
-
+<input type="hidden" id="loginUser"name="writer" value="${sessionScope.id}">
 <input type="hidden" id="sessionScope" value="${sessionScope.loginok}">
+<input type="hidden" name="pnum" id="pnum" value="${projectDto.idx}"> 
 <input type="hidden" id="creator-id" value="${projectDto.id}">
