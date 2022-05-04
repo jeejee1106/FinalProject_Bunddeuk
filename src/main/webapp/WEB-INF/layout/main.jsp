@@ -28,8 +28,6 @@ $(function() {
 	    slideLeft();
 	  });
 	  
-	  
-	  
 	  /*************************
 	   //*> OPTIONAL SETTINGS
 	  ************************/
@@ -183,97 +181,97 @@ $(function() {
 		
 <div class="totalLayout">	
 	<div class="totalLayout-title">
-		<a class="list-titles" title="모든 프로젝트" href="/listchul/listChul?state=no&category=no">모든 프로젝트</a>
+		<a class="list-titles" title="모든 프로젝트" href="/project/stateList?state=no&category=no">모든 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${allProjectList}">
+		<c:forEach var="projectDto" items="${allProjectList}">
 			<div class="project-list-mini">
-				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
+				<a href="/project/detail?idx=${projectDto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">
-						<img src="${root}/thumbnail_image/${dto.thumbnail}">
+						<img src="${root}/thumbnail_image/${projectDto.thumbnail}">
 					</div>
 					<div class="category-name">
-						${dto.category } ㅣ ${dto.name }
+						${projectDto.category } ㅣ ${projectDto.name }
 					</div>
 					<div class="main-project-title">
-						${dto.title}
+						${projectDto.title}
 					</div>
 				</a>
 				<div class="percentageAchieved">
-					<fmt:formatNumber value="${dto.total_amount div dto.target_amount * 100}" pattern="0" />% 달성
+					<fmt:formatNumber value="${projectDto.total_amount div projectDto.target_amount * 100}" pattern="0" />% 달성
 				</div>
 			</div>
 		</c:forEach>
 	</div>
 	<hr>
 	<div class="totalLayout-title">
-		<a class="list-titles" title="인기 프로젝트" href="/listchul/listChul?state=pop&category=no">인기 프로젝트</a>
+		<a class="list-titles" title="인기 프로젝트" href="/project/stateList?state=pop&category=no">인기 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${popularProjectList}">
+		<c:forEach var="projectDto" items="${popularProjectList}">
 			<div class="project-list-mini">
-				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
+				<a href="/project/detail?idx=${projectDto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">
-						<img src="${root}/thumbnail_image/${dto.thumbnail}">
+						<img src="${root}/thumbnail_image/${projectDto.thumbnail}">
 					</div>
 					<div class="category-name">
-						${dto.category } ㅣ ${dto.name }
+						${projectDto.category } ㅣ ${projectDto.name }
 					</div>
 					
 					<div class="main-project-title">
-						${dto.title}
+						${projectDto.title}
 					</div>
 				</a>
 				<div class="percentageAchieved">
-					<fmt:formatNumber value="${dto.total_amount div dto.target_amount * 100}" pattern="0" />% 달성
+					<fmt:formatNumber value="${projectDto.total_amount div projectDto.target_amount * 100}" pattern="0" />% 달성
 				</div>
 			</div>
 		</c:forEach>
 	</div>
 	<hr>
 	<div class="totalLayout-title">
-		<a class="list-titles" title="마감임박 프로젝트" href="/listchul/listChul?state=endsoon&category=no">마감임박 프로젝트</a>
+		<a class="list-titles" title="마감임박 프로젝트" href="/project/stateList?state=endsoon&category=no">마감임박 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${closingProjectList}">
+		<c:forEach var="projectDto" items="${closingProjectList}">
 			<div class="project-list-mini">
-				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
+				<a href="/project/detail?idx=${projectDto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">
-						<img src="${root}/thumbnail_image/${dto.thumbnail}">
+						<img src="${root}/thumbnail_image/${projectDto.thumbnail}">
 					</div>
 					<div class="category-name">
-						${dto.category } ㅣ ${dto.name }
+						${projectDto.category } ㅣ ${projectDto.name }
 					</div>
 					<div class="main-project-title">
-						${dto.title}
+						${projectDto.title}
 					</div>
 				</a>
 				<div class="percentageAchieved">
-					<fmt:formatNumber value="${dto.total_amount div dto.target_amount * 100}" pattern="0" />% 달성
+					<fmt:formatNumber value="${projectDto.total_amount div projectDto.target_amount * 100}" pattern="0" />% 달성
 				</div>
 			</div>
 		</c:forEach>
 	</div>
 	<hr>
 	<div class="totalLayout-title">
-		<a class="list-titles" title="신규 프로젝트" href="/listchul/listChul?state=new&category=no">신규 프로젝트</a>
+		<a class="list-titles" title="신규 프로젝트" href="/project/stateList?state=new&category=no">신규 프로젝트</a>
 	</div>
 	<div class="main-lists">
-		<c:forEach var="dto" items="${newProjectList}">
+		<c:forEach var="projectDto" items="${newProjectList}">
 			<div class="project-list-mini">
-				<a href="/project/detail?idx=${dto.idx}&key=detail"class="list-thumbnail">
+				<a href="/project/detail?idx=${projectDto.idx}&key=detail"class="list-thumbnail">
 					<div class="thumbnail-image">
-						<img src="${root}/thumbnail_image/${dto.thumbnail}">
+						<img src="${root}/thumbnail_image/${projectDto.thumbnail}">
 					</div>
 					<div class="category-name">
-						${dto.category } ㅣ ${dto.name }
+						${projectDto.category } ㅣ ${projectDto.name }
 					</div>
 					<div class="main-project-title">
-						${dto.title}
+						${projectDto.title}
 					</div>
 				</a>
 				<div class="percentageAchieved">
-					<fmt:formatNumber value="${dto.total_amount div dto.target_amount * 100}" pattern="0" />% 달성
+					<fmt:formatNumber value="${projectDto.total_amount div projectDto.target_amount * 100}" pattern="0" />% 달성
 				</div>
 			</div>
 		</c:forEach>

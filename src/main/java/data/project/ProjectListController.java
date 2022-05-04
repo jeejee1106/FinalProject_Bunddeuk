@@ -28,36 +28,33 @@ public class ProjectListController {
 		return "/layout/main";
 	}
 	
-	@GetMapping("/listchul/listChul")
-	public String projectList (Model model, String category,String state,String percent,String search) {
-		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listChul태스트용");
+	@GetMapping("/project/stateList")
+	public String projectList (Model model, String category, String state, String percent, String search) {
+		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + " 프로젝트 상태 체크");
 		if(search == null) {
 			search = "no";
 		}
-		int totalCount=projectListService.getTotalCount();
-		List<ProjectDTO> list= projectListService.getConditionProjects(category,state,percent,search);
+		List<ProjectDTO> list= projectListService.getStateProjects(category, state, percent, search);
 		model.addAttribute("list",list);
-		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("category",category);
 		model.addAttribute("state",state);
 		model.addAttribute("search",search);
-		return "/listchul/listChul";
+		return "/project_list/statusList";
 	}
 	
+	@ResponseBody
+	@GetMapping("/stateList/allList")
+	public List<ProjectDTO> alist(String category, String state, String percent, String search) {
+		if(search.equals("")) {
+			search = "no";
+		}
+		
+		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listAll태스트용");
+		return projectListService.getStateProjects(category, state, percent, search);
+	}
+
 	@GetMapping("/layout/teamProfile")
 	public String teamProfile() {
 		return "/layout/teamProfile";
 	}
-	
-	@ResponseBody
-	@GetMapping("/listchul/listAll")
-	public List<ProjectDTO> alist(String category,String state,String percent, String search)
-	{
-		if(search.equals("")) {
-			search = "no";
-		}
-		//System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listAll태스트용");
-		return projectListService.getConditionProjects(category,state,percent,search);
-	}
-
 }

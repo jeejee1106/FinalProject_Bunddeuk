@@ -14,5 +14,5 @@ public interface ProjectListMapper {
 	public List<ProjectDTO> getClosingProjects();
 	public List<ProjectDTO> getNewProjects();
 	public List<ProjectDTO> bookedProjects(); //어디서 누가 쓰는지 파악이 안돼서 메서드명 수정 못했음
-	public List<ProjectDTO> getConditionProjects(String category,String state,String percent,String search);
+	public List<ProjectDTO> getStateProjects(String category,String state,String percent,String search);
 }

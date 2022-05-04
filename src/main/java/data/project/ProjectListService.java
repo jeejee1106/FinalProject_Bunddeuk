@@ -37,7 +37,7 @@ public class ProjectListService {
 		return mapper.bookedProjects();
 	}
 	
-	public List<ProjectDTO> getConditionProjects (String category,String state,String percent,String search) {
-		return mapper.getConditionProjects(category,state,percent,search);
+	public List<ProjectDTO> getStateProjects (String category,String state,String percent,String search) {
+		return mapper.getStateProjects(category,state,percent,search);
 	}
 }

@@ -1,50 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="/css/list-category.css">
 <script type="text/javascript">
-	var category="no";
-	var state="no";
-	var percent="no";
+	let category="no";
+	let state="no";
+	let percent="no";
 	let search = 'no';
+	
 	if (search != '') {
 		search = '${search}'
 	}
-  
+	
 	$(function() {
-		category=$("#categore").val();
-		state=$("#states").val();
+		//검색 후 검색키워드 클릭하면 키워드 삭제
+		$(".cancel-search").click(function() {
+			$(this).removeClass("cancel-search");
+			location.href = '/project/stateList?category=no&state=no&percent=no&search=no'
+		});
+		
+		//카테고리 선택에 따른 리스트 출력
+		category = $("#categore").val();
+		state = $("#states").val();
 	    setTimeout(() => {
 			list();
 		}, 100);
 
 		$(".list-gore-btn").change(function(){
-			category=$("#list-gore").val();
+			category = $("#list-gore").val();
 			list();
 		});
 		$(".list-state-btn").change(function(){
-			state=$("#list-state").val();
-			
-			//alert(state);
+			state = $("#list-state").val();
 			list();
 		});
 		$(".list-percent-btn").change(function(){
-			percent=$("#list-percent").val();
-			
-			//alert(percent);
+			percent = $("#list-percent").val();
 			list();
 		});
 	});
+	
 	function list() {
-		/* let search = $("#search").val() */
 		$.ajax({
 			type : "get",
 			dataType : "json",
-			url : "listAll",
-			data:{"category":category,"state":state,"percent":percent,"search":search},
-			
+			url : "/stateList/allList",
+			data:{"category":category, "state":state, "percent":percent, "search":search},
 			success : function(data) {
-				var s = "";
+			var s = "";
 			$.each(data,function(i, dto) {
 				//공개예정 프로젝트 리스트 출력
 				if(state=='book'){
@@ -123,7 +125,7 @@
 					<option value="no"${state=='no'?'selected':'' }>모든 프로젝트</option>
 					<option value="pop"${state=='pop'?'selected':'' }>인기 프로젝트</option>
 					<option value="endsoon"${state=='endsoon'?'selected':'' }>마감임박 프로젝트</option>
-					<option value="new"${state=='new'?'selected':'' }>최신 프로젝트</option>
+					<option value="new"${state=='new'?'selected':'' }>신규 프로젝트</option>
 					<option value="book"${state=='book'?'selected':'' }>공개예정 프로젝트</option>
 				</select>
 			</span>
@@ -137,7 +139,7 @@
 			</span>
 			<c:choose>
 				<c:when test="${search != 'no'}">
-					<span class='cancel-search'>
+					<span class="cancel-search">
 						${search} <i class="fa fa-remove"></i>
 					</span>
 				</c:when>
@@ -145,36 +147,11 @@
 					<span></span>
 				</c:otherwise>
 			</c:choose>
-			<script type="text/javascript">
-				$(".cancel-search").click(function() {
-					$(".cancel-search").text("").css({"backgroundColor" : "white", "border" : "none"});
-					location.href = '/listchul/listChul?category=no&state=no&percent=no&search=no'
-				});
-			
-			</script>
-			
-			<!-- <input type='text' id ="search">
-			<button id="searchBtn">검색</button>
-			<script type="text/javascript">
-				$("#searchBtn").click(function() {
-					list()
-					let keyword = $("#search").val();
-					$.ajax({
-						type : "get",
-						url : "../keyword/insert",
-						data:{keyword:keyword},
-						success : function() {
-							console.log("검색어 추가 완료")
-						}
-					});
-				})
-			</script> -->
 		</div>
 	</div>
 </div>
 <div class="totalLayout">
-	<div class="list-chul-ajax">
-	</div>
+	<div class="list-chul-ajax"></div>
 </div>
 <input type="hidden" id="categore" value="${category}">
 <input type="hidden" id="states" value="${state}">

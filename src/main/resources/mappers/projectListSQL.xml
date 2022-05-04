@@ -37,7 +37,7 @@
 	</select>	
 	
 	<!--조건에 따라 출력 -->
-	<select id="getConditionProjects" parameterType="String" resultType="pdto">
+	<select id="getStateProjects" parameterType="String" resultType="pdto">
 		<choose>
 			<!-- 검색시 -->
 			<when test="category=='no' and state == 'no' and percent == 'no' and search != 'no'">
