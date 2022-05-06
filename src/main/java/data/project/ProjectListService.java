@@ -13,10 +13,6 @@ public class ProjectListService {
 	@Autowired
 	ProjectListMapper mapper;
 	
-	public int getTotalCount() {
-		return mapper.getTotalCount();
-	}
-	
 	public List<ProjectDTO> getAllProjects(){
 		return mapper.getAllProjects();
 	}
@@ -31,10 +27,6 @@ public class ProjectListService {
 	
 	public List<ProjectDTO> getNewProjects(){
 		return mapper.getNewProjects();
-	}
-	
-	public List<ProjectDTO> bookedProjects(){
-		return mapper.bookedProjects();
 	}
 	
 	public List<ProjectDTO> getStateProjects (String category,String state,String percent,String search) {

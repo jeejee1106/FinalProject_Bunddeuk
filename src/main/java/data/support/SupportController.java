@@ -34,7 +34,7 @@ public class SupportController {
 		supportService.addTotalAmount(pstP, idx);
 		
 		//랜덤으로 리스트 뽑아서 추천 프로젝트 출력
-		List<ProjectDTO> alist=listMapper.allProjects();
+		List<ProjectDTO> alist=listMapper.getAllProjects();
 		if(alist.size()>4) {
 			List<ProjectDTO> recommendList = new ArrayList<ProjectDTO>();
 			int [] randomNumber = new int[4];
