@@ -30,7 +30,7 @@ public class ProjectListController {
 	
 	@GetMapping("/project/stateList")
 	public String projectList (Model model, String category, String state, String percent, String search) {
-//		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + " 프로젝트 상태 체크");
+		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + " 프로젝트 상태 체크");
 		if(search == null) {
 			search = "no";
 		}

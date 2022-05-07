@@ -15,7 +15,7 @@
 		//검색 후 검색키워드 클릭하면 키워드 삭제
 		$(".cancel-search").click(function() {
 			$(this).removeClass("cancel-search");
-			location.href = '/project/stateList?category=no&state=no&percent=no&search=no'
+			location.href = '/project/stateList?category=no&state=no'
 		});
 		
 		//카테고리 선택에 따른 리스트 출력
@@ -151,7 +151,9 @@
 	</div>
 </div>
 <div class="totalLayout">
-	<div class="list-chul-ajax"></div>
+	<div class="list-chul-ajax">
+	
+	</div>
 </div>
 <input type="hidden" id="categore" value="${category}">
 <input type="hidden" id="states" value="${state}">
