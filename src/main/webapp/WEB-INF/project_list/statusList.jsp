@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="/css/list-category.css">
 <script type="text/javascript">
-	let category="no";
-	let state="no";
-	let percent="no";
-	let search = 'no';
+	let category="default";
+	let state="default";
+	let percent="default";
+	let search = "default";
 	
 	if (search != '') {
 		search = '${search}'
@@ -15,16 +15,15 @@
 		//검색 후 검색키워드 클릭하면 키워드 삭제
 		$(".cancel-search").click(function() {
 			$(this).removeClass("cancel-search");
-			location.href = '/project/stateList?category=no&state=no'
+			location.href = '/project/stateList?category=default&state=default'
 		});
 		
-		//카테고리 선택에 따른 리스트 출력
-		category = $("#categore").val();
-		state = $("#states").val();
-	    setTimeout(() => {
-			list();
-		}, 100);
-
+		//카테고리, 상태 선택에 따른 리스트 출력
+		category = $("#category").val();
+		state = $("#state").val();
+	    //일단 선택되어진 상태에 대한 리스트를 먼저 뿌린 후
+		list();
+	    //그 다음부터 바뀌는 상태에 따라 리스트 뿌림
 		$(".list-gore-btn").change(function(){
 			category = $("#list-gore").val();
 			list();
@@ -108,7 +107,7 @@
 		<div class="wrap">
 			<span class="list-gore">
 				<select class="list-gore-btn" id="list-gore">
-					<option value="no">카테고리</option>
+					<option value="default">카테고리</option>
 					<option value="게임" ${category=='게임'?'selected':'' }>게임</option>
 					<option value="공연" ${category=='공연'?'selected':'' }>공연</option>
 					<option value="디자인" ${category=='디자인'?'selected':'' }>디자인</option>
@@ -122,7 +121,7 @@
 			</span>
 			<span class="list-gore">
 				<select class="list-state-btn" id="list-state">
-					<option value="no"${state=='no'?'selected':'' }>모든 프로젝트</option>
+					<option value="default"${state=='default'?'selected':'' }>모든 프로젝트</option>
 					<option value="pop"${state=='pop'?'selected':'' }>인기 프로젝트</option>
 					<option value="endsoon"${state=='endsoon'?'selected':'' }>마감임박 프로젝트</option>
 					<option value="new"${state=='new'?'selected':'' }>신규 프로젝트</option>
@@ -131,14 +130,14 @@
 			</span>
 			<span class="list-gore">
 				<select class="list-percent-btn" id="list-percent">
-					<option value="no">달성률</option>
+					<option value="default">달성률</option>
 					<option value="75down">75% 이하</option>
 					<option value="75to100">75%~100%</option>
 					<option value="100up">100% 이상</option>
 				</select>
 			</span>
 			<c:choose>
-				<c:when test="${search != 'no'}">
+				<c:when test="${search != 'default'}">
 					<span class="cancel-search">
 						${search} <i class="fa fa-remove"></i>
 					</span>
@@ -155,5 +154,5 @@
 	
 	</div>
 </div>
-<input type="hidden" id="categore" value="${category}">
-<input type="hidden" id="states" value="${state}">
+<input type="hidden" id="category" value="${category}">
+<input type="hidden" id="state" value="${state}">

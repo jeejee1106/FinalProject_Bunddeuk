@@ -59,11 +59,22 @@ $(document).ready(function(){
     
  
 });
+
 $(function() {
 	$(".chat").click(function() {
 	      var win = window.open("${root}/chat/list", "PopupWin", "width=480,height=765  , left = 400px, top = 100px");
 	});
+	
+	$(".search-btn").click(function() {
+		let search = $("#searchMain").val()
+		if(search.trim() == ''){
+			alert("검색할 내용을 입력해주세요.")
+			return;
+		}
+		location.href = "/project/stateList?category=default&state=default&percent=default&search="+search
+	})
 })
+
 </script>
 
 <header class="wrap">
@@ -197,24 +208,24 @@ $(function() {
 					</div>
 					
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=pop&category=no'">
+					<span onclick="location.href='/project/stateList?state=pop&category=default'">
 					인기
 					</span>
 					</div>
 					
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=new&category=no'">
+					<span onclick="location.href='/project/stateList?state=new&category=default'">
 					신규
 					</span>
 					</div>
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=endsoon&category=no'">
+					<span onclick="location.href='/project/stateList?state=endsoon&category=default'">
 					마감임박
 					</span>
 					</div>
 					
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=book&category=no'">
+					<span onclick="location.href='/project/stateList?state=book&category=default'">
 					공개예정
 					</span>
 					
@@ -235,32 +246,6 @@ $(function() {
 						</span>
 					</div>
 				</div>
-				<script type="text/javascript">
-					$(".search-btn").click(function() {
-						let search = $("#searchMain").val()
-						if(search.trim() == ''){
-							alert("검색할 내용을 입력해주세요")
-							return;
-						}
-						location.href = "/project/stateList?category=no&state=no&percent=no&search="+search
-					})
-				</script>
-<!-- 				<script type="text/javascript">
-					$("#searchBtnMain").click(function() {
-						let keyword = $("#searchMain").val();
-						$.ajax({
-							type : "get",
-							url : "../keyword/insert",
-							data:{keyword:keyword},
-							success : function() {
-							location.href='/project/stateList?state=no&category=no'
-								list();
-							}
-						});
-					})
-				</script>
-				 -->
-				
 			</div>
 			<!-- hover -->
 			<div class="style__ExtendedCategorySection-zxsodr-19 dDWncX test4">
@@ -269,7 +254,7 @@ $(function() {
 						<div class="style__Depth1CategoryWrapper-zxsodr-25 hNuCTH header-swiper-wrapper test1">
 							
 							<!-- 전체 -->
-							<span onclick="location.href='/project/stateList?state=no&category=no'">
+							<span onclick="location.href='/project/stateList?state=default&category=default'">
 							<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 								<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 									<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -291,7 +276,7 @@ $(function() {
 							</span>
 							
 							<!-- 게임 -->
-							<span onclick="location.href='/project/stateList?state=no&category=게임'">
+							<span onclick="location.href='/project/stateList?state=default&category=게임'">
 							<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 								<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 									<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -311,7 +296,7 @@ $(function() {
 							</span>
 							
 							<!-- 공연 -->
-							<span onclick="location.href='/project/stateList?state=no&category=공연'">
+							<span onclick="location.href='/project/stateList?state=default&category=공연'">
 							<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 								<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 									<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -336,7 +321,7 @@ $(function() {
 								</span>
 								
 								<!-- 디자인 -->
-								<span onclick="location.href='/project/stateList?state=no&category=디자인'">
+								<span onclick="location.href='/project/stateList?state=default&category=디자인'">
 								<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 									<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 										<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
@@ -373,7 +358,7 @@ $(function() {
 								
 								
 								<!-- 사진 -->
-								<span onclick="location.href='/project/stateList?state=no&category=사진'">
+								<span onclick="location.href='/project/stateList?state=default&category=사진'">
 								<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 									<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 										<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
@@ -393,7 +378,7 @@ $(function() {
 								</span>
 								
 								<!-- 영화비디오 -->
-								<span onclick="location.href='/project/stateList?state=no&category=영화·비디오'">
+								<span onclick="location.href='/project/stateList?state=default&category=영화·비디오'">
 								<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 									<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 										<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
@@ -411,7 +396,7 @@ $(function() {
 								</span>
 								
 								<!-- 푸드 -->
-								<span onclick="location.href='/project/stateList?state=no&category=푸드'">
+								<span onclick="location.href='/project/stateList?state=default&category=푸드'">
 								<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 									<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 										<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
@@ -440,7 +425,7 @@ $(function() {
 								</span>
 								
 								<!-- 음악 -->
-								<span onclick="location.href='/project/stateList?state=no&category=음악'">
+								<span onclick="location.href='/project/stateList?state=default&category=음악'">
 								<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 									<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 										<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
@@ -458,7 +443,7 @@ $(function() {
 								</span>
 								
 								<!-- 테크 -->
-								<span onclick="location.href='/project/stateList?state=no&category=테크'">
+								<span onclick="location.href='/project/stateList?state=default&category=테크'">
 								<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 									<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 										<svg width="48" height="48" viewBox="0 0 48 48" fill="none"
@@ -476,7 +461,7 @@ $(function() {
 								</span>
 								
 								<!-- 패션 -->
-								<span onclick="location.href='/project/stateList?state=no&category=패션'">
+								<span onclick="location.href='/project/stateList?state=default&category=패션'">
 								<div class="style__Depth1Category-zxsodr-26 EyrIo header-swiper-slide">
 									<div class="style__Depth1CategoryIcon-zxsodr-27 eHXkLB">
 										<svg width="48" height="48" viewBox="0 0 48 48" fill="none"

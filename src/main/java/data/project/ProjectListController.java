@@ -30,10 +30,10 @@ public class ProjectListController {
 	
 	@GetMapping("/project/stateList")
 	public String projectList (Model model, String category, String state, String percent, String search) {
-		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + " 프로젝트 상태 체크");
 		if(search == null) {
-			search = "no";
+			search = "default";
 		}
+		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + " 프로젝트 상태 체크");
 		List<ProjectDTO> list= projectListService.getStateProjects(category, state, percent, search);
 		model.addAttribute("list",list);
 		model.addAttribute("category",category);
@@ -47,7 +47,7 @@ public class ProjectListController {
 	public List<ProjectDTO> alist(String category, String state, String percent, String search) {
 //		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listAll태스트용11");
 //		if(search.equals("")) {
-//			search = "no";
+//			search = "default";
 //		}
 //		System.out.println("카테고리:" + category + ", 상태:" + state + ", 퍼센트:" + percent +", 검색:" + search + "  listAll태스트용22");
 		return projectListService.getStateProjects(category, state, percent, search);

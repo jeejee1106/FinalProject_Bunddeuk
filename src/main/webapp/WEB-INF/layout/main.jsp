@@ -181,7 +181,7 @@ $(function() {
 		
 <div class="totalLayout">	
 	<div class="totalLayout-title">
-		<a class="list-titles" title="모든 프로젝트" href="/project/stateList?state=no&category=no">모든 프로젝트</a>
+		<a class="list-titles" title="모든 프로젝트" href="/project/stateList?state=default&category=default">모든 프로젝트</a>
 	</div>
 	<div class="main-lists">
 		<c:forEach var="projectDto" items="${allProjectList}">
@@ -205,7 +205,7 @@ $(function() {
 	</div>
 	<hr>
 	<div class="totalLayout-title">
-		<a class="list-titles" title="인기 프로젝트" href="/project/stateList?state=pop&category=no">인기 프로젝트</a>
+		<a class="list-titles" title="인기 프로젝트" href="/project/stateList?state=pop&category=default">인기 프로젝트</a>
 	</div>
 	<div class="main-lists">
 		<c:forEach var="projectDto" items="${popularProjectList}">
@@ -230,7 +230,7 @@ $(function() {
 	</div>
 	<hr>
 	<div class="totalLayout-title">
-		<a class="list-titles" title="마감임박 프로젝트" href="/project/stateList?state=endsoon&category=no">마감임박 프로젝트</a>
+		<a class="list-titles" title="마감임박 프로젝트" href="/project/stateList?state=endsoon&category=default">마감임박 프로젝트</a>
 	</div>
 	<div class="main-lists">
 		<c:forEach var="projectDto" items="${closingProjectList}">
@@ -254,7 +254,7 @@ $(function() {
 	</div>
 	<hr>
 	<div class="totalLayout-title">
-		<a class="list-titles" title="신규 프로젝트" href="/project/stateList?state=new&category=no">신규 프로젝트</a>
+		<a class="list-titles" title="신규 프로젝트" href="/project/stateList?state=new&category=default">신규 프로젝트</a>
 	</div>
 	<div class="main-lists">
 		<c:forEach var="projectDto" items="${newProjectList}">
