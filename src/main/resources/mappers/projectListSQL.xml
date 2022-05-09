@@ -27,8 +27,19 @@
 		select * from project where audit = 3
 		<if test="category!='default'">
 			and category = #{category}
-		</if>	
-		<if test="percent != 'default'">
+		</if>
+		<if test="search !='default'">
+			and title like concat('%',#{search},'%') 
+		</if>
+		
+		<!-- 공개예정선택 -->
+		<if test="state == 'book'">
+			and start_date > now() order by start_date asc
+		</if>
+		
+		<!-- 공개예정 미선택 -->
+		<if test="state != 'book'">
+			and end_date >= now() and now() >= start_date
 			<choose>
 				<when test="percent=='75down'">
 					and 75 > (total_amount / target_amount)*100
@@ -40,46 +51,20 @@
 					and (total_amount / target_amount)*100 > 100
 				</when>
 			</choose>
+			<choose>
+				<!-- 마감임박순 -->
+				<when test="state=='endsoon'">
+			 		and date_add(now(),interval 10 day) > end_date order by idx asc
+			 	</when>
+				<!-- 최신순 -->
+				<when test="state=='new'">
+					order by start_date desc
+				</when>
+			 	<!-- 인기순 -->
+			 	<when test="state=='pop'">
+			 		order by number_support desc
+			 	</when>
+			</choose>
 		</if>
-		<if test="search !='default'">
-			and title like concat('%',#{search},'%')  
-		</if>
-		
-		<choose>
-			<!-- 검색시 -->
-			<when test="category=='default' and state == 'default' and percent == 'default' and search != 'default'">
-				and title like concat('%',#{search},'%')
-			</when>
-			
-			<!-- 공개예정선택 -->
-			<when test="state == 'book'">
-				and start_date > now() order by start_date asc
-			</when>
-			
-			<!-- 공개예정 미선택 -->
-			<when test="state != 'book'">
-				and end_date >= now() and now() >= start_date
-				<if test="state != 'default'">
-					<choose>
-						<!-- 마감임박순 -->
-						<when test="state=='endsoon'">
-					 		and date_add(now(),interval 10 day) > end_date order by idx asc
-					 	</when>
-						<!-- 최신순 -->
-						<when test="state=='new'">
-							order by start_date desc
-						</when>
-					 	<!-- 인기순 -->
-					 	<when test="state=='pop'">
-					 		order by number_support desc
-					 	</when>
-					</choose>
-				</if>
-				<!-- 모두 미선택 -->
-				<if test="category=='default' and state == 'default' and percent == 'default'">
-					order by idx desc
-				</if>
-			</when>
-		</choose>		
 	</select>
 </mapper>
