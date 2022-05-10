@@ -5,10 +5,10 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("PLDTO")
 public class ProjectListDTO {
-	private String search = "no";
-	private String state = "no";
-	private String category = "no";
-	private String percent = "no";
+	private String search = "default";
+	private String state = "default";
+	private String category = "default";
+	private String percent = "default";
 	
 	
 	public String getSearch() {

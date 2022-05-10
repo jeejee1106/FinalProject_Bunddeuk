@@ -208,24 +208,24 @@ $(function() {
 					</div>
 					
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=pop&category=default'">
+					<span onclick="location.href='/project/stateList?category=default&state=pop&percent=default&search=default'">
 					인기
 					</span>
 					</div>
 					
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=new&category=default'">
+					<span onclick="location.href='/project/stateList?category=default&state=new&percent=default&search=default'">
 					신규
 					</span>
 					</div>
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=endsoon&category=default'">
+					<span onclick="location.href='/project/stateList?category=default&state=endsoon&percent=default&search=default'">
 					마감임박
 					</span>
 					</div>
 					
 					<div class="style__CategoryWrapper-zxsodr-18 kWZlUb effect_hover">
-					<span onclick="location.href='/project/stateList?state=book&category=default'">
+					<span onclick="location.href='/project/stateList?category=default&state=book&percent=default&search=default'">
 					공개예정
 					</span>
 					
