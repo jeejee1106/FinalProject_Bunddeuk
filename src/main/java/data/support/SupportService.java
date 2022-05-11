@@ -1,17 +1,44 @@
 package data.support;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import data.project.ProjectDTO;
+import data.project.ProjectListMapper;
 
 @Service
 public class SupportService {
 
 	@Autowired
 	SupportMapper mapper;
+	@Autowired
+	ProjectListMapper listMapper;
 	
 	//support 테이블에 후원 정보 insert
-	public void insertSupportData(SupportDTO dto) {
+	public List<ProjectDTO> insertSupportData(SupportDTO dto) {
 		mapper.insertSupportData(dto);
+		
+		List<ProjectDTO> alist=listMapper.getAllProjects();
+		if(alist.size()>4) {
+			List<ProjectDTO> recommendList = new ArrayList<ProjectDTO>();
+			int [] randomNumber = new int[4];
+			for(int i=0; i<4; i++) {
+				randomNumber[i] = (int)(Math.random()*(alist.size()-1));
+				for(int j=0; j<i; j++) {
+					if(randomNumber[j] == randomNumber[i]) {
+						i--;
+						continue;
+					}
+				}
+				recommendList.add(alist.get(randomNumber[i]));
+			}
+			return recommendList;
+		}else {
+			return alist;
+		}
 	}
 	
 	//project테이블에 후원자수 업데이트

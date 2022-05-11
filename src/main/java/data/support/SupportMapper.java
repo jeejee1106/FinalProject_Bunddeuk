@@ -1,11 +1,15 @@
 package data.support;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Mapper;
+
+import data.project.ProjectDTO;
 
 @Mapper
 public interface SupportMapper {
 
-	public void insertSupportData(SupportDTO dto);
+	public ArrayList<ProjectDTO> insertSupportData(SupportDTO dto);
 	public void addSupporter(int idx);
 	public void addTotalAmount(int pstP, int idx);
 	public String getEmail(String id);
