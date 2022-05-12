@@ -26,12 +26,16 @@ import data.mysetting.DeliveryDTO;
 @Controller
 public class DetailController {
 
-	@Autowired
 	DetailService detailService;
-	@Autowired
 	MessageService messageService;
-	@Autowired
 	MemberService memberService;
+	
+	//생성자가 하나면 자동으로 Autowired가 붙는 효과가 있다. 기본생성자를 생성해?말어?
+	public DetailController(DetailService detailService, MessageService messageService, MemberService memberService) {
+		this.detailService = detailService;
+		this.messageService = messageService;
+		this.memberService = memberService;
+	}
 	
 	//공개된 프로젝트의 디테일 페이지
 	@GetMapping("/project/detail")

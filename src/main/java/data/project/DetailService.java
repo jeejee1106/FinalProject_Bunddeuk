@@ -12,8 +12,13 @@ import data.mysetting.DeliveryDTO;
 @Service
 public class DetailService {
 	
-	@Autowired
+	
 	DetailMapper mapper;
+	
+	//생성자가 하나면 자동으로 Autowired가 붙는 효과가 있다. 기본생성자를 생성해?말어?
+	public DetailService(DetailMapper mapper) {
+		this.mapper = mapper;
+	}
 
 	//프로젝트 전체 데이터 반환
 	public ProjectDTO getData(int idx) {
