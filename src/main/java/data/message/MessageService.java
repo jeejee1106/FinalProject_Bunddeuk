@@ -45,7 +45,6 @@ public class MessageService {
 		return mapper.getMessage(num);
 	}
 	
-	// 도대체 어디에 push가 된거지...?
 	public void insertMessage(MessageDTO dto) {
 		mapper.insertMessage(dto);
 	}
