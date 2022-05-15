@@ -160,7 +160,7 @@ public class MessageController {
 		dto.setId(id);
 		dto.setSend_name(name);
 		
-		service.reply(dto);	
+		service.insertMessage(dto);	
 		
 	}
 		

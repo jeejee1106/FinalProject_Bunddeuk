@@ -45,8 +45,8 @@ public class MessageService {
 		return mapper.getMessage(num);
 	}
 	
-	public void reply(MessageDTO dto) {
-		mapper.reply(dto);
+	public void insertMessage(MessageDTO dto) {
+		mapper.insertMessage(dto);
 	}
 	
 	public void updateReadCount(String name, String num) {
