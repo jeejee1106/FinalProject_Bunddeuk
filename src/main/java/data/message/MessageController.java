@@ -1,6 +1,5 @@
 package data.message;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,61 +23,45 @@ import data.member.MemberService;
 public class MessageController {
 	
 	@Autowired
-	MessageService service;
+	MessageService messageService;
 	@Autowired
-	MemberMapper memMapper;
+	MemberMapper memberMapper;
 	@Autowired
 	MemberService memberService;
 	
 	// 받은 메세지 리스트
 	@GetMapping("/message/receivedMessage")
-	public ModelAndView receivedList (
-			HttpSession session,
-			@RequestParam(defaultValue = "1") int currentPage
-			) {
-		
-		ModelAndView mview = new ModelAndView();
-		
+	public String receivedList (HttpSession session, @RequestParam(defaultValue = "1") int currentPage, Model model) {
 		String id = (String)session.getAttribute("id");
-		String name = memMapper.getName(id);
-		//System.out.println("나의 아이디 "+id);
-		//System.out.println("나의 name "+my_name);
+		String name = memberMapper.getName(id);
 		
-		int totalCount = service.getReceivedTotalCount(name);
+		int totalCount = messageService.getReceivedTotalCount(name);
 		
 		int perPage = 5; // 한페이지에 보여질 글의 갯수
-		int totalPage; // 총 페이지수
-		int start; // 각페이지에서 불러올 db 의 시작번호
+		int totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1); // 총 페이지수
+		int start = (currentPage - 1) * perPage; // 각페이지에서 불러올 db 의 시작번호
 		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
-		int startPage; // 각 블럭에 표시할 시작페이지
-		int endPage; // 각 블럭에 표시할 마지막페이지
+		int startPage = (currentPage - 1) / perBlock * perBlock + 1; // 각 블럭에 표시할 시작페이지
+		int endPage = startPage + perBlock - 1; // 각 블럭에 표시할 마지막페이지
 		
-		// 총 페이지 갯수 구하기
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-		// 각 블럭의 시작페이지
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-		if (endPage > totalPage)
+//		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+//		start = (currentPage - 1) * perPage;
+//		startPage = (currentPage - 1) / perBlock * perBlock + 1;
+//		endPage = startPage + perBlock - 1;
+		if (endPage > totalPage) {
 			endPage = totalPage;
-		// 각 페이지에서 불러올 시작번호
-		start = (currentPage - 1) * perPage;
+		}
 		
-		List<MessageDTO> recvList = service.getReceivedList(name, start, perPage);
-		//System.out.println(recvList);
-		
+		List<MessageDTO> recvList = messageService.getReceivedList(name, start, perPage);
 		MemberDTO dto = memberService.getAll(id);
-		//System.out.println("받은"+totalCount);
-		mview.addObject("dto", dto);
 		
-		mview.addObject("name", name);
-		mview.addObject("totalCount", totalCount);
-		mview.addObject("recvList", recvList);
-		mview.addObject("count", recvList.size());
-		mview.setViewName("/message/receivedMessageList");
+		model.addAttribute("dto", dto);
+		model.addAttribute("name", name);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("recvList", recvList);
+		model.addAttribute("count", recvList.size()); //얘 안쓰는 것 같은데, 차라리 totalCount를 없애고(그러면 sql도 따로 필요 없으니까) 얘를 쓰는 건 어떨까?
 		
-		//System.out.println(receivedList);
-		return mview;
-		
+		return "/message/receivedMessageList";
 	}
 	
 	// 보낸 메세지 리스트
@@ -95,7 +78,7 @@ public class MessageController {
 		//System.out.println("리스트"+sendList);
 		MemberDTO dto = memberService.getAll(id);
 		
-		int totalCount = service.getSentTotalCount(name);
+		int totalCount = messageService.getSentTotalCount(name);
 		
 		int perPage = 5; // 한페이지에 보여질 글의 갯수
 		int totalPage; // 총 페이지수
@@ -114,7 +97,7 @@ public class MessageController {
 		// 각 페이지에서 불러올 시작번호
 		start = (currentPage - 1) * perPage;
 		
-		List<MessageDTO> sendList = service.getSentMessageList(name, start, perPage);
+		List<MessageDTO> sendList = messageService.getSentMessageList(name, start, perPage);
 		
 		//System.out.println("보낸"+totalCount);
 		
@@ -143,24 +126,21 @@ public class MessageController {
 		String id = (String) session.getAttribute("id");
 		String name = memberService.getName(id);
 		
-		service.updateReadCount(name, num);
-		return service.getMessage(num);
+		messageService.updateReadCount(name, num);
+		return messageService.getMessage(num);
 	}
 	
 	// 답장하기 insert
 	@PostMapping("/message/messageReply")
 	@ResponseBody
 	public void reply(@ModelAttribute MessageDTO dto, HttpSession session) {
-		
 		String id = (String) session.getAttribute("id");
-		String name = memMapper.getName(id);
-		
-		//System.out.println("name: "+name+", id: "+id);
+		String name = memberMapper.getName(id);
 		
 		dto.setId(id);
 		dto.setSend_name(name);
 		
-		service.insertMessage(dto);	
+		messageService.insertMessage(dto);	
 		
 	}
 		

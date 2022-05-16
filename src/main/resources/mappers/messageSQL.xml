@@ -35,9 +35,10 @@
 	<update id="updateReadCount" parameterType="String">
 		UPDATE message msg 
 		INNER JOIN member mem 
-		ON msg.recv_name=#{name} 
-		SET msg.read_chk=msg.read_chk+1 
-		WHERE msg.num=#{num}
+		ON msg.recv_name = #{name} 
+		<!-- SET msg.read_chk=msg.read_chk+1  -->
+		SET msg.read_chk = 1 
+		WHERE msg.num = #{num}
 	</update>
 	
 	<!-- 받은 메세지 총 갯수 -->
