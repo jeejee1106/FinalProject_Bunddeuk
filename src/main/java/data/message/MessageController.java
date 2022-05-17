@@ -39,82 +39,79 @@ public class MessageController {
 		
 		int perPage = 5; // 한페이지에 보여질 글의 갯수
 		int totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1); // 총 페이지수
-		int start = (currentPage - 1) * perPage; // 각페이지에서 불러올 db 의 시작번호
+		int start = (currentPage - 1) * perPage; // 각페이지에서 불러올 db 의 시작번호 //민지 - 파라미터에 기본값 1넣어놓고 이거 왜 이렇게 하는거임...? 이러면 0나오잖아...
 		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
 		int startPage = (currentPage - 1) / perBlock * perBlock + 1; // 각 블럭에 표시할 시작페이지
 		int endPage = startPage + perBlock - 1; // 각 블럭에 표시할 마지막페이지
 		
-//		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-//		start = (currentPage - 1) * perPage;
-//		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-//		endPage = startPage + perBlock - 1;
 		if (endPage > totalPage) {
 			endPage = totalPage;
 		}
+		
+		System.out.println("한페이지에 보여질 글의 갯수 : " + perPage);
+		System.out.println("총 페이지수 : " + totalPage);
+		System.out.println("각페이지에서 불러올 db 의 시작번호 : " + start);
+		System.out.println("몇개의 페이지번호씩 표현할것인가 : " + perBlock);
+		System.out.println("각 블럭에 표시할 시작페이지 : " + startPage);
+		System.out.println("각 블럭에 표시할 마지막페이지 : " + endPage);
 		
 		List<MessageDTO> recvList = messageService.getReceivedList(name, start, perPage);
 		MemberDTO dto = memberService.getAll(id);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("name", name);
-		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("totalCount", recvList.size());
 		model.addAttribute("recvList", recvList);
-		model.addAttribute("count", recvList.size()); //얘 안쓰는 것 같은데, 차라리 totalCount를 없애고(그러면 sql도 따로 필요 없으니까) 얘를 쓰는 건 어떨까?
+		model.addAttribute("count", recvList.size()); //민지 - 얘 안쓰는 것 같은데, 차라리 totalCount를 없애고(그러면 sql도 따로 필요 없으니까) 얘를 쓰는 건 어떨까?
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("currentPage", currentPage);
 		
 		return "/message/receivedMessageList";
 	}
 	
 	// 보낸 메세지 리스트
 	@GetMapping("/message/sentMessage")
-	public ModelAndView sentList (
-			@RequestParam(defaultValue = "1") int currentPage,
-			HttpSession session
-			) {
+	public String sentList (@RequestParam(defaultValue = "1") int currentPage, HttpSession session, Model model) {
 		
-		ModelAndView mview = new ModelAndView();
 		String id = (String)session.getAttribute("id");
 		String name = memberService.getName(id);
-		//System.out.println("상대방이름"+otherParty_name);
-		//System.out.println("리스트"+sendList);
 		MemberDTO dto = memberService.getAll(id);
 		
 		int totalCount = messageService.getSentTotalCount(name);
 		
 		int perPage = 5; // 한페이지에 보여질 글의 갯수
-		int totalPage; // 총 페이지수
-		int start; // 각페이지에서 불러올 db 의 시작번호
+		int totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1); // 총 페이지수
+		int start = (currentPage - 1) * perPage; // 각페이지에서 불러올 db 의 시작번호
 		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
-		int startPage; // 각 블럭에 표시할 시작페이지
-		int endPage; // 각 블럭에 표시할 마지막페이지
+		int startPage = (currentPage - 1) / perBlock * perBlock + 1; // 각 블럭에 표시할 시작페이지
+		int endPage = startPage + perBlock - 1; // 각 블럭에 표시할 마지막페이지
 		
-		// 총 페이지 갯수 구하기
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-		// 각 블럭의 시작페이지
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-		if (endPage > totalPage)
+		if (endPage > totalPage) {
 			endPage = totalPage;
-		// 각 페이지에서 불러올 시작번호
-		start = (currentPage - 1) * perPage;
+		}
+		
+		System.out.println("한페이지에 보여질 글의 갯수 : " + perPage);
+		System.out.println("총 페이지수 : " + totalPage);
+		System.out.println("각페이지에서 불러올 db 의 시작번호 : " + start);
+		System.out.println("몇개의 페이지번호씩 표현할것인가 : " + perBlock);
+		System.out.println("각 블럭에 표시할 시작페이지 : " + startPage);
+		System.out.println("각 블럭에 표시할 마지막페이지 : " + endPage);
 		
 		List<MessageDTO> sendList = messageService.getSentMessageList(name, start, perPage);
 		
-		//System.out.println("보낸"+totalCount);
+		model.addAttribute("dto", dto);
+		model.addAttribute("name", name);
+		model.addAttribute("sendList", sendList);
+		model.addAttribute("count", sendList.size());
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalCount", totalCount);
 		
-		mview.addObject("dto", dto);
-		mview.addObject("name", name);
-		mview.addObject("sendList", sendList);
-		mview.addObject("count", sendList.size());
-		mview.addObject("startPage", startPage);
-		mview.addObject("endPage", endPage);
-		mview.addObject("totalPage", totalPage);
-		mview.addObject("currentPage", currentPage);
-		mview.addObject("totalCount", totalCount);
-		mview.setViewName("/message/sentMessageList");
-		
-		//service.updateReadCount(name, num);
-		//System.out.println(receivedList);
-		return mview;
+		return "/message/sentMessageList";
 		
 	}
 	
