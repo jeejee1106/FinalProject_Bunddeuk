@@ -48,6 +48,7 @@ public class MessageController {
 			endPage = totalPage;
 		}
 		
+		System.out.println("currentPage : " + currentPage);
 		System.out.println("한페이지에 보여질 글의 갯수 : " + perPage);
 		System.out.println("총 페이지수 : " + totalPage);
 		System.out.println("각페이지에서 불러올 db 의 시작번호 : " + start);

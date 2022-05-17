@@ -200,18 +200,15 @@ function onSubmit(){
 									</div>
 								</div>
 								<div class="readWrap">
-									<c:if test="${a.read_chk > 0 }">
+									<c:if test="${a.read_chk == 1 }">
 										<div class="read">읽음</div>
-										<br>
-										<div class="send_time">받은시간<br>
-										${a.send_time }</div>
 									</c:if>
 									<c:if test="${a.read_chk == 0 }">
 										<div class="read" style="font-weight: bold;">안읽음</div>
-										<br>
-										<div class="send_time">받은시간<br>
-										${a.send_time }</div>
 									</c:if>
+									<br>
+									<div class="send_time">받은시간<br>
+									${a.send_time }</div>
 								</div>
 							</div>
 						</div>
@@ -221,7 +218,8 @@ function onSubmit(){
 			</c:forEach>
 		</c:if>
 	</div>
-			<!-- 페이징  -->
+	
+	<!-- 페이징  -->
 	<div class="pagination-wrap" style="margin: 20px auto;">
 	<c:if test="${totalCount>0 }">
 		<nav aria-label="Page navigation example">
