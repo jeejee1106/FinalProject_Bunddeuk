@@ -180,31 +180,27 @@ function onSubmit(){
 	
 	<!-- 페이징  -->
 	<div class="pagination-wrap" style="margin: 20px auto;">
-	<c:if test="${totalCount>0 }">
+	<c:if test="${totalCount > 0 }">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<!-- 이전 -->
-				<c:if test="${startPage>1 }">
-					<li class="page-item"><a class="page-link" href="sentMessage=${startPage-1}"
+				<c:if test="${startPage > 1 }">
+					<li class="page-item"><a class="page-link" href="sentMessage?currentPage=${startPage-1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
 					</li>
 				</c:if>
 
 				<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-					<c:if test="${currentPage==pp}">
-						<li class="page-item active"><a class="page-link"
-							href="sentMessage=${pp}">${pp}</a></li>
+					<c:if test="${currentPage == pp}">
+						<li class="page-item active"><a class="page-link" href="sentMessage?currentPage=${pp}">${pp}</a></li>
 					</c:if>
-					<c:if test="${currentPage!=pp}">
-						<li class="page-item"><a class="page-link"
-							href="sentMessage=${pp}">${pp}</a></li>
+					<c:if test="${currentPage != pp}">
+						<li class="page-item"><a class="page-link" href="sentMessage?currentPage=${pp}">${pp}</a></li>
 					</c:if>
 				</c:forEach>
-				
 				<!-- 다음 -->
-				<c:if test="${endPage<totalPage }">
-					<li class="page-item"><a class="page-link"
-						href="sentMessage=${endPage+1}"
+				<c:if test="${endPage < totalPage}">
+					<li class="page-item"><a class="page-link" href="sentMessage?currentPage=${endPage + 1}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>
