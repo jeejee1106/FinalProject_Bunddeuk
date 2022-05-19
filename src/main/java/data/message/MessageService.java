@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import data.paging.PagingDTO;
+
 @Service
 public class MessageService {
 	
@@ -47,5 +49,8 @@ public class MessageService {
 	public void updateReadCount(String name, String num) {
 		mapper.updateReadCount(name, num);
 	}
-
+	
+	
+	
+	
 }
