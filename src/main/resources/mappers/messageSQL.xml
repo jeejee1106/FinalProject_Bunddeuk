@@ -27,7 +27,6 @@
 	</select>
 	
 	<!-- insert -->
-	<!-- <insert id="reply" parameterType="msgdto"> -->
 	<insert id="insertMessage" parameterType="msgdto">
 		INSERT INTO message (id,send_name,recv_name,send_time,content,read_chk,inquiry_type)
 		VALUES (#{id},#{send_name},#{recv_name},now(),#{content},0,#{inquiry_type})

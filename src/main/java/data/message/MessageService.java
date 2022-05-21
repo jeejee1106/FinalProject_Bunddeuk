@@ -47,8 +47,4 @@ public class MessageService {
 	public void updateReadCount(String name, String num) {
 		mapper.updateReadCount(name, num);
 	}
-	
-	
-	
-	
 }

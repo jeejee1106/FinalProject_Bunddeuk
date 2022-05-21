@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import data.member.MemberDTO;
-import data.member.MemberMapper;
 import data.member.MemberService;
 import data.paging.PagingHandler;
-
 
 @Controller
 public class MessageController {
@@ -25,14 +23,11 @@ public class MessageController {
 	@Autowired
 	MessageService messageService;
 	@Autowired
-	MemberMapper memberMapper;
-	@Autowired
 	MemberService memberService;
 	
 	// 받은 메세지 리스트
 	@GetMapping("/message/receivedMessage")
 	public String receivedList (HttpSession session, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int pageSize, Model model) {
-
 		String id = (String)session.getAttribute("id");
 		String name = memberService.getName(id);
 		
@@ -53,7 +48,6 @@ public class MessageController {
 	// 보낸 메세지 리스트
 	@GetMapping("/message/sentMessage")
 	public String sentList (@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int pageSize, HttpSession session, Model model) {
-		
 		String id = (String)session.getAttribute("id");
 		String name = memberService.getName(id);
 		
@@ -67,6 +61,7 @@ public class MessageController {
 		model.addAttribute("sendList", sendList);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("ph", pagingHandler);
+		
 		return "/message/sentMessageList";
 	}
 	
@@ -74,11 +69,10 @@ public class MessageController {
 	@GetMapping("/message/messagedata")
 	@ResponseBody
 	public MessageDTO data(String num, HttpSession session) {
-		
 		String id = (String) session.getAttribute("id");
 		String name = memberService.getName(id);
-		
 		messageService.updateReadCount(name, num);
+		
 		return messageService.getMessage(num);
 	}
 	
@@ -87,13 +81,11 @@ public class MessageController {
 	@ResponseBody
 	public void reply(@ModelAttribute MessageDTO dto, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		String name = memberMapper.getName(id);
+		String name = memberService.getName(id);
 		
 		dto.setId(id);
 		dto.setSend_name(name);
-		
 		messageService.insertMessage(dto);	
-		
 	}
 		
 }

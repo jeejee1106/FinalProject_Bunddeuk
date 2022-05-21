@@ -112,17 +112,4 @@ public class PagingHandler {
 				", showPrev=" + showPrev + 
 				", showNext=" + showNext + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
