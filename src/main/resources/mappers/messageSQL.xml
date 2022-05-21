@@ -6,7 +6,8 @@
 		SELECT * 
 		FROM message
 		WHERE recv_name=#{recv_name} 
-		ORDER BY num desc LIMIT #{start}, #{perpage}
+		ORDER BY num desc 
+		LIMIT #{offset}, #{pageSize}
 	</select>
 	
 	<!-- 보낸 메세지 리스트 -->
@@ -16,7 +17,6 @@
 		WHERE send_name=#{send_name}
 		ORDER BY num desc 
 		LIMIT #{offset}, #{pageSize}
-		<!-- LIMIT #{start}, #{perpage} -->
 	</select>
 	
 	<!-- num 에 대한 메세지 반환 -->

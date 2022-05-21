@@ -172,19 +172,19 @@ function onSubmit(){
 <div class="MessageThreads">
 	<br>
 	<div class="MessageWrap">
-		<button type="button" class="button1 selected" onclick="location.href='receivedMessage?name=${name}'">받은 메시지</button>
-		<button type="button" class="button2" onclick="location.href='sentMessage?name=${name}&currentPage=${currentPage}&pageSize=${pageSize}'">보낸 메시지</button>
+		<button type="button" class="button1 selected" onclick="location.href='receivedMessage'">받은 메시지</button>
+		<button type="button" class="button2" onclick="location.href='sentMessage'">보낸 메시지</button>
 	</div>
 	<br>
 	<div class="msgcount">
-		받은 메세지(<b>${totalCount }</b>)
+		받은 메세지(<b>${ph.totalCount }</b>)
 	</div>
 	<br>
 	<div style="" class="msgList">
 	<c:if test="${empty recvList}">
 	받은 메세지가 없습니다
 	</c:if>
-		<c:if test="${totalCount>0}">
+		<c:if test="${ph.totalCount > 0}">
 			<c:forEach var="a" items="${recvList}">
 			<a id="msg-view" num=${a.num }>
 				<div>
@@ -221,27 +221,27 @@ function onSubmit(){
 	
 	<!-- 페이징  -->
 	<div class="pagination-wrap" style="margin: 20px auto;">
-	<c:if test="${totalCount > 0 }">
+	<c:if test="${ph.totalCount > 0 }">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<!-- 이전 -->
-				<c:if test="${startPage > 1 }">
-					<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${startPage-1}"
+				<c:if test="${ph.showPrev}">
+					<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${ph.beginPage-1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
 					</li>
 				</c:if>
 
-				<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-					<c:if test="${currentPage == pp}">
-						<li class="page-item active"><a class="page-link" href="receivedMessage?currentPage=${pp}">${pp}</a></li>
+				<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+					<c:if test="${currentPage == i}">
+						<li class="page-item active"><a class="page-link" href="receivedMessage?currentPage=${i}">${i}</a></li>
 					</c:if>
-					<c:if test="${currentPage != pp}">
-						<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${pp}">${pp}</a></li>
+					<c:if test="${currentPage != i}">
+						<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${i}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				<!-- 다음 -->
-				<c:if test="${endPage < totalPage}">
-					<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${endPage + 1}"
+				<c:if test="${ph.showNext}">
+					<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${ph.endPage + 1}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>

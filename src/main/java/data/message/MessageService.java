@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.paging.PagingHandler;
-
 @Service
 public class MessageService {
 	
@@ -22,15 +20,19 @@ public class MessageService {
 		return mapper.getSentTotalCount(send_name);
 	}
 	
-	public List<MessageDTO> getReceivedList(String recv_name, int start, int perpage) {
+	public List<MessageDTO> getReceivedList(String recv_name, int currentPage, int pageSize) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("recv_name", recv_name);
-		map.put("start", start);
-		map.put("perpage", perpage);
+		map.put("offset", (currentPage-1) * pageSize);
+		map.put("pageSize", pageSize);
 		return mapper.getReceivedMessageList(map);
 	}
 	
-	public List<MessageDTO> getSentMessageList(HashMap<String, Object> map) {
+	public List<MessageDTO> getSentMessageList(String send_name, int currentPage, int pageSize) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("send_name", send_name);
+		map.put("offset", (currentPage-1) * pageSize);
+		map.put("pageSize", pageSize);
 		return mapper.getSentMessageList(map);
 	}
 	
