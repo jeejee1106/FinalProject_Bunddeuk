@@ -173,7 +173,7 @@ function onSubmit(){
 	<br>
 	<div class="MessageWrap">
 		<button type="button" class="button1 selected" onclick="location.href='receivedMessage?name=${name}'">받은 메시지</button>
-		<button type="button" class="button2" onclick="location.href='sentMessage?name=${name}'">보낸 메시지</button>
+		<button type="button" class="button2" onclick="location.href='sentMessage?name=${name}&currentPage=${currentPage}&pageSize=${pageSize}'">보낸 메시지</button>
 	</div>
 	<br>
 	<div class="msgcount">

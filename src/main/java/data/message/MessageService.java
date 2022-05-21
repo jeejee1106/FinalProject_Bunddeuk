@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import data.paging.PagingDTO;
+import data.paging.PagingHandler;
 
 @Service
 public class MessageService {
@@ -30,11 +30,7 @@ public class MessageService {
 		return mapper.getReceivedMessageList(map);
 	}
 	
-	public List<MessageDTO> getSentMessageList(String send_name, int start, int perpage) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("send_name", send_name);
-		map.put("start", start);
-		map.put("perpage", perpage);
+	public List<MessageDTO> getSentMessageList(HashMap<String, Object> map) {
 		return mapper.getSentMessageList(map);
 	}
 	
