@@ -1,7 +1,5 @@
 package data.login;
 
-
-
 import java.util.Random;
 import java.util.UUID;
 
@@ -34,12 +32,10 @@ public class Oauth2Controller {
 
     @GetMapping(value = "/login/kakao")
     public String kakaoOauthRedirect(String code,HttpSession session) {
-    	
     	RestTemplate rt = new RestTemplate();
     	
     	HttpHeaders headers = new HttpHeaders();
     	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	
     	
     	// HttpBody 오브젝트 생성
     	MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
@@ -73,14 +69,11 @@ public class Oauth2Controller {
     	
     //	System.out.println("카카오 엑세스 토큰 :"+oauthToken.getAccess_token());
     	
-    	
-    	
     	RestTemplate rt2 = new RestTemplate();
     	
     	HttpHeaders headers2 = new HttpHeaders();
     	headers2.add("Authorization", "Bearer "+oauthToken.getAccess_token());
     	headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-    	
     	
     	// HttpHeader와 HttpBody를 HttpEntity에 담기 (why? rt.exchange에서 HttpEntity객체를 받게 되어있다.)
     	HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest = new HttpEntity<>(headers2);
@@ -93,20 +86,16 @@ public class Oauth2Controller {
     	    String.class
     	);
     	
-    	
     	ObjectMapper objectMapper2 = new ObjectMapper();
     	KakaoProfile kakaoProfile = null;
     	
     	try {
 			kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
     	
     	int leftLimit = 48; // numeral '0'
 		int rightLimit = 122; // letter 'z'
@@ -117,16 +106,10 @@ public class Oauth2Controller {
 				.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(targetStringLength)
 				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
 
-
-    	
     	UUID garcagePassword = UUID.randomUUID();
     	
     	MemberDTO member = new MemberDTO();
     	String str = kakaoProfile.getKakao_account().getEmail();
-    
-    //	System.out.println(kakaoProfile.getId());
-    	
-    	
     	String kakaoId = str.substring(0,str.lastIndexOf("@"));
     	
     	member.setId("KKO-"+kakaoId);
@@ -142,19 +125,15 @@ public class Oauth2Controller {
     		memberService.insertMember(member);
     	}
     	
-    	
 		MemberDTO dto = memberService.getAll(member.getId());
 		String profileImage = dto.getPhoto();
 			
 		session.setAttribute("profileImage", profileImage);
-		
 		session.setAttribute("nickName", member.getName());
     	session.setAttribute("id", member.getId());
 		session.setAttribute("loginok", "yes");
     	
         return "redirect:main";
     }
-    
-    
     
 }

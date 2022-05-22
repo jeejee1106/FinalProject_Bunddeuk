@@ -192,6 +192,7 @@ function onSubmit(){
 
 				<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
 					<c:if test="${currentPage == i}">
+					<!-- active : 페이징 네비바의 현재 페이지만 색갈 입혀줌 -->
 						<li class="page-item active"><a class="page-link" href="sentMessage?currentPage=${i}">${i}</a></li>
 					</c:if>
 					<c:if test="${currentPage != i}">

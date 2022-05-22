@@ -55,23 +55,19 @@ public class MemberService {
 	public void updateMemberPrivacy(MemberDTO dto) {
 		mapper.updateMemberPrivacy(dto);
 	}
-	
 	public void updateMemberPass(MemberDTO dto) {
 		String encodedPassword = passwordEncoder.encode(dto.getPass());
 		dto.setPass(encodedPassword);
 		mapper.updateMemberPass(dto);
 	}
-	
 	public void updateEmailPass(MemberDTO dto) {
 		String encodedPassword = passwordEncoder.encode(dto.getPass());
 		dto.setPass(encodedPassword);
 		mapper.updateEmailPass(dto);
 	}
-	
 	public void updateMemberHp(MemberDTO dto) {
 		mapper.updateMemberHp(dto);
 	}
-	
 	public String getUrl(String id) {
 		return mapper.getUrl(id);
 	}
@@ -81,23 +77,18 @@ public class MemberService {
 	public String getIntroduce(String id) {
 		return mapper.getIntroduce(id);
 	}
-	
 	public void deleteMember(String num) {
 		mapper.deleteMember(num);
 	}
-	
 	public String getName(String id) {
 		return mapper.getName(id);
 	}
-	
 	public String getIdUrl(String url) {
 		return mapper.getIdUrl(url);
 	}
 	public int login(HashMap<String, String> map) {
 		return mapper.login(map);
 	}
-	
-	
 	public MemberDTO getAll(String id) {
 		return mapper.getAll(id);
 	}
@@ -110,8 +101,4 @@ public class MemberService {
 	public void updateMemberStatus(MemberDTO dto) {
 		mapper.updateMemberStatus(dto);
 	}
-	
-	
-	
-
 }

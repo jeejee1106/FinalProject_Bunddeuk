@@ -9,7 +9,6 @@ public class KakaoProfile{
 	public Properties properties;
 	public KakaoAccount kakao_account;
 	
-	
 	@Data
 	public class Properties{
 		public String nickname;
@@ -29,16 +28,12 @@ public class KakaoProfile{
 		public Boolean is_email_verified;
 		public String email;
 
-
 		@Data
 		class Profile{
 			public String nickname;
 			public String thumbnail_image_url;
 			public String profile_image_url; 
 		}
-		
 	}
-	
-	
 }
 

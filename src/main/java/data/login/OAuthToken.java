@@ -8,7 +8,6 @@ public class OAuthToken {
 	private String scope;
 	private int Refresh_token_expires_in;
 	
-	
 	public String getAccess_token() {
 		return access_token;
 	}
@@ -45,7 +44,4 @@ public class OAuthToken {
 	public void setRefresh_token_expires_in(int refresh_token_expires_in) {
 		Refresh_token_expires_in = refresh_token_expires_in;
 	}
-	
-	
-
 }

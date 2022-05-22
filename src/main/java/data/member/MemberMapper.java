@@ -1,15 +1,12 @@
- package data.member;
+package data.member;
 
 import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
-
-
 @Mapper
 public interface MemberMapper {
 	public void insertMember(MemberDTO dto);
-	
 	public int getIdCheck(String id);
 	public int getNameCheck(String name);
 	public int getCheckPass(HashMap<String, String> map);
@@ -33,9 +30,7 @@ public interface MemberMapper {
 	public void updateMemberStatus(MemberDTO dto);
 	public void updateEmailPass(MemberDTO dto);
 	public MemberDTO memberByEmail(String email);
-	
 	public String getUrl(String id);
 	public String getPhoto(String id);
 	public String getIntroduce(String id);
-
 }
