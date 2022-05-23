@@ -31,7 +31,7 @@ public class MessageController {
 		String id = (String)session.getAttribute("id");
 		String name = memberService.getName(id);
 		
-		MemberDTO memberDto = memberService.getAll(id);
+		MemberDTO memberDto = memberService.getMemberInfo(id);
 		int totalCount = messageService.getReceivedTotalCount(name);
 		List<MessageDTO> recvList = messageService.getReceivedList(name, currentPage, pageSize);
 		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);
@@ -51,7 +51,7 @@ public class MessageController {
 		String id = (String)session.getAttribute("id");
 		String name = memberService.getName(id);
 		
-		MemberDTO dto = memberService.getAll(id);
+		MemberDTO dto = memberService.getMemberInfo(id);
 		int totalCount = messageService.getSentTotalCount(name);
 		List<MessageDTO> sendList = messageService.getSentMessageList(name, currentPage, pageSize);
 		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);

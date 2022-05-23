@@ -1,6 +1,7 @@
 package data.member;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,12 +16,25 @@ public class MemberService {
 	private PasswordEncoder passwordEncoder;
 	
 	public void insertMember(MemberDTO dto) {
+//		String url = "";
+		int leftLimit = 48; // numeral '0'
+		int rightLimit = 122; // letter 'z'
+		int targetStringLength = 15;
+		Random random = new Random();
+
+		String generatedString = random.ints(leftLimit, rightLimit + 1)
+				.filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97)).limit(targetStringLength)
+				.collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
+
+		String url = generatedString;
 		String encodedPassword = passwordEncoder.encode(dto.getPass());
+
+		dto.setUrl(url);
 		dto.setPass(encodedPassword);
 		mapper.insertMember(dto);
 	}
-	public int getIdCheck(String id) {
-		return mapper.getIdCheck(id);
+	public int idDuplicateCheck(String id) {
+		return mapper.idDuplicateCheck(id);
 	}
 	public int getNameCheck(String name) {
 		return mapper.getNameCheck(name);
@@ -86,11 +100,11 @@ public class MemberService {
 	public String getIdUrl(String url) {
 		return mapper.getIdUrl(url);
 	}
-	public int login(HashMap<String, String> map) {
-		return mapper.login(map);
+	public int idPassCheck(HashMap<String, String> map) {
+		return mapper.idPassCheck(map);
 	}
-	public MemberDTO getAll(String id) {
-		return mapper.getAll(id);
+	public MemberDTO getMemberInfo(String id) {
+		return mapper.getMemberInfo(id);
 	}
 	public MemberDTO memberByEmail(String email) {
 		return mapper.memberByEmail(email);

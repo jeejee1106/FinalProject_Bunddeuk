@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
 	public void insertMember(MemberDTO dto);
-	public int getIdCheck(String id);
+	public int idDuplicateCheck(String id);
 	public int getNameCheck(String name);
 	public int getCheckPass(HashMap<String, String> map);
 	public int getUrlCheck(String url);
@@ -22,8 +22,8 @@ public interface MemberMapper {
 	public void deleteMember(String num);
 	public MemberDTO getAllProfile(HashMap<String, String> map);
 	public String getName(String id);
-	public MemberDTO getAll(String id);
-	public int login(HashMap<String, String> map);
+	public MemberDTO getMemberInfo(String id);
+	public int idPassCheck(HashMap<String, String> map);
 	public String getIdUrl(String id);
 	public int getEmailCheck(String email);
 	public void updateMemberAuthkey(MemberDTO dto);

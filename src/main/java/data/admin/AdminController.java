@@ -39,7 +39,7 @@ public class AdminController {
 		
 		ModelAndView mview = new ModelAndView();
 		String id = (String) session.getAttribute("id");
-		MemberDTO dto = memberSerivce.getAll(id);
+		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
 		int totalCount = service.getTotalCount();
 		
@@ -114,7 +114,7 @@ public class AdminController {
 			) {
 		
 		String id = (String) session.getAttribute("id");
-		MemberDTO dto = memberSerivce.getAll(id);
+		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
 		int totalCount = service.getTotalMemberCount();
 		
@@ -157,7 +157,7 @@ public class AdminController {
 			) {
 		
 		ModelAndView mview = new ModelAndView();
-		MemberDTO mdto = memberSerivce.getAll(id);
+		MemberDTO mdto = memberSerivce.getMemberInfo(id);
 		System.out.println(id);
 		mview.addObject("mdto", mdto);
 		mview.addObject("currentPage", currentPage);

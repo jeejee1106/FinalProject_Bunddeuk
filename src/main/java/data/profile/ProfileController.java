@@ -52,7 +52,7 @@ public class ProfileController {
 	@PostMapping("/comment/profile")
 	public String moveProfile(Model model, String id) {
 		
-		MemberDTO movedto = memberService.getAll(id);
+		MemberDTO movedto = memberService.getMemberInfo(id);
 		model.addAttribute("id",id); //원섭
 		model.addAttribute("movedto", movedto);
 		
@@ -93,7 +93,7 @@ public class ProfileController {
 	@PostMapping("/comment/sponsored")
 	public String moveToS(Model model, String id) {
 		
-		MemberDTO movedto = memberService.getAll(id);
+		MemberDTO movedto = memberService.getMemberInfo(id);
 		model.addAttribute("id",id); //원섭
 		model.addAttribute("movedto", movedto);
 		

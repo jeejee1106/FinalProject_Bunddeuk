@@ -8,7 +8,7 @@
 		insert into member(name, id, pass, email, url, join_date, oauth)
 		values (#{name}, #{id}, #{pass}, #{email}, #{url}, now(), #{oauth})
 	</insert>
-	<select id="getIdCheck" parameterType="String" resultType="int">
+	<select id="idDuplicateCheck" parameterType="String" resultType="int">
 		select count(*) from member where id = #{id}
 	</select>
 	<select id="getNameCheck" parameterType="String" resultType="int">
@@ -67,7 +67,7 @@
 	<select id="getIdUrl" parameterType="String" resultType="String">
 		select id from member where url = #{url}
 	</select>
-	<select id="getAll" parameterType="String" resultType="mdto">
+	<select id="getMemberInfo" parameterType="String" resultType="mdto">
 		select * from member where id = #{id}
 	</select>
 	<select id="memberByEmail" parameterType="String" resultType="mdto">
@@ -76,10 +76,9 @@
 	<select id="getAllProfile" parameterType="HashMap" resultType="mdto">
 		select * from member where id = #{id} and url = #{url}
 	</select>
-	<select id="login" parameterType="HashMap" resultType="int">
+	<select id="idPassCheck" parameterType="HashMap" resultType="int">
 		select count(*) from member where id = #{id} and pass = #{pass}
 	</select>
-	
 	<update id="updateMemberAuthkey" parameterType="mdto">
 		update member set email = #{email}, authkey = #{authkey} where num = #{num}
 	</update>

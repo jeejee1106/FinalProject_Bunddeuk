@@ -18,7 +18,7 @@ import data.member.MemberService;
 @Controller
 public class LoginController {
 	@Autowired
-	MemberService service;
+	MemberService memberService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
@@ -31,7 +31,7 @@ public class LoginController {
 			return "/login/loginForm";
 		} else {
 			//로그인중일경우 request에 로그인한 이름 저장하기
-			String name = service.getName(id);
+			String name = memberService.getName(id);
 			model.addAttribute("name", name);
 			return "/";
 		}
@@ -40,34 +40,34 @@ public class LoginController {
 	//@RequestParam (required = false) 이렇게 해주면 null값도 받을수 있다
 	@PostMapping("/login/loginprocess")
 	public String loginprocess(@RequestParam (required = false) String cbsave, @RequestParam String id, @RequestParam String pass, HttpSession session) {
-		int idcheck = service.getIdCheck(id);
+		int idcheck = memberService.idDuplicateCheck(id); //아이디가 존재하면 1반환
 		
 		if(idcheck==0) {
 			return "/login/passFail";  
 		}
 		
-		MemberDTO dto = service.getAll(id);
-		String oauthNullCheck = dto.getOauth();
+		MemberDTO memberDto = memberService.getMemberInfo(id);
+		String oauthNullCheck = memberDto.getOauth();
 		
 		if(oauthNullCheck != null) {
 			return "/login/kakaoLoginFail";
 		}
 		
-		String profileImage = dto.getPhoto();
-		String nickName = dto.getName();
+		String profileImage = memberDto.getPhoto();
+		String nickName = memberDto.getName();
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
-		map.put("pass", dto.getPass());
-		int check = service.login(map);
+		map.put("pass", memberDto.getPass());
+		int check = memberService.idPassCheck(map);
 		
-		if(check == 1 && passwordEncoder.matches(pass, dto.getPass())) {
+		if(check == 1 && passwordEncoder.matches(pass, memberDto.getPass())) {
 			session.setAttribute("profileImage", profileImage);
 			session.setAttribute("nickName", nickName);
 			session.setAttribute("id", id);
 			session.setAttribute("checkid", id);
 			session.setAttribute("loginok", "yes");
-			String getUrl = service.getUrl(id);
+			String getUrl = memberService.getUrl(id);
 			session.setAttribute("url",getUrl);
 			session.setAttribute("saveok", cbsave); //체크 안했을 경우 null, 체크 했을경우 on
 			return "redirect:main";

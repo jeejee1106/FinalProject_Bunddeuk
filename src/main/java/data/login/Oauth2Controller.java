@@ -120,12 +120,12 @@ public class Oauth2Controller {
     	String url = generatedString;
 		member.setUrl(url);
     	
-    	int check = memberService.getIdCheck(member.getId());
+    	int check = memberService.idDuplicateCheck(member.getId());
     	if(check != 1) {
     		memberService.insertMember(member);
     	}
     	
-		MemberDTO dto = memberService.getAll(member.getId());
+		MemberDTO dto = memberService.getMemberInfo(member.getId());
 		String profileImage = dto.getPhoto();
 			
 		session.setAttribute("profileImage", profileImage);

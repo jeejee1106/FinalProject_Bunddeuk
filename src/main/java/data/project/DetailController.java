@@ -92,7 +92,7 @@ public class DetailController {
 		String id = (String)session.getAttribute("id");
 		
 		ProjectDTO dto = detailService.getData(idx);
-		MemberDTO mdto = memberService.getAll(id);
+		MemberDTO mdto = memberService.getMemberInfo(id);
 		DeliveryDTO ddto = detailService.getAddr(id);
 		
 		String pymDate1 = detailService.getPaymentDate(idx).substring(0,4);

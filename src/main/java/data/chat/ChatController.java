@@ -26,7 +26,7 @@ public class ChatController {
 	public String openPersonalChat(Model model, String id) {
 		
 		/* System.out.println(id); */
-		MemberDTO dto = memberMapper.getAll(id);
+		MemberDTO dto = memberMapper.getMemberInfo(id);
 		model.addAttribute("dto", dto);
 		return "/chat/chat/personalChat";
 	}
