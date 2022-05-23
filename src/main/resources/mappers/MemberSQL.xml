@@ -76,7 +76,7 @@
 	<select id="getAllProfile" parameterType="HashMap" resultType="mdto">
 		select * from member where id = #{id} and url = #{url}
 	</select>
-	<select id="idPassCheck" parameterType="HashMap" resultType="int">
+	<select id="idPassCheck" parameterType="String" resultType="int">
 		select count(*) from member where id = #{id} and pass = #{pass}
 	</select>
 	<update id="updateMemberAuthkey" parameterType="mdto">

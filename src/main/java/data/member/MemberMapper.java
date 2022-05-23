@@ -23,7 +23,7 @@ public interface MemberMapper {
 	public MemberDTO getAllProfile(HashMap<String, String> map);
 	public String getName(String id);
 	public MemberDTO getMemberInfo(String id);
-	public int idPassCheck(HashMap<String, String> map);
+	public int idPassCheck(String id, String pass);
 	public String getIdUrl(String id);
 	public int getEmailCheck(String email);
 	public void updateMemberAuthkey(MemberDTO dto);

@@ -18,28 +18,24 @@
 <div class="limiter">
 	<div class="container-login100">
 		<div class="wrap-login100">
-			<form class="login100-form validate-form" action="loginprocess" method="post">
+			<form class="login100-form validate-form" action="login-process" method="post">
 				<span class="login100-form-title p-b-48">
 					<div>
 						<h2>로그인</h2>
 					</div>
 				</span>
-				
 				<div class="wrap-input100 validate-input" data-validate="Valid email">
 					<input type="text"  placeholder="아이디 입력" name="id" class = "input100" autofocus="autofocus" required="required" 
-						style = "width: 120px" value="${sessionScope.saveok==null?"":sessionScope.checkid}">
+						style="width: 120px" value="${sessionScope.rememberId == null ? '' : sessionScope.checkid}">
 				</div>
-				
 				<div class="wrap-input100 validate-input" data-validate="Enter password">
-					<input type = "password" name="pass" class = "input100" required="required" placeholder="비밀번호 입력" style = "width: 120px">
+					<input type="password" name="pass" class="input100" required="required" placeholder="비밀번호 입력" style = "width: 120px">
 				</div>
-				
 				<div>
 					<label>
-						<input type = "checkbox" name = "cbsave" ${sessionScope.saveok == null?"":"checked"}>&nbsp;아이디저장
+						<input type="checkbox" name="rememberId" ${sessionScope.rememberId == null?"":"checked"}>&nbsp;아이디저장
 					</label>
 				</div>
-				
 				<button type="submit" style="margin-top:30px; width:100%; height:50px;"  class="update-save">
 					<b>로그인</b>
 				</button><br><br>
@@ -48,7 +44,6 @@
 						<img src="../profile_image/kakao_login_medium_wide.png" style="height:50px;">
 					</a>
 				</span>
-				
 				<div class="text-center login-sub-manu">
 					<span onclick="location.href='../member/main'">
 						회원가입

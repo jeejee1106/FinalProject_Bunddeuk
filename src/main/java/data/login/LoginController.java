@@ -38,30 +38,27 @@ public class LoginController {
 	}
 	
 	//@RequestParam (required = false) 이렇게 해주면 null값도 받을수 있다
-	@PostMapping("/login/loginprocess")
-	public String loginprocess(@RequestParam (required = false) String cbsave, @RequestParam String id, @RequestParam String pass, HttpSession session) {
+	@PostMapping("/login/login-process")
+	public String loginProcess(@RequestParam (required = false) String rememberId, @RequestParam String id, @RequestParam String pass, HttpSession session) {
 		int idcheck = memberService.idDuplicateCheck(id); //아이디가 존재하면 1반환
-		
 		if(idcheck==0) {
 			return "/login/passFail";  
 		}
 		
 		MemberDTO memberDto = memberService.getMemberInfo(id);
+		String profileImage = memberDto.getPhoto();
+		String nickName = memberDto.getName();
 		String oauthNullCheck = memberDto.getOauth();
-		
 		if(oauthNullCheck != null) {
 			return "/login/kakaoLoginFail";
 		}
 		
-		String profileImage = memberDto.getPhoto();
-		String nickName = memberDto.getName();
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("id", id);
+//		map.put("pass", memberDto.getPass());
+		int idPassCheck = memberService.idPassCheck(id, memberDto.getPass());
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
-		map.put("pass", memberDto.getPass());
-		int check = memberService.idPassCheck(map);
-		
-		if(check == 1 && passwordEncoder.matches(pass, memberDto.getPass())) {
+		if(idPassCheck == 1 && passwordEncoder.matches(pass, memberDto.getPass())) {
 			session.setAttribute("profileImage", profileImage);
 			session.setAttribute("nickName", nickName);
 			session.setAttribute("id", id);
@@ -69,7 +66,7 @@ public class LoginController {
 			session.setAttribute("loginok", "yes");
 			String getUrl = memberService.getUrl(id);
 			session.setAttribute("url",getUrl);
-			session.setAttribute("saveok", cbsave); //체크 안했을 경우 null, 체크 했을경우 on
+			session.setAttribute("rememberId", rememberId); //체크 안했을 경우 null, 체크 했을경우 on
 			return "redirect:main";
 		}else {
 			return "/login/passFail";  
