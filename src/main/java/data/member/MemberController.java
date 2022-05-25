@@ -2,7 +2,6 @@ package data.member;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,35 +11,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
 	@Autowired
-	MemberService service;
-	
-	@GetMapping("/member/home")
+	MemberService memberService;
+
+	@GetMapping("/home")
 	public String home() {
 		return "/";
 	}
 	
-	@GetMapping("/member/main")
+	@GetMapping("/main")
 	public String join() {
 		return "/member/join";
 	}
 
-	@GetMapping("/member/findpass")
+	@GetMapping("/findpass")
 	public String findpass() {
 		return "/login/findPass";
 	}
 	
-	@GetMapping("/member/join")
+	@GetMapping("/join")
 	public String memberform() {
 		return "/member/memberForm";
 	}
@@ -50,55 +49,66 @@ public class MemberController {
 		return "/member/joinSuccess";
 	}
 
-	@PostMapping("/member/insert")
+	@PostMapping("/insert")
 	public String memberInsert(@ModelAttribute MemberDTO dto) {
-		service.insertMember(dto);
+		memberService.insertMember(dto);
 		return "/member/joinSuccess";
 	}
 	
-	@GetMapping("/member/idcheck") //@responsebody 를 넣어주면 rest컨트롤러처럼 변경
-	public @ResponseBody Map<String, Integer> idCheckProcess(@RequestParam String id) {
-		//id 체크
-		int check = service.idDuplicateCheck(id);
-		
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("check", check);//0 or 1
-		return map;
-	}
+	/*
+	 * >>>>>>>>>>>>>>>>>>>>>>>>>이거 쓰는데도 없는데 대체 왜 있는거야 진짜 하<<<<<<<<<<<<<<<<<<<<<<<< 
+	 * */
+//	@GetMapping("/idcheck")
+//	@ResponseBody
+//	public Map<String, Integer> idCheckProcess(@RequestParam String id) {
+//		//id 체크
+//		int check = memberService.idDuplicateCheck(id);
+//		
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		map.put("check", check);//0 or 1
+//		return map;
+//	}
 	
-	@GetMapping("/member/emailcheck") //@responsebody 를 넣어주면 rest컨트롤러처럼 변경
-	public @ResponseBody Map<String, Integer> emailcheck(@ModelAttribute MemberDTO dto) {
-		int check = service.getEmailCheck(dto.getEmail());
+	
+	/*
+	 * get~check 메서드 하나로 합칠 수 없는지 공부해보기.
+	 * 메서드 이름도 싹 바꾸기
+	 */
+	@GetMapping("/emailcheck")
+	@ResponseBody
+	public Map<String, Integer> emailcheck(@ModelAttribute MemberDTO dto) {
+		int check = memberService.getEmailCheck(dto.getEmail());
 		
 		Map<String, Integer> map2 = new HashMap<String, Integer>();
 		map2.put("check", check);//0 or 1
 		return map2;
 	}
 	
-	@GetMapping("/member/urlcheck") //@responsebody 를 넣어주면 rest컨트롤러처럼 변경
-	public @ResponseBody Map<String, Integer> urlCheckProcess(@RequestParam String url) {
-		//id 체크
-		int check = service.getUrlCheck(url);
+	@GetMapping("/urlcheck")
+	@ResponseBody
+	public Map<String, Integer> urlCheckProcess(@RequestParam String url) {
+		int check = memberService.getUrlCheck(url);
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("check", check);//0 or 1
 		return map;
 	}
 	
-	@GetMapping("/member/namecheck") //@responsebody 를 넣어주면 rest컨트롤러처럼 변경
-	public @ResponseBody Map<String, Integer> nameCheckProcess(@RequestParam String name) {
-		//id 체크
-		int check = service.getNameCheck(name);
+	@GetMapping("/namecheck")
+	@ResponseBody
+	public Map<String, Integer> nameCheckProcess(@RequestParam String name) {
+		int check = memberService.getNameCheck(name);
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("check", check);//0 or 1
 		return map;
 	}
 	
-	@GetMapping("/member/passcheck") //@responsebody 를 넣어주면 rest컨트롤러처럼 변경
-	public @ResponseBody Map<String, Integer> passCheckProcess(@RequestParam int num,@RequestParam String pass) {
+	@GetMapping("/passcheck")
+	@ResponseBody
+	public Map<String, Integer> passCheckProcess(@RequestParam int num,@RequestParam String pass) {
 		
-		MemberDTO dto = service.getMember(num);
+		MemberDTO dto = memberService.getMember(num);
 		int check = 0;
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
@@ -107,35 +117,35 @@ public class MemberController {
 			map.put("num", num1);
 			map.put("pass", dto.getPass());
 			//pass 체크
-			check = service.getCheckPass(map);
+			check = memberService.getCheckPass(map);
 		}
 		Map<String, Integer> map2 = new HashMap<String, Integer>();
 		map2.put("check", check);//0 or 1
 		return map2;
 	}
 	
-	@PostMapping("/member/memberdelete")
+	@PostMapping("/memberdelete")
 	public String delete(@RequestParam String num, @RequestParam String pass,HttpSession session){
-		MemberDTO dto = service.getMember(Integer.parseInt(num));
+		MemberDTO dto = memberService.getMember(Integer.parseInt(num));
 		
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("num", num);
 			map.put("pass", dto.getPass());
-			int check = service.getCheckPass(map);
+			int check = memberService.getCheckPass(map);
 			if(check == 1) {
 				//비번이 맞을경우 삭제
-			service.deleteMember(num);
+			memberService.deleteMember(num);
 			session.removeAttribute("loginok");
 			}
 		}
 		return "redirect:home";
 	}
 
-	@PostMapping("/member/kakaodelete")
+	@PostMapping("/kakaodelete")
 	public String kakaoDelete(@RequestParam String num,HttpSession session) {
-		service.deleteMember(num);
+		memberService.deleteMember(num);
 		session.removeAttribute("loginok");
 		return "redirect:home";
 	}
