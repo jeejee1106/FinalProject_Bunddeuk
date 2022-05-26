@@ -17,7 +17,7 @@
 	<select id="getUrlCheck" parameterType="String" resultType="int">
 		select count(*) from member where url = #{url}
 	</select>
-	<select id="getEmailCheck" parameterType="String" resultType="int">
+	<select id="hasEmailCheck" parameterType="String" resultType="int">
 		select count(*) from member where email = #{email} and auth_status= 1
 	</select>
 	<select id="getCheckPass" parameterType="HashMap" resultType="int">

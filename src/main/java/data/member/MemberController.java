@@ -76,8 +76,8 @@ public class MemberController {
 	 */
 	@GetMapping("/emailcheck")
 	@ResponseBody
-	public Map<String, Integer> emailcheck(@ModelAttribute MemberDTO dto) {
-		int check = memberService.getEmailCheck(dto.getEmail());
+	public Map<String, Integer> hasEmailCheck(@ModelAttribute MemberDTO dto) {
+		int check = memberService.hasEmailCheck(dto.getEmail());
 		
 		Map<String, Integer> map2 = new HashMap<String, Integer>();
 		map2.put("check", check);//0 or 1

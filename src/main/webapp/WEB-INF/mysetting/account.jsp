@@ -120,7 +120,7 @@ $("button.emailupdatebtn").click(function(){
 		url:"../member/emailcheck",
 		async: false,
 		success:function(data){
-			if(data.check==1){
+			if(data.emailCnt == 1){
 				$("b.emailmsg").html("<font color='red'>이미 인증된 이메일입니다.</font>");
 			}else{
 				$("b.emailmsg").html("");
@@ -131,7 +131,6 @@ $("button.emailupdatebtn").click(function(){
 					url:"mail",
 					success:function(data){
 					},error:function(error){
-						//$("#d_content").load('/setting/main #d_content');
 						$("#Email_div").show();
 						$("div.ptofileemailupdate").hide();
 					}
@@ -139,105 +138,73 @@ $("button.emailupdatebtn").click(function(){
 			}
 		}
 	});
-	
-	
 });
 
-
-
-
-
-/*
-
-//수정 버튼 이벤트
-$("button.emailupdatebtn").click(function(){
-	
-	var auth_status = $("#auth_status").val();
-	var num = $("#num").val();
-	var email = $("#emailupdate").val();
-	
-	if(auth_status == 1){
-		$("b.emailmsg").html("<font color='red'>이미 인증된 이메일입니다.</font>");
-		return;
-	}else{
-	$.ajax({
-		type:"post",
-		dataType:"json",
-		data:{"num":num,"email":email},
-		url:"mail",
-		success:function(data){
-		},error:function(error){
-			//$("#d_content").load('/setting/main #d_content');
-			$("#Email_div").show();
-			$("div.ptofileemailupdate").hide();
-		}
-	});
-	}
-});*/
 </script>
+
 <c:if test="${empty dto.oauth}">
-<!-- 비밀번호 -->
-<div class="password">
-	<span class="title"><b>비밀번호</b></span> 
-	<span class="updatePass">
-	<span class="updatespan">변경</span>
-	<br></span><br>
-	<hr>
-</div>
-
-<div class="passupdate">
-	<span class="title"><b>비밀번호</b></span> 
-	<span class="close7">
-		<span class="updatespan">취소</span>
-<br>	</span><br>
-	<form action="updatepass" method="post" onsubmit="return lastcheck(this)">
-		<input type="hidden" name="num" value="${dto.num}">
-		<div class="form-group">
-			<div style="margin-top:10px;">현재 비밀번호</div>
-			<input id="passcheck" type="hidden" name="passcheck" value="${dto.pass}">
-			<input type="password" style="height:39px; margin-top:10px;"
-				class="form-control" id="pass1" name="pass1" maxlength="20"
-				placeholder="현재 비밀번호" required="required">
-				<b class="pass1msg"></b>
-				<div style=" margin-top:10px;"></div>
-					비밀번호가 기억나지 않나요?
-					<span style="cursor:pointer;" onclick="location.href='../member/findpass'">
-						&nbsp;<b>임시 비밀번호 받기</b>
-					</span>
-				
-		</div>
-	<br>
-		<div class="form-group">
-			<div>변경할 비밀번호</div>
-			<input type="password" style="height:39px; margin-top:10px;"
-				class="form-control" id="pass" name="pass" maxlength="20"
-				placeholder="변경할 비밀번호" required="required">
-				<b class="passmsg"></b>
-		</div>
-		<div class="form-group">
-			<div>비밀번호 확인</div> <input style="height:39px; margin-top:10px;"
-				type="password" class="form-control" name="pass2" id="pass2"
-				maxlength="20" placeholder="변경할 비밀번호 확인"
-				required="required">
-				<b class="passmsg2"></b>
-		</div>
-
-		<button type="submit" class="update-save" style="margin-top: 10px;">저장</button>
-	</form>
-	<hr>
-</div>
+	<!-- 비밀번호 -->
+	<div class="password">
+		<span class="title"><b>비밀번호</b></span> 
+		<span class="updatePass">
+		<span class="updatespan">변경</span>
+		<br></span><br>
+		<hr>
+	</div>
+	
+	<div class="passupdate">
+		<span class="title"><b>비밀번호</b></span> 
+		<span class="close7">
+			<span class="updatespan">취소</span>
+	<br>	</span><br>
+		<form action="updatepass" method="post" onsubmit="return lastcheck(this)">
+			<input type="hidden" name="num" value="${dto.num}">
+			<div class="form-group">
+				<div style="margin-top:10px;">현재 비밀번호</div>
+				<input id="passcheck" type="hidden" name="passcheck" value="${dto.pass}">
+				<input type="password" style="height:39px; margin-top:10px;"
+					class="form-control" id="pass1" name="pass1" maxlength="20"
+					placeholder="현재 비밀번호" required="required">
+					<b class="pass1msg"></b>
+					<div style=" margin-top:10px;"></div>
+						비밀번호가 기억나지 않나요?
+						<span style="cursor:pointer;" onclick="location.href='../member/findpass'">
+							&nbsp;<b>임시 비밀번호 받기</b>
+						</span>
+					
+			</div>
+		<br>
+			<div class="form-group">
+				<div>변경할 비밀번호</div>
+				<input type="password" style="height:39px; margin-top:10px;"
+					class="form-control" id="pass" name="pass" maxlength="20"
+					placeholder="변경할 비밀번호" required="required">
+					<b class="passmsg"></b>
+			</div>
+			<div class="form-group">
+				<div>비밀번호 확인</div> <input style="height:39px; margin-top:10px;"
+					type="password" class="form-control" name="pass2" id="pass2"
+					maxlength="20" placeholder="변경할 비밀번호 확인"
+					required="required">
+					<b class="passmsg2"></b>
+			</div>
+	
+			<button type="submit" class="update-save" style="margin-top: 10px;">저장</button>
+		</form>
+		<hr>
+	</div>
 </c:if>
 <c:if test="${not empty dto.oauth}">
-<span class="title"><b>카카오 계정 연동</b></span><br>
-	<div class="CommonStyled__C kbzLam" style="margin-top:10px;">
-		<div name="check" class="Icon__SVGICON-sc ccxeYs baseline">
-			<svg viewBox="0 0 48 48">
-				<path fill-rule="evenodd" clip-rule="evenodd"
-					d="M41.6 8L18.9 30.8L6.2 19L2 23.5L19.1 39.4L46 12.4L41.6 8Z"></path></svg>
+	<span class="title"><b>카카오 계정 연동</b></span><br>
+		<div class="CommonStyled__C kbzLam" style="margin-top:10px;">
+			<div name="check" class="Icon__SVGICON-sc ccxeYs baseline">
+				<svg viewBox="0 0 48 48">
+					<path fill-rule="evenodd" clip-rule="evenodd"
+						d="M41.6 8L18.9 30.8L6.2 19L2 23.5L19.1 39.4L46 12.4L41.6 8Z"></path></svg>
+			</div>
+			<span style="color:gray;">연동 중입니다.</span>
 		</div>
-		<span style="color:gray;">연동 중입니다.</span>
-	</div>
-<hr>
+	<hr>
 </c:if>
 
    	<!--  연락처 -->

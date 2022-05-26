@@ -49,8 +49,8 @@ public class MemberService {
 		return mapper.getCheckPass(map);
 	}
 	
-	public int getEmailCheck(String email) {
-		return mapper.getEmailCheck(email);
+	public int hasEmailCheck(String email) {
+		return mapper.hasEmailCheck(email);
 	}
 	
 	public MemberDTO getAllProfile(HashMap<String, String> map) {

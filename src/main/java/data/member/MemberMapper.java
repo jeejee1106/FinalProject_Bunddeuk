@@ -25,7 +25,7 @@ public interface MemberMapper {
 	public MemberDTO getMemberInfo(String id);
 	public int idPassCheck(String id, String pass);
 	public String getIdUrl(String id);
-	public int getEmailCheck(String email);
+	public int hasEmailCheck(String email);
 	public void updateMemberAuthkey(MemberDTO dto);
 	public void updateMemberStatus(MemberDTO dto);
 	public void updateEmailPass(MemberDTO dto);

@@ -279,7 +279,7 @@
 function emailcheck(){
 	var email = $("#email").val();
 	var num = $("#num").val();
-	var rs = "";
+	var result = "";
 	
 	$.ajax({
 		type:"get",
@@ -288,13 +288,13 @@ function emailcheck(){
 		url:"../member/emailcheck",
 		async: false,
 		success:function(data){
-			if(data.check==0){
+			if(data.emailCnt == 0){
 				$("b.emailmsg").html("<font color='red'>해당 이메일이 존재하지 않습니다.</font>");
-				rs =false;
+				result =false;
 			}else{
 				$("b.emailmsg").html("");
 				alert("임시 비밀번호가 이메일로 전송되었습니다.");
-				rs = true;
+				result = true;
 			}
 		}
 	});
