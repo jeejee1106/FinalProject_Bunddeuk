@@ -10,7 +10,7 @@ public interface MemberMapper {
 	public int idDuplicateCheck(String id);
 	public int getNameCheck(String name);
 	public int getCheckPass(HashMap<String, String> map);
-	public int getUrlCheck(String url);
+	public int hasUrlCheck(String url);
 	public MemberDTO getMember(Integer num);
 	public void updateMemberName(MemberDTO dto);
 	public void updateMemberPhoto(MemberDTO dto);

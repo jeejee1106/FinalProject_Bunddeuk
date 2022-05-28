@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.member.MemberMapper">
+	
 	<select id="getAllMembers" resultType="mdto">
 		select * from member order by id asc
 	</select>
+	
 	<insert id="insertMember" parameterType="mdto">
 		insert into member(name, id, pass, email, url, join_date, oauth)
 		values (#{name}, #{id}, #{pass}, #{email}, #{url}, now(), #{oauth})
 	</insert>
+	
 	<select id="idDuplicateCheck" parameterType="String" resultType="int">
 		select count(*) from member where id = #{id}
 	</select>
+	
 	<select id="getNameCheck" parameterType="String" resultType="int">
 		select count(*) from member where name = #{name}
 	</select>
-	<select id="getUrlCheck" parameterType="String" resultType="int">
-		select count(*) from member where url = #{url}
-	</select>
+		
 	<select id="hasEmailCheck" parameterType="String" resultType="int">
 		select count(*) from member where email = #{email} and auth_status= 1
 	</select>
+
+	<select id="hasUrlCheck" parameterType="String" resultType="int">
+		select count(*) from member where url = #{url}
+	</select>
+	
 	<select id="getCheckPass" parameterType="HashMap" resultType="int">
 		select count(*) from member where num=#{num} and pass=#{pass}
 	</select>
+	
 	<select id="getMember" parameterType="Integer" resultType="mdto">
 		select * from member where num = #{num}
 	</select>
+	
 	<update id="updateMemberName" parameterType="mdto">
 		update member set name = #{name} where num = #{num}
 	</update>
@@ -61,24 +70,31 @@
 	<delete id="deleteMember" parameterType="String">
 		delete from member where num = #{num}
 	</delete> 
+	
 	<select id="getName" parameterType="String" resultType="String">
 		select name from member where id = #{id}
 	</select>
+	
 	<select id="getIdUrl" parameterType="String" resultType="String">
 		select id from member where url = #{url}
 	</select>
+	
 	<select id="getMemberInfo" parameterType="String" resultType="mdto">
 		select * from member where id = #{id}
 	</select>
+	
 	<select id="memberByEmail" parameterType="String" resultType="mdto">
 		select * from member where email = #{email} and auth_status= 1
 	</select>
+	
 	<select id="getAllProfile" parameterType="HashMap" resultType="mdto">
 		select * from member where id = #{id} and url = #{url}
 	</select>
+	
 	<select id="idPassCheck" parameterType="String" resultType="int">
 		select count(*) from member where id = #{id} and pass = #{pass}
 	</select>
+	
 	<update id="updateMemberAuthkey" parameterType="mdto">
 		update member set email = #{email}, authkey = #{authkey} where num = #{num}
 	</update>

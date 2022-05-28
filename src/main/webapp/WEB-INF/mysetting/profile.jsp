@@ -194,7 +194,7 @@ function urlcheck() {
 		url:"../member/urlcheck",
 		async: false,
 		success:function(data){
-			if(data.check==1){
+			if(data.urlCnt == 1){
 				$("b.urlmsg").html("<font color='red'>이미 사용중인 URL입니다.</font>");
 				$("#url").focus();
 				rs = false;

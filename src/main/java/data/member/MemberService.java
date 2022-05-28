@@ -41,8 +41,8 @@ public class MemberService {
 		return mapper.getNameCheck(name);
 	}
 	
-	public int getUrlCheck(String url) {
-		return mapper.getUrlCheck(url);
+	public int hasUrlCheck(String url) {
+		return mapper.hasUrlCheck(url);
 	}
 	
 	public int getCheckPass(HashMap<String, String> map) {

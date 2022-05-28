@@ -71,26 +71,28 @@ public class MemberController {
 	
 	
 	/*
+	 * TODO : 
 	 * get~check 메서드 하나로 합칠 수 없는지 공부해보기.
 	 * 메서드 이름도 싹 바꾸기
 	 */
 	@GetMapping("/emailcheck")
 	@ResponseBody
 	public Map<String, Integer> hasEmailCheck(@ModelAttribute MemberDTO dto) {
-		int check = memberService.hasEmailCheck(dto.getEmail());
+		//이메일이 있는지 없는지 체크. 있으면 1 반환
+		int emailCnt = memberService.hasEmailCheck(dto.getEmail());
 		
-		Map<String, Integer> map2 = new HashMap<String, Integer>();
-		map2.put("check", check);//0 or 1
-		return map2;
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("emailCnt", emailCnt);//0 or 1
+		return map;
 	}
 	
 	@GetMapping("/urlcheck")
 	@ResponseBody
 	public Map<String, Integer> urlCheckProcess(@RequestParam String url) {
-		int check = memberService.getUrlCheck(url);
+		int urlCnt = memberService.hasUrlCheck(url);
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("check", check);//0 or 1
+		map.put("urlCnt", urlCnt);//0 or 1
 		return map;
 	}
 	
