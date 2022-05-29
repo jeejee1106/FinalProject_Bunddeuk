@@ -49,7 +49,7 @@ public class ProjectController {
 	
 	@PostMapping("/project/insert")
 	public String inert(@ModelAttribute ProjectDTO dto,HttpSession session) {
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		String loginok = (String) session.getAttribute("loginok");
 		if(loginok == null) {
 			return "redirect:/login/main";

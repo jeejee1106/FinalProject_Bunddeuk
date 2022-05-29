@@ -24,14 +24,19 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-	@GetMapping("/home")
-	public String home() {
-		return "/";
-	}
+//	@GetMapping("/home")
+//	public String home() {
+//		return "/";
+//	}
 	
-	@GetMapping("/main")
-	public String join() {
-		return "/member/join";
+//	@GetMapping("/main")
+//	public String join() {
+//		return "/member/join";
+//	}
+
+	@GetMapping("/join")
+	public String memberform() {
+		return "/member/joinForm";
 	}
 
 	@GetMapping("/findpass")
@@ -39,15 +44,10 @@ public class MemberController {
 		return "/login/findPass";
 	}
 	
-	@GetMapping("/join")
-	public String memberform() {
-		return "/member/memberForm";
-	}
-	
-	@GetMapping("joinsuccess")
-	public String joinsuccess() {
-		return "/member/joinSuccess";
-	}
+//	@GetMapping("joinsuccess")
+//	public String joinsuccess() {
+//		return "/member/joinSuccess";
+//	}
 
 	@PostMapping("/insert")
 	public String memberInsert(@ModelAttribute MemberDTO dto) {

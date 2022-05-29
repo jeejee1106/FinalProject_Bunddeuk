@@ -34,9 +34,9 @@ public class ChatController {
 	
 	@GetMapping("/chat/list")
 	public String getChatList(Model model, HttpSession session) {
-		List<ChatDTO> list = chatService.getChatList((String)session.getAttribute("id"));
+		List<ChatDTO> list = chatService.getChatList((String)session.getAttribute("sessionId"));
 		for(ChatDTO dto:list) {
-			dto.setId((String)session.getAttribute("id"));
+			dto.setId((String)session.getAttribute("sessionId"));
 			dto.setPhoto(chatService.getOtherProfile(dto));
 			dto.setUnread(chatService.countUnreadMessage(dto));
 			/* System.out.println(dto.getPhoto()); */

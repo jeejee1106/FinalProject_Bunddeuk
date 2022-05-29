@@ -38,7 +38,7 @@ public class AdminController {
 			) {
 		
 		ModelAndView mview = new ModelAndView();
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
 		int totalCount = service.getTotalCount();
@@ -113,7 +113,7 @@ public class AdminController {
 			HttpSession session
 			) {
 		
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
 		int totalCount = service.getTotalMemberCount();

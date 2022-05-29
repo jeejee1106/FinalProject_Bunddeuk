@@ -37,7 +37,7 @@ public class NoticeController implements ServletContextAware {
 			) {
 		
 		ModelAndView mview = new ModelAndView();
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		String loginok = (String) session.getAttribute("loginok");
 		
 		int totalCount = mapper.getTotalCount();
@@ -103,7 +103,7 @@ public class NoticeController implements ServletContextAware {
 			return "/notice/loginmsg";
 		}
 		
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		dto.setId(id);
 		
 		mapper.insertNotice(dto);
@@ -118,7 +118,7 @@ public class NoticeController implements ServletContextAware {
 			) {
 		
 		ModelAndView mview = new ModelAndView();
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		NoticeDTO ndto = mapper.getNoticeData(num);
 		
 		mview.addObject("ndto", ndto);
@@ -135,7 +135,7 @@ public class NoticeController implements ServletContextAware {
 		
 		ModelAndView mview = new ModelAndView();
 		
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		String login = (String) session.getAttribute("login");
 		NoticeDTO ndto = mapper.getNoticeData(num);
 		

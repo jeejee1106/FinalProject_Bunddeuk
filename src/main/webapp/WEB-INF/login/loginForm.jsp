@@ -18,7 +18,7 @@
 <div class="limiter">
 	<div class="container-login100">
 		<div class="wrap-login100">
-			<form class="login100-form validate-form" action="login-process" method="post">
+			<form class="login100-form validate-form" action="/login/login-process" method="post">
 				<span class="login100-form-title p-b-48">
 					<div>
 						<h2>로그인</h2>
@@ -47,7 +47,7 @@
 					</a>
 				</span>
 				<div class="text-center login-sub-manu">
-					<span onclick="location.href='../member/main'">
+					<span onclick="location.href='../member/join'">
 						회원가입
 					</span>
 					<span onclick="location.href='../member/findpass'">

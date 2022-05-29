@@ -40,7 +40,7 @@ public class DetailController {
 	//공개된 프로젝트의 디테일 페이지
 	@GetMapping("/project/detail")
 	public String getDetailData(int idx, String key, HttpSession session, Model model) {
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		String name = memberService.getName(id);
 		int likeCheck = detailService.getLikeCheck(idx, id);
 		int supportCheck = detailService.getSupportCheck(idx, id);
@@ -89,7 +89,7 @@ public class DetailController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date today = java.sql.Date.valueOf(sdf.format(new Date()));
 		
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		
 		ProjectDTO dto = detailService.getData(idx);
 		MemberDTO mdto = memberService.getMemberInfo(id);
@@ -144,7 +144,7 @@ public class DetailController {
 	@GetMapping("/payment/deliveryInsert")
 	public String deliveryInsert(DeliveryDTO ddto,HttpSession session) {
 		
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);

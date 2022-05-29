@@ -188,7 +188,7 @@ function lastcheck(f){
 	<div>
 		<h3>회원 가입</h3>
 	</div>
-	<form action="insert" method="post"  name="memberfrm" onsubmit="return lastcheck(this)">
+	<form action="/member/insert" method="post"  name="memberfrm" onsubmit="return lastcheck(this)">
 		<div style="margin-top:45px;">아이디</div>
 		<input type="text" class="form-control member-info" id="id" placeholder="아이디를 입력해주세요" name="id" maxlength="20" required="required" >
 		<b class="idmsg"></b>

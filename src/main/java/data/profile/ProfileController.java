@@ -61,7 +61,7 @@ public class ProfileController {
 	
 	@GetMapping("/profile")
 	public String moveProfile2(HttpSession session,Model model) {
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		String loginok = (String)session.getAttribute("loginok");
 		session.removeAttribute("url");
 		String url = memberService.getUrl(id);

@@ -36,7 +36,7 @@ public class SettingController {
 	public ModelAndView home(HttpSession session, Model model) {
 		
 		ModelAndView mview = new ModelAndView();
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = service.getMemberInfo(id);
 		List<DeliveryDTO> list = deliveryservice.getPinList(id);
 		int totalCount = deliveryservice.getTotalCount(id);
@@ -52,7 +52,7 @@ public class SettingController {
 	public ModelAndView delivery(HttpSession session, Model model) {
 		
 		ModelAndView mview = new ModelAndView();
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = service.getMemberInfo(id);
 		List<DeliveryDTO> list = deliveryservice.getPinList(id);
 		int totalCount = deliveryservice.getTotalCount(id);
@@ -67,7 +67,7 @@ public class SettingController {
 	@ResponseBody
 	@GetMapping("/setting/alist")
 	public List<DeliveryDTO> alist(HttpSession session){
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		List<DeliveryDTO> list = deliveryservice.getPinList(id);
 		
 		return list;
@@ -76,7 +76,7 @@ public class SettingController {
 	@ResponseBody
 	@GetMapping("/setting/deliveryupdate")
 	public HashMap<String, String> home2(HttpSession session, @RequestParam String num) {
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
@@ -186,7 +186,7 @@ public class SettingController {
 	public ModelAndView leave(HttpSession session, Model model) {
 		ModelAndView mview = new ModelAndView();
 		
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = service.getMemberInfo(id);
 		
 		mview.addObject("dto", dto);
@@ -198,7 +198,7 @@ public class SettingController {
 	public ModelAndView validation(HttpSession session, Model model) {
 		ModelAndView mview = new ModelAndView();
 		
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = service.getMemberInfo(id);
 		
 		mview.addObject("dto", dto);
@@ -209,7 +209,7 @@ public class SettingController {
 	@GetMapping("/setting/deliveryinsert")
 	public @ResponseBody String deliveryInsert(@ModelAttribute DeliveryDTO ddto,HttpSession session) {
 		
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		String pin = String.valueOf(ddto.getPin());
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -229,7 +229,7 @@ public class SettingController {
 	
 	@GetMapping("/setting/updatedelivery")
 	public @ResponseBody void updateDelivery(@ModelAttribute DeliveryDTO ddto,HttpSession session) {
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		String pin = String.valueOf(ddto.getPin());
 		
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -247,7 +247,7 @@ public class SettingController {
 	
 	@GetMapping("/setting/deliverydelete")
 	public @ResponseBody String deliverydelete(@RequestParam String num,HttpSession session){
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("num", num);
 		map.put("id", id);

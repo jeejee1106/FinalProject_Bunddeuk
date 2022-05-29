@@ -36,6 +36,7 @@ public class LoginController {
 			return "/login/passFail";
 		} else {
 //			//소셜 로그인
+			
 //			if(memberDto.getOauth() != null) {
 //				return "/login/kakaoLoginFail";
 //			}

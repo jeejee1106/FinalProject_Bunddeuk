@@ -28,7 +28,7 @@ public class MessageController {
 	// 받은 메세지 리스트
 	@GetMapping("/message/receivedMessage")
 	public String receivedList (HttpSession session, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int pageSize, Model model) {
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		String name = memberService.getName(id);
 		
 		MemberDTO memberDto = memberService.getMemberInfo(id);
@@ -48,7 +48,7 @@ public class MessageController {
 	// 보낸 메세지 리스트
 	@GetMapping("/message/sentMessage")
 	public String sentList (@RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int pageSize, HttpSession session, Model model) {
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("sessionId");
 		String name = memberService.getName(id);
 		
 		MemberDTO dto = memberService.getMemberInfo(id);
@@ -69,7 +69,7 @@ public class MessageController {
 	@GetMapping("/message/messagedata")
 	@ResponseBody
 	public MessageDTO data(String num, HttpSession session) {
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		String name = memberService.getName(id);
 		messageService.updateReadCount(name, num);
 		
