@@ -90,7 +90,7 @@ $(function() {
 	<!-- end 제목부분 -->
 	
 		<div class="style__StatusWrapper-zxsodr-4 bgpTeU">
-		<c:if test="${sessionScope.loginok != null && sessionScope.id != 'admin'}">
+		<c:if test="${sessionScope.loginok != null && sessionScope.sessionId != 'admin'}">
 			<div class="style__ProjectEditorButton-zxsodr-5 cfcgIZ">
 				<span onclick="location.href='/project/start'">
 				프로젝트 올리기
@@ -116,7 +116,7 @@ $(function() {
 			<div class="style__UserButtonWrapper-zxsodr-9 idLbRv">
 				<div class="style__UserButton-zxsodr-10 csOHNF">
 					<div class="style__UserText-zxsodr-11 fXtfpK">
-					<c:if test="${sessionScope.loginok != null && sessionScope.id != 'admin' }">
+					<c:if test="${sessionScope.loginok != null && sessionScope.sessionId != 'admin' }">
 						<!-- 프로필 -->
 						<div class="style__UserAvatar-zxsodr-8 eAeocm">
 						<span onclick="location.href='/profile'">
@@ -142,7 +142,7 @@ $(function() {
 			           	</span>
 			           	</div>
 			        </c:if>
-					<c:if test="${sessionScope.id == 'admin'}">
+					<c:if test="${sessionScope.sessionId == 'admin'}">
 						<!-- 프로필 -->
 						<div class="style__UserAvatar-zxsodr-8 eAeocm">
 						<span onclick="location.href='/admin/member_management'">
@@ -152,7 +152,7 @@ $(function() {
 										
 			           	<div class="style__UserText-zxsodr-11 fXtfpK1">				
 						<span onclick="location.href='/admin/member_management'">
-			           	${sessionScope.id}
+			           	${sessionScope.sessionId}
 			           	</span>
 			           	</div>
 			        </c:if>

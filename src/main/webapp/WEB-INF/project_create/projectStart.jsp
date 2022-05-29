@@ -152,7 +152,7 @@ $(function() {
 			<form action="insert" method="post">
 			<button type="submit" class="btn btn3" disabled="disabled" onclick="/project/insert">시작하기</button>
 			<input type="hidden" id="category" name="category">
-			<input type="hidden" name="id" value="${sessionScope.id }">
+			<input type="hidden" name="id" value="${sessionScope.sessionId }">
 			</form>
     	</div>
     </div>

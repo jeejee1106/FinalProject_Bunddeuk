@@ -23,10 +23,10 @@
 			<c:otherwise>
 				<ul>
 					<c:forEach var="messageInfo" items="${list}">
-						<%-- <c:if test="${messageInfo.exit_id != sessionScope.id}"> --%>
+						<%-- <c:if test="${messageInfo.exit_id != sessionScope.sessionId}"> --%>
 						<li class="info-container">
 							<div class="open-chat">
-								<input type="hidden" id="loginUser" value="${sessionScope.id}">
+								<input type="hidden" id="loginUser" value="${sessionScope.sessionId}">
 								<input type="hidden" id="exitCount" value="${messageInfo.exit_count}"> 
 								<input type="hidden" id="room" value="${messageInfo.room}">
 								<c:choose>
@@ -38,7 +38,7 @@
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
-									<c:when test="${messageInfo.recv_id == sessionScope.id}">
+									<c:when test="${messageInfo.recv_id == sessionScope.sessionId}">
 										<input type="hidden" id="reciver" value="${messageInfo.send_id  }">
 									</c:when>
 									<c:otherwise>
@@ -46,7 +46,7 @@
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
-									<c:when test="${messageInfo.send_id == sessionScope.id}">
+									<c:when test="${messageInfo.send_id == sessionScope.sessionId}">
 										<span class="chat-id">${messageInfo.recv_id}</span>
 									</c:when>
 									<c:otherwise>
@@ -122,7 +122,7 @@
 					<form action="/report/send" method="post">
 						<input type="hidden" name="address" value="wonseob7942@naver.com">
 						<input type="hidden" id="reportRoom" name="room"> 
-						<input type="hidden" id="reportId" name="id" value="${sessionScope.id}">
+						<input type="hidden" id="reportId" name="id" value="${sessionScope.sessionId}">
 						<input name="title" placeholder="제목" required="required">
 						<br>
 						<textarea name="message" placeholder="신고 내용을 입력해주세요." cols="33"

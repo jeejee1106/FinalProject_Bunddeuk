@@ -45,7 +45,7 @@ function onSubmit(){
 				<div class="a">
 					<div class="user-name">
 							<span>${dto.name }</span>
-						<c:if test="${sessionScope.id == dto.id }">
+						<c:if test="${sessionScope.sessionId == dto.id }">
 							<a class="user-info" href="/setting/main">
 								<div name="setting">
 									<img src="${root }/image/settings.png">
@@ -58,7 +58,7 @@ function onSubmit(){
 		
 		<div class="container-tab">
 			<div class="tab-warpper">
-			<c:if test="${ sessionScope.id != 'admin'}">
+			<c:if test="${ sessionScope.sessionId != 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">
@@ -81,7 +81,7 @@ function onSubmit(){
 							<a href="/profile/${sessionScope.url}/liked">관심프로젝트 </a>
 						</div>
 					</span>
-					<c:if test="${sessionScope.id == dto.id }">
+					<c:if test="${sessionScope.sessionId == dto.id }">
 						<span class="tab">
 							<div class="link-wrapper">
 								<a href="/message/receivedMessage">문의 메세지 </a>
@@ -89,7 +89,7 @@ function onSubmit(){
 						</span>
 						</c:if>
 					<c:if test="${sessionScope.loginok == 'yes'}">
-						<c:if test="${dto.id != sessionScope.id}">
+						<c:if test="${dto.id != sessionScope.sessionId}">
 							<span class="tab">
 								<div class="link-wrapper">
 									<a class='personal-chat'>채팅 </a>
@@ -100,7 +100,7 @@ function onSubmit(){
 					</div>
 			</c:if>
 			<!-- 관리자 -->
-<%-- 			<c:if test="${sessionScope.id == 'admin'}">
+<%-- 			<c:if test="${sessionScope.sessionId == 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">
@@ -158,12 +158,12 @@ function onSubmit(){
 				<div class="WarrantyCard">
 					<div class="DescWrapper">
 						<div class="ImageWrapper">
-						<c:if test="${sessionScope.id == dto.id }">
+						<c:if test="${sessionScope.sessionId == dto.id }">
 							<a href="support_success?num=${s.num }">
 								<img src="../../thumbnail_image/${s.thumbnail }" style="">
 							</a>
 						</c:if>
-						<c:if test="${sessionScope.id != dto.id }">
+						<c:if test="${sessionScope.sessionId != dto.id }">
 							<a>
 								<img src="../../thumbnail_image/${s.thumbnail }">
 							</a>
@@ -173,10 +173,10 @@ function onSubmit(){
 							후원일 ${s.support_date }<span>|</span>후원번호 ${s.num }
 						</div>
 						<div class="WarrantyCard-Title">
-							<c:if test="${sessionScope.id == dto.id }">
+							<c:if test="${sessionScope.sessionId == dto.id }">
 							<a href="support_success?num=${s.num }">${s.title }</a>
 							</c:if>
-							<c:if test="${sessionScope.id != dto.id }">
+							<c:if test="${sessionScope.sessionId != dto.id }">
 							<a>${s.title }</a>
 							</c:if>
 						</div>

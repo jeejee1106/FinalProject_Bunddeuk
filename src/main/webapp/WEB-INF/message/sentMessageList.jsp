@@ -48,7 +48,7 @@ $(document).on("click","#msg-view",function(){
 			<div class="a">
 				<div class="user-name">
 				<span>${name }</span>
-				<c:if test="${sessionScope.id == id }">
+				<c:if test="${sessionScope.sessionId == id }">
 					<a class="user-info" href="/setting/main">
 						<div name="setting">
 							<img src="${root }/image/settings.png">
@@ -60,7 +60,7 @@ $(document).on("click","#msg-view",function(){
 		</div>
 		<div class="container-tab">
 			<div class="tab-warpper">
-				<c:if test="${ sessionScope.id != 'admin'}">
+				<c:if test="${ sessionScope.sessionId != 'admin'}">
 					<div class="tab-warpper-in">
 						<span class="tab current">
 							<div class="link-wrapper">
@@ -82,13 +82,13 @@ $(document).on("click","#msg-view",function(){
 								<a href="/profile/${sessionScope.url}/liked">관심프로젝트 </a>
 							</div>
 						</span>
-						<c:if test="${sessionScope.id == dto.id }">
+						<c:if test="${sessionScope.sessionId == dto.id }">
 							<span class="tab">
 								<div class="link-wrapper">
 									<a href="/message/receivedMessage" class="select">문의 메세지 </a>
 								</div>
 							</span>
-							<c:if test="${dto.id != sessionScope.id}">
+							<c:if test="${dto.id != sessionScope.sessionId}">
 								<span class="tab">
 									<div class="link-wrapper">
 										<a class='personal-chat'>채팅 </a>

@@ -80,7 +80,7 @@ public class MessageController {
 	@PostMapping("/message/messageReply")
 	@ResponseBody
 	public void reply(@ModelAttribute MessageDTO dto, HttpSession session) {
-		String id = (String) session.getAttribute("id");
+		String id = (String) session.getAttribute("sessionId");
 		String name = memberService.getName(id);
 		
 		dto.setId(id);

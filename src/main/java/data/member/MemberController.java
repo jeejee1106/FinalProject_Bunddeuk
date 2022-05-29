@@ -44,7 +44,7 @@ public class MemberController {
 		return "/member/memberForm";
 	}
 	
-	@GetMapping("/member/joinsuccess")
+	@GetMapping("joinsuccess")
 	public String joinsuccess() {
 		return "/member/joinSuccess";
 	}

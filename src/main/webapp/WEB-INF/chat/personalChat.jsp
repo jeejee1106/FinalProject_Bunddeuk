@@ -27,7 +27,7 @@
           
            <div class="text-container">
 	       	 <input type="hidden" id="reciver" value="${dto.id}"> 
-		 	 <input type="hidden" id="sender" value="${sessionScope.id}"> 
+		 	 <input type="hidden" id="sender" value="${sessionScope.sessionId}"> 
 			 <input type="hidden" id="room"> 
 			 <input type="hidden" id="listSize">
 	         <textarea placeholder="메세지를 입력하세요." class="text"></textarea>
@@ -48,7 +48,7 @@
 						<form action="/report/send" method="post">
 							<input type="hidden" name="address" value="wonseob7942@naver.com">
 							<input type="hidden" id="reportRoom" name="room"> 
-							<input type="hidden" id="reportId" name="id" value="${sessionScope.id}">
+							<input type="hidden" id="reportId" name="id" value="${sessionScope.sessionId}">
 								<input name="title" placeholder="제목" required="required">
 								<br>
 								<textarea name="message" placeholder="신고 내용을 입력해주세요." cols="33"

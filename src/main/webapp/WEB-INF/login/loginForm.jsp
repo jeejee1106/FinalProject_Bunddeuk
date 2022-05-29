@@ -26,19 +26,21 @@
 				</span>
 				<div class="wrap-input100 validate-input" data-validate="Valid email">
 					<input type="text"  placeholder="아이디 입력" name="id" class = "input100" autofocus="autofocus" required="required" 
-						style="width: 120px" value="${sessionScope.rememberId == null ? '' : sessionScope.checkid}">
+						style="width: 120px" value="${sessionScope.rememberIdCheck == null ? '' : sessionScope.sessionId}">
 				</div>
 				<div class="wrap-input100 validate-input" data-validate="Enter password">
 					<input type="password" name="pass" class="input100" required="required" placeholder="비밀번호 입력" style = "width: 120px">
 				</div>
 				<div>
 					<label>
-						<input type="checkbox" name="rememberId" ${sessionScope.rememberId == null?"":"checked"}>&nbsp;아이디저장
+						<input type="checkbox" name="rememberIdCheck" ${sessionScope.rememberIdCheck == null ? "" : "checked"}>&nbsp;아이디저장
 					</label>
 				</div>
 				<button type="submit" style="margin-top:30px; width:100%; height:50px;"  class="update-save">
 					<b>로그인</b>
-				</button><br><br>
+				</button>
+				<br>
+				<br>
 				<span class="login100-form-title p-b-26">
 					<a href="https://kauth.kakao.com/oauth/authorize?client_id=1439861063a7d822757160ad213d4a33&redirect_uri=http://localhost:9002/login/kakao&response_type=code">
 						<img src="../profile_image/kakao_login_medium_wide.png" style="height:50px;">

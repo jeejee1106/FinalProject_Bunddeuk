@@ -111,7 +111,7 @@ $(function () {
 				<div class="a">
 					<div class="user-name">
 							<span>${dto.name }</span>
-						<c:if test="${sessionScope.id == dto.id }">
+						<c:if test="${sessionScope.sessionId == dto.id }">
 							<a class="user-info" href="/setting/main">
 								<div name="setting">
 									<img src="${root }/image/settings.png">
@@ -124,7 +124,7 @@ $(function () {
 		
 		<div class="container-tab">
 			<div class="tab-warpper">
-			<c:if test="${ sessionScope.id != 'admin'}">
+			<c:if test="${ sessionScope.sessionId != 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">
@@ -147,7 +147,7 @@ $(function () {
 							<a href="/profile/${sessionScope.url}/liked">관심프로젝트 </a>
 						</div>
 					</span>
-					<c:if test="${sessionScope.id == dto.id }">
+					<c:if test="${sessionScope.sessionId == dto.id }">
 						<span class="tab">
 							<div class="link-wrapper">
 								<a href="/message/receivedMessage">문의 메세지 </a>
@@ -155,7 +155,7 @@ $(function () {
 						</span>
 						</c:if>
 					<c:if test="${sessionScope.loginok == 'yes'}">
-						<c:if test="${dto.id != sessionScope.id}">
+						<c:if test="${dto.id != sessionScope.sessionId}">
 							<span class="tab">
 								<div class="link-wrapper">
 									<a class='personal-chat'>채팅 </a>
@@ -166,7 +166,7 @@ $(function () {
 					</div>
 			</c:if>
 			<!-- 관리자 -->
-<%-- 			<c:if test="${sessionScope.id == 'admin'}">
+<%-- 			<c:if test="${sessionScope.sessionId == 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">
@@ -199,7 +199,7 @@ $(function () {
  			<div class="project-count">
 				<em style="color: red;">${creativeCont}</em> 개의 프로젝트가 있습니다.
 			</div>
-			<c:if test="${sessionScope.id == dto.id }">
+			<c:if test="${sessionScope.sessionId == dto.id }">
 			<div class="top-btn" id="top-btn">
 				<button type="button" id="btn2" name="button" value="0" class="write dggvBV">작성 중</button>
 				<button type="button" id="btn3" name="button" value="1" class="audit gsEWlI">심사 중</button>
@@ -219,7 +219,7 @@ $(function () {
 				<c:if test="${creativeCont>0 }">
 				
 				<!-- 작성중 리스트 -->
-				<c:if test="${sessionScope.id == dto.id }">
+				<c:if test="${sessionScope.sessionId == dto.id }">
 				<div id="write">
 					<br><br><br>
 					<div class="project-status">
@@ -253,7 +253,7 @@ $(function () {
 											</div>
 										</div>
 									</div>
-									<c:if test="${sessionScope.id == dto.id }">
+									<c:if test="${sessionScope.sessionId == dto.id }">
 									<div class="project-button-section">
 										<a class="project-management"
 											href="created_management?idx=${c.idx}">관리</a>
@@ -300,7 +300,7 @@ $(function () {
 											</div>
 										</div>
 									</div>
-									<c:if test="${sessionScope.id == dto.id }">
+									<c:if test="${sessionScope.sessionId == dto.id }">
 									<div class="project-button-section">
 										<a class="project-management"
 											href="created_management?idx=${c.idx}">관리</a>
@@ -315,7 +315,7 @@ $(function () {
 				</div>
 				</c:if>
 				<!-- 승인 리스트 -->
-				<c:if test="${sessionScope.id != dto.id || sessionScope.id == dto.id}">
+				<c:if test="${sessionScope.sessionId != dto.id || sessionScope.sessionId == dto.id}">
 				<div id="approval">
 					<br><br><br>
 					<div class="project-status">
@@ -349,7 +349,7 @@ $(function () {
 											</div>
 										</div>
 									</div>
-									<c:if test="${sessionScope.id == dto.id }">
+									<c:if test="${sessionScope.sessionId == dto.id }">
 									<div class="project-button-section">
 										<a class="project-management"
 											href="created_management?idx=${c.idx}">관리</a>
@@ -364,7 +364,7 @@ $(function () {
 				</div>
 				</c:if>
 				<!-- 반려 리스트 -->
-				<c:if test="${sessionScope.id == dto.id }">
+				<c:if test="${sessionScope.sessionId == dto.id }">
 				<div id="companion">
 					<br><br><br>
 					<div class="project-status">
@@ -398,7 +398,7 @@ $(function () {
 											</div>
 										</div>
 									</div>
-									<c:if test="${sessionScope.id == dto.id }">
+									<c:if test="${sessionScope.sessionId == dto.id }">
 									<div class="project-button-section">
 										<a class="project-management"
 											href="created_management?idx=${c.idx}">관리</a>

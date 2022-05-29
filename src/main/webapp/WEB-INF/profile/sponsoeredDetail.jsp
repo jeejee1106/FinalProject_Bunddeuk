@@ -272,7 +272,7 @@ $(function(){
 		</div>
 		<div class="message-main">
 			<input type="hidden" id="send_name" value="${name }">
-			<input type="hidden" id="id" value="${sessionScope.id}">
+			<input type="hidden" id="id" value="${sessionScope.sessionId}">
 			<table class= "table table-bordered">
 				<tr>
 					<td>

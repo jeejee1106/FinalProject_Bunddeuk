@@ -165,7 +165,7 @@ $(document).on("click", "td.title", function() {
 				<div class="a">
 					<div class="user-name">
 							<span>${dto.name }</span>
-						<c:if test="${sessionScope.id == id }">
+						<c:if test="${sessionScope.sessionId == id }">
 							<a class="user-info" href="/setting/main">
 								<div name="setting">
 									<img src="${root }/image/settings.png">
@@ -179,7 +179,7 @@ $(document).on("click", "td.title", function() {
 		<div class="container-tab">
 			<div class="tab-warpper">
 			<!-- 관리자 -->
-			<c:if test="${sessionScope.id == 'admin' && sessionScope.loginok == 'yes'}">
+			<c:if test="${sessionScope.sessionId == 'admin' && sessionScope.loginok == 'yes'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">

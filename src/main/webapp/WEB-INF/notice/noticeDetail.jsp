@@ -61,7 +61,7 @@ $(function(){
 	</ul>
 	<div class="btn-wrap">
 		<button class="list_back" onclick="location.href='/notice?currentPage=${currentPage}'">목록으로 돌아가기</button>
-		<c:if test="${sessionScope.loginok == 'yes' and sessionScope.id == 'admin' }">
+		<c:if test="${sessionScope.loginok == 'yes' and sessionScope.sessionId == 'admin' }">
 			<button class="update" onclick="location.href='/notice/updateform?num=${ndto.num}&currentPage=${currentPage}'">수정하기</button>
 			<button class="delete">삭제하기</button>
 		</c:if>

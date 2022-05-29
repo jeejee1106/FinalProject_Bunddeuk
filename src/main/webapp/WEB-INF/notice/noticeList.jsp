@@ -51,7 +51,7 @@
 		</ul>
 	</div>
 	<div class="btn-wrap" style="float: right;">
-		<c:if test="${sessionScope.loginok == 'yes' and sessionScope.id == 'admin' }">
+		<c:if test="${sessionScope.loginok == 'yes' and sessionScope.sessionId == 'admin' }">
 			<button type="button" onclick="location.href='/notice/wrtieform'" class="notice-write">글쓰기</button>
 		</c:if>
 	</div>

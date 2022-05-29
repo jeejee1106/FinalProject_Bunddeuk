@@ -25,7 +25,7 @@
 				<div class="a">
 					<div class="user-name">
 						<span>${name }</span>
-						<c:if test="${sessionScope.id == id }">
+						<c:if test="${sessionScope.sessionId == id }">
 							<a class="user-info" href="/setting/main">
 								<div name="setting">
 									<img src="${root }/img/core-img/settings.png">
@@ -38,7 +38,7 @@
 		
 		<div class="container-tab">
 			<div class="tab-warpper">
-			<c:if test="${ sessionScope.id != 'admin'}">
+			<c:if test="${ sessionScope.sessionId != 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">
@@ -61,7 +61,7 @@
 							<a href="/profile/${sessionScope.url}/liked">관심프로젝트 </a>
 						</div>
 					</span>
-					<c:if test="${sessionScope.id == id }">
+					<c:if test="${sessionScope.sessionId == id }">
 						<span class="tab">
 							<div class="link-wrapper">
 								<a href="/receivedMessage">메세지 </a>
@@ -76,7 +76,7 @@
 				</div>
 			</c:if>
 			<!-- 관리자 -->
-			<c:if test="${sessionScope.id == 'admin'}">
+			<c:if test="${sessionScope.sessionId == 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">

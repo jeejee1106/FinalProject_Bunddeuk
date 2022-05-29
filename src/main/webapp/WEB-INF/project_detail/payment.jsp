@@ -32,7 +32,7 @@
 	<hr>
 	
 	<form action="/project_support/success" method="post" id="final-support-submit">
-		<input type="hidden" name="id" id="id" value="${sessionScope.id}">
+		<input type="hidden" name="id" id="id" value="${sessionScope.sessionId}">
 		<input type="hidden" name="idx" value="${dto.idx}">
 		<input type="hidden" name="supportNum" value="${dto.number_support}">
 		<input type="hidden" name="end_date" value="${dto.end_date}">

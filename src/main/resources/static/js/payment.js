@@ -44,7 +44,7 @@ $(function(){
 	
 	//입력받은 핸드폰 번호 바로 출력하기
 	$(".btn-add-hp").click(function(){
-		var id = "${sessionScope.id}";
+		var id = "${sessionScope.sessionId}";
 		var hp1 = $("#hp1").val();
 		var hp2 = $("#hp2").val();
 		var hp3 = $("#hp3").val();
@@ -67,7 +67,7 @@ $(function(){
 	
 	//입력받은 이메일 바로 출력하기
 	$(".btn-add-email").click(function(){
-		var id = "${sessionScope.id}";
+		var id = "${sessionScope.sessionId}";
 		var email1 = $("#email1").val();
 		var email2 = $("#email2").val();
 		var email = email1 + "@" + email2;
@@ -91,7 +91,7 @@ $(function(){
 	$(".btn-add-addr").click(function(){
 		//alert("Df");
 		var check = $("#pin").is(":checked");
-		var id = "${sessionScope.id}";
+		var id = "${sessionScope.sessionId}";
 		var name=$("#name").val();
 		var addr=$("#sample4_roadAddress").val();
 		var addr2=$("#sample4_detailAddress").val();

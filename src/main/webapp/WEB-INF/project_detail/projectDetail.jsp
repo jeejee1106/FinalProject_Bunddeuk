@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" type="text/css" href="/css/project-detail.css">
 
-<input type="hidden" id="id" value="${sessionScope.id}">
+<input type="hidden" id="id" value="${sessionScope.sessionId}">
 <input type="hidden" id="loginok" value="${sessionScope.loginok}">
 <input type="hidden" id="likeCheck" value="${likeCheck}">
 <input type="hidden" id="supportCheck" value="${supportCheck}">

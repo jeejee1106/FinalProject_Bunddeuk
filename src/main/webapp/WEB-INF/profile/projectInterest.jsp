@@ -71,7 +71,7 @@ $(document).on("click",".LikedBtn", function() {
 				<div class="a">
 					<div class="user-name">
 							<span>${dto.name }</span>
-						<c:if test="${sessionScope.id == dto.id }">
+						<c:if test="${sessionScope.sessionId == dto.id }">
 							<a class="user-info" href="/setting/main">
 								<div name="setting">
 									<img src="${root }/image/settings.png">
@@ -84,7 +84,7 @@ $(document).on("click",".LikedBtn", function() {
 		
 		<div class="container-tab">
 			<div class="tab-warpper">
-			<c:if test="${ sessionScope.id != 'admin'}">
+			<c:if test="${ sessionScope.sessionId != 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">
@@ -107,7 +107,7 @@ $(document).on("click",".LikedBtn", function() {
 							<a href="/profile/${sessionScope.url}/liked" class="select">관심프로젝트 </a>
 						</div>
 					</span>
-					<c:if test="${sessionScope.id == dto.id }">
+					<c:if test="${sessionScope.sessionId == dto.id }">
 						<span class="tab">
 							<div class="link-wrapper">
 								<a href="/message/receivedMessage">문의 메세지 </a>
@@ -115,7 +115,7 @@ $(document).on("click",".LikedBtn", function() {
 						</span>
 						</c:if>
 						<c:if test="${sessionScope.loginok == 'yes'}">
-						<c:if test="${dto.id != sessionScope.id}">
+						<c:if test="${dto.id != sessionScope.sessionId}">
 							<span class="tab">
 								<div class="link-wrapper">
 									<a class='personal-chat'>채팅 </a>
@@ -126,7 +126,7 @@ $(document).on("click",".LikedBtn", function() {
 					</div>
 			</c:if>
 			<!-- 관리자 -->
-<%-- 			<c:if test="${sessionScope.id == 'admin'}">
+<%-- 			<c:if test="${sessionScope.sessionId == 'admin'}">
 				<div class="tab-warpper-in">
 					<span class="tab current">
 						<div class="link-wrapper">
@@ -180,7 +180,7 @@ $(document).on("click",".LikedBtn", function() {
 				<div class="card-wrapper-liked">
 					<div class="ProjectCard_Wrapper">
 						<div class="like-link-wrapper">
-							<c:if test="${sessionScope.id == dto.id }">
+							<c:if test="${sessionScope.sessionId == dto.id }">
 							<div class="LikeButton">
 								<button type="button" class="LikedBtn" num="${l.num }" myid="${l.id }">
 									<span>좋아요</span>

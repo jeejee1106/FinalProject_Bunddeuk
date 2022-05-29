@@ -32,7 +32,7 @@
 		<input id="profileId" type="hidden" name="id">
 	</form>
 </div>
-<input type="hidden" id="loginUser"name="writer" value="${sessionScope.id}">
+<input type="hidden" id="loginUser"name="writer" value="${sessionScope.sessionId}">
 <input type="hidden" id="sessionScope" value="${sessionScope.loginok}">
 <input type="hidden" name="pnum" id="pnum" value="${projectDto.idx}"> 
 <input type="hidden" id="creator-id" value="${projectDto.id}">
