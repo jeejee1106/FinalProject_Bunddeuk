@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberService {
 	@Autowired
-	MemberMapper mapper;
+	MemberMapper memberMapper;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -30,114 +30,114 @@ public class MemberService {
 
 		dto.setUrl(url);
 		dto.setPass(encodedPassword);
-		mapper.insertMember(dto);
+		memberMapper.insertMember(dto);
 	}
 	
 	public int idDuplicateCheck(String id) {
-		return mapper.idDuplicateCheck(id);
+		return memberMapper.idDuplicateCheck(id);
 	}
 	
 	public int getNameCheck(String name) {
-		return mapper.getNameCheck(name);
+		return memberMapper.getNameCheck(name);
 	}
 	
 	public int hasUrlCheck(String url) {
-		return mapper.hasUrlCheck(url);
+		return memberMapper.hasUrlCheck(url);
 	}
 	
-	public int getCheckPass(HashMap<String, String> map) {
-		return mapper.getCheckPass(map);
+	public int passCheck(HashMap<String, Object> map) {
+		return memberMapper.passCheck(map);
 	}
 	
 	public int hasEmailCheck(String email) {
-		return mapper.hasEmailCheck(email);
+		return memberMapper.hasEmailCheck(email);
 	}
 	
 	public MemberDTO getAllProfile(HashMap<String, String> map) {
-		return mapper.getAllProfile(map);
+		return memberMapper.getAllProfile(map);
 	}
 	
 	public MemberDTO getMember(Integer num) {
-		return mapper.getMember(num);
+		return memberMapper.getMember(num);
 	}
 	
 	public void updateMemberPhoto(MemberDTO dto) {
-		mapper.updateMemberPhoto(dto);
+		memberMapper.updateMemberPhoto(dto);
 	}
 	
 	public void updateMemberUrl(MemberDTO dto) {
-		mapper.updateMemberUrl(dto);
+		memberMapper.updateMemberUrl(dto);
 	}
 	
 	public void updateMemberIntroduce(MemberDTO dto) {
-		mapper.updateMemberIntroduce(dto);
+		memberMapper.updateMemberIntroduce(dto);
 	}
 	
 	public void updateMemberName(MemberDTO dto) {
-		mapper.updateMemberName(dto);
+		memberMapper.updateMemberName(dto);
 	}
 	
 	public void updateMemberPrivacy(MemberDTO dto) {
-		mapper.updateMemberPrivacy(dto);
+		memberMapper.updateMemberPrivacy(dto);
 	}
 	
 	public void updateMemberPass(MemberDTO dto) {
 		String encodedPassword = passwordEncoder.encode(dto.getPass());
 		dto.setPass(encodedPassword);
-		mapper.updateMemberPass(dto);
+		memberMapper.updateMemberPass(dto);
 	}
 	
 	public void updateEmailPass(MemberDTO dto) {
 		String encodedPassword = passwordEncoder.encode(dto.getPass());
 		dto.setPass(encodedPassword);
-		mapper.updateEmailPass(dto);
+		memberMapper.updateEmailPass(dto);
 	}
 	
 	public void updateMemberHp(MemberDTO dto) {
-		mapper.updateMemberHp(dto);
+		memberMapper.updateMemberHp(dto);
 	}
 	
 	public String getUrl(String id) {
-		return mapper.getUrl(id);
+		return memberMapper.getUrl(id);
 	}
 	
 	public String getPhoto(String id) {
-		return mapper.getPhoto(id);
+		return memberMapper.getPhoto(id);
 	}
 	
 	public String getIntroduce(String id) {
-		return mapper.getIntroduce(id);
+		return memberMapper.getIntroduce(id);
 	}
 	
-	public void deleteMember(String num) {
-		mapper.deleteMember(num);
+	public void deleteMember(int num) {
+		memberMapper.deleteMember(num);
 	}
 	
 	public String getName(String id) {
-		return mapper.getName(id);
+		return memberMapper.getName(id);
 	}
 	
 	public String getIdUrl(String url) {
-		return mapper.getIdUrl(url);
+		return memberMapper.getIdUrl(url);
 	}
 	
 	public int idPassCheck(String id, String pass) {
-		return mapper.idPassCheck(id, pass);
+		return memberMapper.idPassCheck(id, pass);
 	}
 	
 	public MemberDTO getMemberInfo(String id) {
-		return mapper.getMemberInfo(id);
+		return memberMapper.getMemberInfo(id);
 	}
 	
 	public MemberDTO memberByEmail(String email) {
-		return mapper.memberByEmail(email);
+		return memberMapper.memberByEmail(email);
 	}
 	
 	public void updateMemberAuthkey(MemberDTO dto) {
-		mapper.updateMemberAuthkey(dto);
+		memberMapper.updateMemberAuthkey(dto);
 	}
 	
 	public void updateMemberStatus(MemberDTO dto) {
-		mapper.updateMemberStatus(dto);
+		memberMapper.updateMemberStatus(dto);
 	}
 }

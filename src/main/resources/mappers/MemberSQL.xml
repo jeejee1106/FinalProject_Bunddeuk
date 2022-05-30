@@ -27,11 +27,11 @@
 		select count(*) from member where url = #{url}
 	</select>
 	
-	<select id="getCheckPass" parameterType="HashMap" resultType="int">
+	<select id="passCheck" parameterType="HashMap" resultType="int">
 		select count(*) from member where num=#{num} and pass=#{pass}
 	</select>
 	
-	<select id="getMember" parameterType="Integer" resultType="mdto">
+	<select id="getMember" parameterType="int" resultType="mdto">
 		select * from member where num = #{num}
 	</select>
 	
@@ -67,7 +67,7 @@
 		update member set hp = #{hp} where num = #{num}
 	</update>
 	
-	<delete id="deleteMember" parameterType="String">
+	<delete id="deleteMember" parameterType="int">
 		delete from member where num = #{num}
 	</delete> 
 	

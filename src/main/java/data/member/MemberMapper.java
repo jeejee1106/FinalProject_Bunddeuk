@@ -9,7 +9,7 @@ public interface MemberMapper {
 	public void insertMember(MemberDTO dto);
 	public int idDuplicateCheck(String id);
 	public int getNameCheck(String name);
-	public int getCheckPass(HashMap<String, String> map);
+	public int passCheck(HashMap<String, Object> map);
 	public int hasUrlCheck(String url);
 	public MemberDTO getMember(Integer num);
 	public void updateMemberName(MemberDTO dto);
@@ -19,7 +19,7 @@ public interface MemberMapper {
 	public void updateMemberPrivacy(MemberDTO dto);
 	public void updateMemberPass(MemberDTO dto);
 	public void updateMemberHp(MemberDTO dto);
-	public void deleteMember(String num);
+	public void deleteMember(int num);
 	public MemberDTO getAllProfile(HashMap<String, String> map);
 	public String getName(String id);
 	public MemberDTO getMemberInfo(String id);

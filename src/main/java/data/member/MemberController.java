@@ -114,12 +114,11 @@ public class MemberController {
 		int check = 0;
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
-			HashMap<String, String> map = new HashMap<String, String>();
-			String num1 = Integer.toString(num);
-			map.put("num", num1);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("num", num);
 			map.put("pass", dto.getPass());
 			//pass 체크
-			check = memberService.getCheckPass(map);
+			check = memberService.passCheck(map);
 		}
 		Map<String, Integer> map2 = new HashMap<String, Integer>();
 		map2.put("check", check);//0 or 1
@@ -127,15 +126,15 @@ public class MemberController {
 	}
 	
 	@PostMapping("/memberdelete")
-	public String delete(@RequestParam String num, @RequestParam String pass,HttpSession session){
-		MemberDTO dto = memberService.getMember(Integer.parseInt(num));
+	public String delete(@RequestParam int num, @RequestParam String pass,HttpSession session){
+		MemberDTO dto = memberService.getMember(num);
 		
 		if(passwordEncoder.matches(pass, dto.getPass())) {
 			//db로부터 비번이 맞는지 체크
-			HashMap<String, String> map = new HashMap<String, String>();
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("num", num);
 			map.put("pass", dto.getPass());
-			int check = memberService.getCheckPass(map);
+			int check = memberService.passCheck(map);
 			if(check == 1) {
 				//비번이 맞을경우 삭제
 			memberService.deleteMember(num);
@@ -146,7 +145,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/kakaodelete")
-	public String kakaoDelete(@RequestParam String num,HttpSession session) {
+	public String kakaoDelete(@RequestParam int num,HttpSession session) {
 		memberService.deleteMember(num);
 		session.removeAttribute("loginok");
 		return "redirect:home";
