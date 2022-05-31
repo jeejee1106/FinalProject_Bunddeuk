@@ -27,19 +27,19 @@ import data.member.MemberService;
 public class SettingController {
 	
 	@Autowired
-	MemberService service;
+	MemberService memberService;
 	
 	@Autowired
-	DeliveryService deliveryservice;
+	DeliveryService deliveryService;
 	
 	@GetMapping("/setting/main")
 	public ModelAndView home(HttpSession session, Model model) {
 		
 		ModelAndView mview = new ModelAndView();
 		String id = (String) session.getAttribute("sessionId");
-		MemberDTO dto = service.getMemberInfo(id);
-		List<DeliveryDTO> list = deliveryservice.getPinList(id);
-		int totalCount = deliveryservice.getTotalCount(id);
+		MemberDTO dto = memberService.getMemberInfo(id);
+		List<DeliveryDTO> list = deliveryService.getPinList(id);
+		int totalCount = deliveryService.getTotalCount(id);
 		
 		mview.addObject("dto", dto);
 		mview.addObject("list", list);
@@ -53,9 +53,9 @@ public class SettingController {
 		
 		ModelAndView mview = new ModelAndView();
 		String id = (String) session.getAttribute("sessionId");
-		MemberDTO dto = service.getMemberInfo(id);
-		List<DeliveryDTO> list = deliveryservice.getPinList(id);
-		int totalCount = deliveryservice.getTotalCount(id);
+		MemberDTO dto = memberService.getMemberInfo(id);
+		List<DeliveryDTO> list = deliveryService.getPinList(id);
+		int totalCount = deliveryService.getTotalCount(id);
 		
 		mview.addObject("dto", dto);
 		mview.addObject("list", list);
@@ -68,7 +68,7 @@ public class SettingController {
 	@GetMapping("/setting/alist")
 	public List<DeliveryDTO> alist(HttpSession session){
 		String id = (String) session.getAttribute("sessionId");
-		List<DeliveryDTO> list = deliveryservice.getPinList(id);
+		List<DeliveryDTO> list = deliveryService.getPinList(id);
 		
 		return list;
 	}
@@ -82,7 +82,7 @@ public class SettingController {
 		map.put("id", id);
 		map.put("num", num);
 		
-		DeliveryDTO ddto = deliveryservice.getAllDelivery(map);
+		DeliveryDTO ddto = deliveryService.getAllDelivery(map);
 		
 		String name = ddto.getName();
 		String addr = ddto.getAddr();
@@ -113,7 +113,7 @@ public class SettingController {
 		}else {//업로드한 경우
 			
 			//업로드된 파일명
-			String uploadfileName = service.getMember(dto.getNum()).getPhoto();
+			String uploadfileName = memberService.getMember(dto.getNum()).getPhoto();
 			//File 객체 생성
 			File file2 = new File(path + "/" + uploadfileName);
 			//파일 삭제
@@ -132,13 +132,13 @@ public class SettingController {
 			}
 		}
 		//수정
-		service.updateMemberPhoto(dto);
+		memberService.updateMemberPhoto(dto);
 		return "redirect:main";
 	}
 	
 	@PostMapping("/setting/updatename")
 	public String updateName(@ModelAttribute MemberDTO dto) {
-		service.updateMemberName(dto);
+		memberService.updateMemberName(dto);
 		return "redirect:main";
 	}
 	
@@ -146,7 +146,7 @@ public class SettingController {
 	public String updateUrl(HttpSession session,@ModelAttribute MemberDTO dto) {
 		session.removeAttribute("url");
 		session.setAttribute("url",dto.getUrl());
-		service.updateMemberUrl(dto);
+		memberService.updateMemberUrl(dto);
 		return "redirect:main";
 	}
 	
@@ -157,7 +157,7 @@ public class SettingController {
 		}else {
 			dto.setPrivacy("1");
 		}
-		service.updateMemberPrivacy(dto);
+		memberService.updateMemberPrivacy(dto);
 		return "redirect:main";
 	}
 	
@@ -165,20 +165,20 @@ public class SettingController {
 	public String updateIntroduce(@ModelAttribute MemberDTO dto) {
 		String content = dto.getIntroduce().replaceAll("\r\n","<br>");
 		dto.setIntroduce(content);
-		service.updateMemberIntroduce(dto);
+		memberService.updateMemberIntroduce(dto);
 		return "redirect:main";
 	}
 	
 	@PostMapping("/setting/updatepass")
 	public String updatePass(@ModelAttribute MemberDTO dto) {
 	//	System.out.println("패스워드 업데이트성공");
-		service.updateMemberPass(dto);
+		memberService.updateMemberPass(dto);
 		return "redirect:main";
 	}
 	
 	@PostMapping("/setting/updatehp")
 	public String updateHp(@ModelAttribute MemberDTO dto) {
-		service.updateMemberHp(dto);
+		memberService.updateMemberHp(dto);
 		return "redirect:main";
 	}
 	
@@ -187,7 +187,7 @@ public class SettingController {
 		ModelAndView mview = new ModelAndView();
 		
 		String id = (String) session.getAttribute("sessionId");
-		MemberDTO dto = service.getMemberInfo(id);
+		MemberDTO dto = memberService.getMemberInfo(id);
 		
 		mview.addObject("dto", dto);
 		mview.setViewName("/mysetting/leave");
@@ -199,7 +199,7 @@ public class SettingController {
 		ModelAndView mview = new ModelAndView();
 		
 		String id = (String) session.getAttribute("sessionId");
-		MemberDTO dto = service.getMemberInfo(id);
+		MemberDTO dto = memberService.getMemberInfo(id);
 		
 		mview.addObject("dto", dto);
 		mview.setViewName("/mysetting/validation");
@@ -216,13 +216,13 @@ public class SettingController {
 		map.put("id", id);
 		map.put("pin", pin);
 		
-		int check = deliveryservice.getPin(map);
+		int check = deliveryService.getPin(map);
 		
 		if(check==1) {
-			int num = deliveryservice.getPinNum(map);
-			deliveryservice.updateDeliveryPin(num);
+			int num = deliveryService.getPinNum(map);
+			deliveryService.updateDeliveryPin(num);
 		}
-		deliveryservice.insertDelivery(ddto);
+		deliveryService.insertDelivery(ddto);
 		
 		return "redirect:home";
 	}
@@ -236,13 +236,13 @@ public class SettingController {
 		map.put("id", id);
 		map.put("pin", pin);
 		
-		int check = deliveryservice.getPin(map);
+		int check = deliveryService.getPin(map);
 	//	System.out.println("check : "+check);
 		if(check==1) {
-			int num = deliveryservice.getPinNum(map);
-			deliveryservice.updateDeliveryPin(num);
+			int num = deliveryService.getPinNum(map);
+			deliveryService.updateDeliveryPin(num);
 		}
-		deliveryservice.updateDelivery(ddto);
+		deliveryService.updateDelivery(ddto);
 	}
 	
 	@GetMapping("/setting/deliverydelete")
@@ -252,7 +252,7 @@ public class SettingController {
 		map.put("num", num);
 		map.put("id", id);
 		
-		deliveryservice.deleteDelivery(map);
+		deliveryService.deleteDelivery(map);
 		
 		return "redirect:home";
 	}
