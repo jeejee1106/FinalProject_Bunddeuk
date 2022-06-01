@@ -33,70 +33,58 @@ public class SettingController {
 	DeliveryService deliveryService;
 	
 	@GetMapping("/setting/main")
-	public ModelAndView home(HttpSession session, Model model) {
+	public String home(HttpSession session, Model model) {
 		
-		ModelAndView mview = new ModelAndView();
 		String id = (String) session.getAttribute("sessionId");
-		MemberDTO dto = memberService.getMemberInfo(id);
-		List<DeliveryDTO> list = deliveryService.getPinList(id);
-		int totalCount = deliveryService.getTotalCount(id);
+		MemberDTO memberDto = memberService.getMemberInfo(id);
+//		List<DeliveryDTO> addrList = deliveryService.addrListOfPinDesc(id); ///쓰는 곳 없다고 판단되어 일단 주석 처리함
+//		int addrCount = deliveryService.getAddrCount(id); //쓰는 곳 없다고 판단되어 일단 주석 처리함
 		
-		mview.addObject("dto", dto);
-		mview.addObject("list", list);
-		mview.addObject("totalCount", totalCount);
-		mview.setViewName("/mysetting/settingForm");
-		return mview;
+		model.addAttribute("memberDto", memberDto);
+//		model.addAttribute("addrList", addrList); //원래 변수명 : list
+//		model.addAttribute("addrCount", addrCount); //원래 변수명 : totalCount
+		return "/mysetting/settingForm";
 	}
 	
 	@GetMapping("/setting/delivery")
-	public ModelAndView delivery(HttpSession session, Model model) {
+	public String delivery(HttpSession session, Model model) {
 		
-		ModelAndView mview = new ModelAndView();
 		String id = (String) session.getAttribute("sessionId");
-		MemberDTO dto = memberService.getMemberInfo(id);
-		List<DeliveryDTO> list = deliveryService.getPinList(id);
-		int totalCount = deliveryService.getTotalCount(id);
+		MemberDTO memberDto = memberService.getMemberInfo(id);
+		List<DeliveryDTO> addrList = deliveryService.addrListOfPinDesc(id);
+		int addrCount = deliveryService.getAddrCount(id);
 		
-		mview.addObject("dto", dto);
-		mview.addObject("list", list);
-		mview.addObject("totalCount", totalCount);
-		mview.setViewName("/mysetting/delivery");
-		return mview;
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("addrList", addrList);
+		model.addAttribute("addrCount", addrCount);
+		return "/mysetting/delivery";
 	}
 	
 	@ResponseBody
 	@GetMapping("/setting/alist")
 	public List<DeliveryDTO> alist(HttpSession session){
 		String id = (String) session.getAttribute("sessionId");
-		List<DeliveryDTO> list = deliveryService.getPinList(id);
-		
+		List<DeliveryDTO> list = deliveryService.addrListOfPinDesc(id);
 		return list;
 	}
 	
 	@ResponseBody
 	@GetMapping("/setting/deliveryupdate")
-	public HashMap<String, String> home2(HttpSession session, @RequestParam String num) {
+	public HashMap<String, Object> home2(HttpSession session, @RequestParam int num) {
 		String id = (String) session.getAttribute("sessionId");
 		
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("num", num);
+		DeliveryDTO deliveryDto = deliveryService.getAllDelivery(map);
 		
-		DeliveryDTO ddto = deliveryService.getAllDelivery(map);
-		
-		String name = ddto.getName();
-		String addr = ddto.getAddr();
-		String addr2 = ddto.getAddr2();
-		String hp = ddto.getHp();
-		String pin = String.valueOf(ddto.getPin());
-		
-		HashMap<String, String> rmap = new HashMap<String, String>();
+		HashMap<String, Object> rmap = new HashMap<String, Object>();
 		rmap.put("num", num);
-		rmap.put("name", name);
-		rmap.put("addr", addr);
-		rmap.put("addr2", addr2);
-		rmap.put("hp", hp);
-		rmap.put("pin", pin);
+		rmap.put("name", deliveryDto.getName());
+		rmap.put("addr", deliveryDto.getAddr());
+		rmap.put("addr2", deliveryDto.getAddr2());
+		rmap.put("hp", deliveryDto.getHp());
+		rmap.put("pin", deliveryDto.getPin());
 		return rmap;
 	} 
 	

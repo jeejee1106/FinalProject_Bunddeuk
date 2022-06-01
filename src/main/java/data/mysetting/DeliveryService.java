@@ -11,41 +11,41 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeliveryService {
 	@Autowired
-	DeliveryMapper mapper;
+	DeliveryMapper deliveryMapper;
 
 	public List<DeliveryDTO> getAll(String id) {
-		return mapper.getAll(id);
+		return deliveryMapper.getAll(id);
 	}
-	public DeliveryDTO getAllDelivery(HashMap<String, String> map) {
-		return mapper.getAllDelivery(map);
+	public DeliveryDTO getAllDelivery(HashMap<String, Object> map) {
+		return deliveryMapper.getAllDelivery(map);
 	}
 	public void insertDelivery(DeliveryDTO ddto) {
-		mapper.insertDelivery(ddto);
+		deliveryMapper.insertDelivery(ddto);
 	}
 	
-	public int getTotalCount(String id) {
-		return mapper.getTotalCount(id);
+	public int getAddrCount(String id) {
+		return deliveryMapper.getAddrCount(id);
 	}
 	
 	public int getPin(HashMap<String, String> map) {
-		return mapper.getPin(map);
+		return deliveryMapper.getPin(map);
 	}
 	
 	public int getPinNum(HashMap<String, String> map) {
-		return mapper.getPinNum(map);
+		return deliveryMapper.getPinNum(map);
 	}
 	public void updateDeliveryPin(int num) {
-		mapper.updateDeliveryPin(num);
+		deliveryMapper.updateDeliveryPin(num);
 		System.out.println("service"+num);
 	}
-	public List<DeliveryDTO> getPinList(String id) {
-		return mapper.getPinList(id);
+	public List<DeliveryDTO> addrListOfPinDesc(String id) {
+		return deliveryMapper.addrListOfPinDesc(id);
 	}
 	public void updateDelivery(DeliveryDTO ddto) {
-		mapper.updateDelivery(ddto);
+		deliveryMapper.updateDelivery(ddto);
 	}
 	
 	public void deleteDelivery(HashMap<String, String> map) {
-		mapper.deleteDelivery(map);
+		deliveryMapper.deleteDelivery(map);
 	}
 }

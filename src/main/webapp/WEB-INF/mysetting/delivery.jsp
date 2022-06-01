@@ -4,128 +4,87 @@
 <link rel="stylesheet" type="text/css" href="/css/delivery.css">
 
 <style>
-.drop{
-float:right;
-}
-.drop:hover{
-	background-color: silver;
-}
-select {
+	.drop{
 	float:right;
-    width: 35px; /* 원하는 너비설정 */
-    padding: .8em .5em; /* 여백으로 높이 설정 */
-    font-family: inherit;  /* 폰트 상속 */
-    background: url('../profile_image/dropd.PNG') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
-    border: 1px solid white;
-    border-radius: 0px; /* iOS 둥근모서리 제거 */
-    -webkit-appearance: none; /* 네이티브 외형 감추기 */
-    -moz-appearance: none;
-    appearance: none;
-}
-
-/* IE 10, 11의 네이티브 화살표 숨기기 */
-select::-ms-expand {
-    display: none;
-}
-
-
-.update-save{
-	width: 55px;
-	height: 35px;
-	border: none;
-	border-radius: 5px;
-	background-color: #1e90ff;
-	margin-top: 10px;
-	color: white;
-	font-weight: bold;
-}
-
-
-</style>
-
-<!-- 
-<script type="text/javascript">	
-$(function () {	
-	list();
-	
-	function list() {
-		$.ajax({
-			type:"get",
-			dataType:"json",
-			url:"alist",			
-			success:function(data){
-				var s="";
-				$.each(data, function(i, a) {
-					s+="<div class='' style='' type='address'>";
-					s+="<b>"+a.name+"</b>";
-					if(a.pin==1){
-						s+="<span type='isDefault' class='Label__Wrapper-ac7bbp-0'>기본</span>";
-					}
-					s+="<img src='../profile_image/dropd.PNG' class='dropdown-toggle' data-toggle='dropdown' style='float:right;'>";
-					s+="<div class='dropdown-menu'>";
-					s+="<div class='drop'>";
-					s+="<div class='d_update' num='"+a.num+"' data-toggle='modal' data-target='#md' style='cursor:pointer;'>수정</div></div>";
-					s+="<div class='drop'>";
-					s+="<div class='d_delete' num='"+a.num+"' style='cursor:pointer;'>삭제</div></div></div>";
-					s+="<div class=''> ${a.addr } ${a.addr2 }<br>${a.hp } </div>";
-				})
-				$(".restlist").html(s);
-			}
-		 }); 
+	}
+	.drop:hover{
+		background-color: silver;
+	}
+	select {
+		float:right;
+	    width: 35px; /* 원하는 너비설정 */
+	    padding: .8em .5em; /* 여백으로 높이 설정 */
+	    font-family: inherit;  /* 폰트 상속 */
+	    background: url('../profile_image/dropd.PNG') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+	    border: 1px solid white;
+	    border-radius: 0px; /* iOS 둥근모서리 제거 */
+	    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+	    -moz-appearance: none;
+	    appearance: none;
 	}
 	
-})	
-</script>
- -->
+	/* IE 10, 11의 네이티브 화살표 숨기기 */
+	select::-ms-expand {
+	    display: none;
+	}
+	
+	
+	.update-save{
+		width: 55px;
+		height: 35px;
+		border: none;
+		border-radius: 5px;
+		background-color: #1e90ff;
+		margin-top: 10px;
+		color: white;
+		font-weight: bold;
+	}
+</style>
 
-
-		<div class="">
-					<p class="">등록된 배송지</p>
-			<div style="float:right;">
-				<button class="PlainLink__StyledLink-qbfirs-0 delivery" data-toggle="modal" data-target="#moaModal" color="sub0180" type="button">+ 추가</button>
-			</div>
-				<br><br>
-			<c:if test="${totalCount==0}">
-				<img src="../profile_image/delivery.PNG">
-			</c:if>
-			<c:forEach var="a" items="${list}" varStatus="i">
-					<div class="" style="margin-top:-1px; padding:20px;10px;20px;10px; border:1px solid silver; border-radius: 5px 5px 5px 5px;" type="address">
-								<b style="font-size:13pt;">${a.name }</b>
-								<c:if test="${a.pin==1 }">
-								<span type="isDefault" class="Label__Wrapper-ac7bbp-0">기본</span>
-								</c:if>
-								<div class="drop">
-								     <div class="d_delete" num="${a.num }" style="cursor:pointer;">삭제</div>
-								</div>
-								<div class="drop">
-								     <div class="d_update" num="${a.num }" data-toggle="modal" data-target="#md" style="cursor:pointer;">수정&nbsp;&nbsp;</div>
-								</div>
-							<div style="margin-top:10px;">
-								<span>${a.addr }&nbsp;</span>${a.addr2 }<br>
-							</div>
-							<div style="margin-top:5px;">${a.hp }</div>
-					</div>
-				</c:forEach>
-		</div>
-		
-		
-		<div class="CommonStyled__SettingPageDescBox-bpcmiq-1 cwYHpD">
-			<p class="fnt-p1 tbb-clr-gray-80 fnt-st-bd">배송지를 삭제하면 예약된 후원의 배송지
-				정보도 삭제되나요?</p>
-			<div class="fnt-p3 tbb-clr-gray-60">
-				현재 후원하신 프로젝트에 등록된 배송지가 삭제됩니다.&nbsp;
-					<div style="color:blue; cursor:pointer;" class="txt2" onclick="location.href='/profile/${sessionScope.url}/backed'">
-							<u>내 후원현황 바로가기</u>
-						</div>
-			</div>
-		</div>
-		
-		
+<div class="">
+	<p class="">등록된 배송지</p>
+	<div style="float:right;">
+		<button class="PlainLink__StyledLink-qbfirs-0 delivery" data-toggle="modal" data-target="#moaModal" color="sub0180" type="button">+ 추가</button>
 	</div>
+	
+	<br><br>
+	
+	<c:if test="${addrCount==0}">
+		<img src="../profile_image/delivery.PNG">
+	</c:if>
+	<c:forEach var="addrList" items="${addrList}" varStatus="i">
+		<div class="" style="margin-top:-1px; padding:20px;10px;20px;10px; border:1px solid silver; border-radius: 5px 5px 5px 5px;" type="address">
+			<b style="font-size:13pt;">${addrList.name }</b>
+			<c:if test="${addrList.pin==1 }">
+				<span type="isDefault" class="Label__Wrapper-ac7bbp-0">기본</span>
+			</c:if>
+			<div class="drop">
+				<div class="d_delete" num="${addrList.num }" style="cursor:pointer;">삭제</div>
+			</div>
+			<div class="drop">
+				<div class="d_update" num="${addrList.num }" data-toggle="modal" data-target="#md" style="cursor:pointer;">
+					수정&nbsp;&nbsp;
+				</div>
+			</div>
+			<div style="margin-top:10px;">
+				<span>${addrList.addr }&nbsp;</span>${addrList.addr2 }<br>
+			</div>
+			<div style="margin-top:5px;">
+				${addrList.hp }
+			</div>
+		</div>
+	</c:forEach>
+</div>
 
-
-
-
+<div class="CommonStyled__SettingPageDescBox-bpcmiq-1 cwYHpD">
+	<p class="fnt-p1 tbb-clr-gray-80 fnt-st-bd">배송지를 삭제하면 예약된 후원의 배송지 정보도 삭제되나요?</p>
+	<div class="fnt-p3 tbb-clr-gray-60">
+		현재 후원하신 프로젝트에 등록된 배송지가 삭제됩니다.&nbsp;
+		<div style="color:blue; cursor:pointer;" class="txt2" onclick="location.href='/profile/${sessionScope.url}/backed'">
+			<u>내 후원현황 바로가기</u>
+		</div>
+	</div>
+</div>
 
  <!-- Moa Modal-->
   <div class="modal fade" id="moaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -140,7 +99,7 @@ $(function () {
         <div class="modal-body">
 	        <span>받는 사람</span>
 	     <!--    <form action="deliveryinsert" method="post"> -->
-	        <input type="hidden" name="id" id="id" value="${dto.id }">
+	        <input type="hidden" name="id" id="id" value="${memberDto.id }">
 	         <input type="text" class="form-control" style="margin-top:10px; width:60%; height:40px;" placeholder="받는 분 성함을 입력해주세요."
                        id="dname" name="name" maxlength="20" required="required" >
               <b class="namemsg"></b><br>
@@ -186,8 +145,8 @@ $(function () {
         <div class="modal-body">
 	        <span>받는 사람</span>
 	     <!--    <form action="deliveryinsert" method="post"> -->
-	        <input type="hidden"  id="updateid" value="${dto.id }">
-	        <input type="hidden"  id="num" value="${dto.num }">
+	        <input type="hidden"  id="updateid" value="${memberDto.id }">
+	        <input type="hidden"  id="num" value="${memberDto.num }">
 	         <input type="text" class="form-control" style="margin-top:10px; width:60%; height:40px;" id="updatename" placeholder="받는 분 성함을 입력해주세요."
                         maxlength="20" required="required" value="">
                         <b class="updatenamemsg"></b><br>
@@ -221,77 +180,51 @@ $(function () {
   </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <script type="text/javascript">
-	
-
-		$("div.d_update").click(function() {
-			var num = $(this).attr("num");
-		/*	var addr = $("#aaddr").val();
-			var addr2 = $("#aaddr2").val();
-			var hp = $("#ahp").val();
-			var pin = $("#apin").val();
-			$("#updatename").val(name);
-			$(".aaddr").val(addr);
-			$(".aaddr2").val(addr2);
-			$("#updatehp1").val(hp);
-			if(pin==1){
-				$("#pin1").prop("checked", true);
-			}*/
-			$("b.updatehp1msg").html("");  
-			$("b.updatenamemsg").html("");
-			$("b.add21").html(""); 
-			$("b.add22").html(""); 
+	$("div.d_update").click(function() {
+		var num = $(this).attr("num");
+		$("b.updatehp1msg").html("");  
+		$("b.updatenamemsg").html("");
+		$("b.add21").html(""); 
+		$("b.add22").html(""); 
 			
-			
-			$.ajax({
-				type:"get",
-				dataType:"json",
-				data:{"num":num},
-				url:"deliveryupdate",
-				success:function(data){
-					$("#num").val(data.num);
-					$("#updatename").val(data.name);
-					$(".updateaddr").val(data.addr);
-					$(".updateaddr2").val(data.addr2);
-					$("#updatehp1").val(data.hp);
-					if(data.pin=="1"){
-						$("#pin1").prop("checked", true);
-					}else{
-						$("#pin1").prop("checked", false);
-					}
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			data:{"num":num},
+			url:"deliveryupdate",
+			success:function(data){
+				$("#num").val(data.num);
+				$("#updatename").val(data.name);
+				$(".updateaddr").val(data.addr);
+				$(".updateaddr2").val(data.addr2);
+				$("#updatehp1").val(data.hp);
+				if(data.pin=="1"){
+					$("#pin1").prop("checked", true);
+				}else{
+					$("#pin1").prop("checked", false);
 				}
-			});
-			
+			}
 		});
+			
+	});
 	
 
-	  $("button.delivery").click(function() {
-		  	$("#dname").val("");
-			$(".addr").val("");
-			$(".addr2").val("");
-			$("#hp1").val("");
-			$("b.namemsg").html("");
-			$("b.hp1msg").html("");
-			$("b.add1").html("");
-			$("b.add12").html(""); 
-			$("#pin").prop("checked", false);
-		});
+	$("button.delivery").click(function() {
+		$("#dname").val("");
+		$(".addr").val("");
+		$(".addr2").val("");
+		$("#hp1").val("");
+		$("b.namemsg").html("");
+		$("b.hp1msg").html("");
+		$("b.add1").html("");
+		$("b.add12").html(""); 
+		$("#pin").prop("checked", false);
+	});
 	  
-	  $(document).on("keyup", ".phoneNumber", function() { 
-			 $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
-			 });
+	$(document).on("keyup", ".phoneNumber", function() { 
+		$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") ); 
+	});
 
 	  
 	//수정 버튼 이벤트

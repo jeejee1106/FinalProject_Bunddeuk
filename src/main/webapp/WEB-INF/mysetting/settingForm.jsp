@@ -84,7 +84,7 @@ $(function(){
 	
 	$('div.ptofilenameupdate').hide();
 	$("span.updateName").click(function(){
-		$("#name").val("${dto.name}");
+		$("#name").val("${memberDto.name}");
 		$("div.ptofilenameupdate").show();
 		$("div.profilename").hide();
 	});
@@ -97,7 +97,7 @@ $(function(){
 	
 	$('div.profileurlupdate').hide();
 	$("span.updateUrl").click(function(){
-		$("#url").val("${dto.url}");
+		$("#url").val("${memberDto.url}");
 		$("div.profileurlupdate").show();
 		$("div.profileurl").hide();
 	});
@@ -110,8 +110,8 @@ $(function(){
 
 	$('div.introduceupdate').hide();
 	$("span.updateIntroduce").click(function(){
-	//	$("#introduce").val("${dto.introduce}");
-		var content = "${dto.introduce}";
+	//	$("#introduce").val("${memberDto.introduce}");
+		var content = "${memberDto.introduce}";
 		var result = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
 		$("#introduce").val(result);
 		$("div.introduceupdate").show();
@@ -143,7 +143,7 @@ $(function(){
 	
 	$('div.ptofileemailupdate').hide();
 	$("span.updateEmail").click(function(){
-		$("#emailupdate").val("${dto.email}");
+		$("#emailupdate").val("${memberDto.email}");
 		$("b.emailmsg").html("");
 		$("div.ptofileemailupdate").show();
 		$("div.profileemail").hide();
@@ -170,7 +170,7 @@ $(function(){
 	
 	$('div.hpupdate').hide();
 	$("span.updateHp").click(function(){
-		$("#hp").val("${dto.hp}");
+		$("#hp").val("${memberDto.hp}");
 		$("b.hpmsg").html("");
 		$("div.hpupdate").show();
 		$("div.hp").hide();

@@ -6,9 +6,9 @@
 		select * from delivery where id = #{id}
 	</select>
 	<select id="getAllDelivery" parameterType="HashMap" resultType="ddto">
-		select * from delivery where id = #{id} and num = #{num}
+		select * from delivery where id = #{id} and num = #{num} <!-- num을 굳이 왜 받았을까? id만 받아서 그 id에 대한 주소목록을 가져오면 안되나? -->
 	</select>
-	<select id="getTotalCount" parameterType="String" resultType="int">
+	<select id="getAddrCount" parameterType="String" resultType="int">
 		select count(*) from delivery where id = #{id}
 	</select>
 	<insert id="insertDelivery" parameterType="ddto">
@@ -36,8 +36,10 @@
 		update delivery set pin = 0 where num = #{num}
 	</update>
 	
-	<select id="getPinList" parameterType="String" resultType="ddto">
-			select * from delivery where id = #{id} order by pin desc, num desc
+	<!-- <select id="getPinList" parameterType="String" resultType="ddto"> -->
+	<select id="addrListOfPinDesc" parameterType="String" resultType="ddto">
+			<!-- select * from delivery where id = #{id} order by pin desc, num desc -->
+			select * from delivery where id = #{id} order by pin desc
 	</select>
 	
 	<delete id="deleteDelivery" parameterType="HashMap">
