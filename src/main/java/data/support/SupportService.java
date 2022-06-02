@@ -21,23 +21,23 @@ public class SupportService {
 	public List<ProjectDTO> insertSupportData(SupportDTO dto) {
 		mapper.insertSupportData(dto);
 		
-		List<ProjectDTO> alist=listMapper.getAllProjects();
-		if(alist.size()>4) {
+		List<ProjectDTO> allProjectsList=listMapper.getAllProjects();
+		if(allProjectsList.size()>4) {
 			List<ProjectDTO> recommendList = new ArrayList<ProjectDTO>();
 			int [] randomNumber = new int[4];
 			for(int i=0; i<4; i++) {
-				randomNumber[i] = (int)(Math.random()*(alist.size()-1));
+				randomNumber[i] = (int)(Math.random()*(allProjectsList.size()-1));
 				for(int j=0; j<i; j++) {
 					if(randomNumber[j] == randomNumber[i]) {
 						i--;
 						continue;
 					}
 				}
-				recommendList.add(alist.get(randomNumber[i]));
+				recommendList.add(allProjectsList.get(randomNumber[i]));
 			}
 			return recommendList;
 		}else {
-			return alist;
+			return allProjectsList;
 		}
 	}
 	

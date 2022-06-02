@@ -47,8 +47,8 @@
 		update member set url = #{url} where num = #{num}
 	</update>
 	
-	<update id="updateMemberIntroduce" parameterType="mdto">
-		update member set introduce = #{introduce} where num = #{num}
+	<update id="updateMemberIntroduce" parameterType="String">
+		update member set introduce = #{introduce} where id = #{id}
 	</update>
 	 
 	<update id="updateMemberPrivacy" parameterType="mdto">

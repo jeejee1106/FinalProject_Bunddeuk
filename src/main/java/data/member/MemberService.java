@@ -69,8 +69,10 @@ public class MemberService {
 		memberMapper.updateMemberUrl(dto);
 	}
 	
-	public void updateMemberIntroduce(MemberDTO dto) {
-		memberMapper.updateMemberIntroduce(dto);
+	public void updateMemberIntroduce(String introduce, String id) {
+		System.out.println("서비스의 id : " + id);
+		System.out.println("서비스의 introduce : " + introduce);
+		memberMapper.updateMemberIntroduce(introduce, id);
 	}
 	
 	public void updateMemberName(MemberDTO dto) {

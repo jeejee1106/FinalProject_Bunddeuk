@@ -60,13 +60,16 @@ public class SettingController {
 		return "/mysetting/delivery";
 	}
 	
-	@ResponseBody
-	@GetMapping("/setting/alist")
-	public List<DeliveryDTO> alist(HttpSession session){
-		String id = (String) session.getAttribute("sessionId");
-		List<DeliveryDTO> list = deliveryService.addrListOfPinDesc(id);
-		return list;
-	}
+	/**
+	 * 이건 또 어디에 쓰이는 메서드일꼬...
+	 */
+//	@ResponseBody
+//	@GetMapping("/setting/alist")
+//	public List<DeliveryDTO> alist(HttpSession session){
+//		String id = (String) session.getAttribute("sessionId");
+//		List<DeliveryDTO> list = deliveryService.addrListOfPinDesc(id);
+//		return list;
+//	}
 	
 	@ResponseBody
 	@GetMapping("/setting/deliveryupdate")
@@ -150,10 +153,13 @@ public class SettingController {
 	}
 	
 	@PostMapping("/setting/updateintroduce")
-	public String updateIntroduce(@ModelAttribute MemberDTO dto) {
-		String content = dto.getIntroduce().replaceAll("\r\n","<br>");
-		dto.setIntroduce(content);
-		memberService.updateMemberIntroduce(dto);
+	public String updateIntroduce(HttpSession session, String introduce) {
+		String id = (String) session.getAttribute("sessionId");
+//		String content = dto.getIntroduce().replaceAll("\r\n","<br>");
+//		dto.setIntroduce(content);
+		System.out.println("칸트롤러의 id : " + id);
+		System.out.println("칸트롤러의 introduce : " + introduce);
+		memberService.updateMemberIntroduce(introduce, id);
 		return "redirect:main";
 	}
 	
