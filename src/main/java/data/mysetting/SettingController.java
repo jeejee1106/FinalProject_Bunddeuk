@@ -72,8 +72,8 @@ public class SettingController {
 //	}
 	
 	@ResponseBody
-	@GetMapping("/setting/deliveryupdate")
-	public HashMap<String, Object> home2(HttpSession session, @RequestParam int num) {
+	@GetMapping("/setting/update-address") //??? 주소 업데이트 하는 메서드 맞어,..? 매핑은 주속 업데이트.. 메서드 내용은 업데이트 아닌 것 같은데...!
+	public HashMap<String, Object> updateAddress(HttpSession session, @RequestParam int num) {
 		String id = (String) session.getAttribute("sessionId");
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -91,8 +91,8 @@ public class SettingController {
 		return rmap;
 	} 
 	
-	@PostMapping("/setting/updatephoto")
-	public String updatePhoto(@RequestParam MultipartFile file,@ModelAttribute MemberDTO dto, HttpSession session) {
+	@PostMapping("/setting/update-image")
+	public String updateImage(@RequestParam MultipartFile file, @ModelAttribute MemberDTO dto, HttpSession session) {
 		//업로드할 폴더 지정
 		String path = session.getServletContext().getRealPath("/profile_image");
 		//업로드할 파일명
@@ -127,28 +127,19 @@ public class SettingController {
 		return "redirect:main";
 	}
 	
-	@PostMapping("/setting/updatename")
-	public String updateName(@ModelAttribute MemberDTO dto) {
-		memberService.updateMemberName(dto);
+	@PostMapping("/setting/update-name")
+	public String updateName(HttpSession session, String name) {
+		String id = (String) session.getAttribute("sessionId");
+		memberService.updateName(name , id);
 		return "redirect:main";
 	}
 	
-	@PostMapping("/setting/updateurl")
-	public String updateUrl(HttpSession session,@ModelAttribute MemberDTO dto) {
+	@PostMapping("/setting/update-url")
+	public String updateUrl(HttpSession session, String url) {
+		String id = (String) session.getAttribute("sessionId");
 		session.removeAttribute("url");
-		session.setAttribute("url",dto.getUrl());
-		memberService.updateMemberUrl(dto);
-		return "redirect:main";
-	}
-	
-	@PostMapping("/setting/privacyupdate")
-	public String privacyupdate(@ModelAttribute MemberDTO dto) {
-		if(dto.getPrivacy()==null) {
-			dto.setPrivacy("0");
-		}else {
-			dto.setPrivacy("1");
-		}
-		memberService.updateMemberPrivacy(dto);
+		session.setAttribute("url", url);
+		memberService.updateUrl(url, id);
 		return "redirect:main";
 	}
 	
@@ -159,7 +150,21 @@ public class SettingController {
 //		dto.setIntroduce(content);
 		System.out.println("칸트롤러의 id : " + id);
 		System.out.println("칸트롤러의 introduce : " + introduce);
-		memberService.updateMemberIntroduce(introduce, id);
+		memberService.updateIntroduce(introduce, id);
+		return "redirect:main";
+	}
+	
+	@PostMapping("/setting/privacyupdate")
+	public String privacyupdate(@ModelAttribute MemberDTO dto, HttpSession session) {
+		String id = (String) session.getAttribute("sessionId");
+		dto.setId(id);
+		if(dto.getPrivacy()==null) {
+			dto.setPrivacy("0");
+		}else {
+			dto.setPrivacy("1");
+		}
+		System.out.println(dto.getPrivacy());
+//		memberService.updatePrivacyCheck(privacy, num);
 		return "redirect:main";
 	}
 	

@@ -192,7 +192,7 @@
 			type:"get",
 			dataType:"json",
 			data:{"num":num},
-			url:"deliveryupdate",
+			url:"update-address",
 			success:function(data){
 				$("#num").val(data.num);
 				$("#updatename").val(data.name);

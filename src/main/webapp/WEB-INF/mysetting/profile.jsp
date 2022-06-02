@@ -52,7 +52,7 @@
 		<img class="img2" align="left" src="../profile_image/${dto.photo }"/>
 	</c:if>
 	
-	<form action="updatephoto" method="post" enctype="multipart/form-data">
+	<form action="update-image" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="num" value="${dto.num}">
 		<p style="margin-top: 10px; margin-left: 110px;">
 			<input type="button" class="btn btn-default" value="파일 업로드" onclick=document.all.file.click();> 
@@ -89,7 +89,7 @@
 		<span class="updatespan">취소</span>
 		<br>
 	</span>
-	<form action="updatename" method="post" onsubmit="return namecheck();">
+	<form action="update-name" method="post" onsubmit="return namecheck();">
 		<input type="hidden" name="num" value="${dto.num}">
 		<input type="text" class="form-control" id="name" name="name" maxlength="20" required="required" style="width:50%; margin-top:10px;" value="${dto.name}"> 		
 		<div>
@@ -155,7 +155,7 @@ function namecheck() {
 		<span class="updatespan">취소</span>
 		<br>
 	</span>
-	<form action="updateurl" method="post" onsubmit="return urlcheck();">
+	<form action="update-url" method="post" onsubmit="return urlcheck();">
 		<div class="form-group">
 			<input type="hidden" name="num" value="${dto.num}">
 			<input type="text" required="required" class="form-control" id="url" name="url" style="width:50%; margin-top:10px;" value="${dto.url }">
