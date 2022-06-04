@@ -26,11 +26,11 @@
 		<br>
 	</span>
 	<br>
-	<c:if test="${dto.photo == null}">
+	<c:if test="${memberDto.photo == null}">
 		<img class="img1" src="../profile_image/basic.jpg"/>
 	</c:if>
-	<c:if test="${dto.photo != null}">
-		<img class="img1" src="../profile_image/${dto.photo }"/>
+	<c:if test="${memberDto.photo != null}">
+		<img class="img1" src="../profile_image/${memberDto.photo }"/>
 	</c:if>
 	<hr>
 </div>
@@ -45,15 +45,15 @@
 	</span>
 	<br>
 	
-	<c:if test="${dto.photo == null}">
+	<c:if test="${memberDto.photo == null}">
 		<img class="img2" align="left" src="../profile_image/basic.jpg"/>
 	</c:if>
-	<c:if test="${dto.photo != null}">
-		<img class="img2" align="left" src="../profile_image/${dto.photo }"/>
+	<c:if test="${memberDto.photo != null}">
+		<img class="img2" align="left" src="../profile_image/${memberDto.photo }"/>
 	</c:if>
 	
 	<form action="update-image" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="num" value="${dto.num}">
+		<input type="hidden" name="num" value="${memberDto.num}">
 		<p style="margin-top: 10px; margin-left: 110px;">
 			<input type="button" class="btn btn-default" value="파일 업로드" onclick=document.all.file.click();> 
 			<input type="file" onchange="setThumbnail(event);" name="file" id="file" style="display: none;"/>
@@ -76,7 +76,7 @@
 		<br>
 	</span>
 	<div style="margin-top:10px;">
-		${dto.name}
+		${memberDto.name}
 	</div>
 	<hr>
 </div>
@@ -90,8 +90,8 @@
 		<br>
 	</span>
 	<form action="update-name" method="post" onsubmit="return namecheck();">
-		<input type="hidden" name="num" value="${dto.num}">
-		<input type="text" class="form-control" id="name" name="name" maxlength="20" required="required" style="width:50%; margin-top:10px;" value="${dto.name}"> 		
+		<input type="hidden" name="num" value="${memberDto.num}">
+		<input type="text" class="form-control" id="name" name="name" maxlength="20" required="required" style="width:50%; margin-top:10px;" value="${memberDto.name}"> 		
 		<div>
 			<b class="namemsg"></b>
 		</div>
@@ -142,7 +142,7 @@ function namecheck() {
 		<br>
 	</span>
 	<div style="margin-top:10px;">
-		http://localhost:9002/profile/<b>${dto.url }</b>
+		http://localhost:9002/profile/<b>${memberDto.url }</b>
 	</div>
 	<hr>
 </div>
@@ -157,8 +157,8 @@ function namecheck() {
 	</span>
 	<form action="update-url" method="post" onsubmit="return urlcheck();">
 		<div class="form-group">
-			<input type="hidden" name="num" value="${dto.num}">
-			<input type="text" required="required" class="form-control" id="url" name="url" style="width:50%; margin-top:10px;" value="${dto.url }">
+			<input type="hidden" name="num" value="${memberDto.num}">
+			<input type="text" required="required" class="form-control" id="url" name="url" style="width:50%; margin-top:10px;" value="${memberDto.url }">
 			<div style="color:gray; margin-top:10px;">
 				<div>
 					사용자 이름은 회원님의 프로필 주소로 활용됩니다. ex) http://localhost:9002/profile/사용자이름
@@ -224,11 +224,11 @@ function urlcheck() {
 		<br>
 	</span>
 	<div style="margin-top:10px; color:gray;">
-		<c:if test="${dto.introduce == null}">
+		<c:if test="${memberDto.introduce == null}">
 			등록된 소개가 없습니다.
 		</c:if>
-		<c:if test="${dto.introduce != null}">
-			<div style="margin-top:10px;">${dto.introduce}</div>
+		<c:if test="${memberDto.introduce != null}">
+			<div style="margin-top:10px;">${memberDto.introduce}</div>
 		</c:if>
 	</div>
 	<hr>
@@ -243,7 +243,7 @@ function urlcheck() {
 		<br>
 	</span>
 	<form action="updateintroduce" method="post">
-		<input type="hidden" name="num" value="${dto.num}">
+		<input type="hidden" name="num" value="${memberDto.num}">
 		<textarea class="form-control" required="required" style="width:100%; height:200px; margin-top:10px;"id="introduce" name="introduce" placeholder="자기소개를 입력해주세요."></textarea>		
 		<button type="submit" class="update-save" style="margin-top:10px;">저장</button>
 	</form>
@@ -260,10 +260,10 @@ function urlcheck() {
 		<br>
 	</span>
 	<div style="margin-top:10px; color:gray;">
-		<c:if test="${dto.privacy == '1'}">
+		<c:if test="${memberDto.privacy == '1'}">
 			<span style="margin-top:10px;">후원한 프로젝트 목록을 공개합니다.</span>
 		</c:if>
-		<c:if test="${dto.privacy == '0'}">
+		<c:if test="${memberDto.privacy == '0'}">
 			<div style="margin-top:10px;">후원한 프로젝트 목록을 공개하지 않습니다.</div>
 		</c:if>
 	</div>
@@ -280,9 +280,9 @@ function urlcheck() {
 	</span>
 	<br>
 	<form action="privacyupdate" method="post">
-		<input type="hidden" name="num" value="${dto.num}">
+		<input type="hidden" name="num" value="${memberDto.num}">
 		<label>
-			<input type="checkbox" ${dto.privacy == "1"?"checked":""} value="${dto.privacy}" name="privacy" id="privacy"><span style="margin-top:10px;">후원한 프로젝트 목록을 공개합니다.</span><br>
+			<input type="checkbox" ${memberDto.privacy == "1"?"checked":""} value="${memberDto.privacy}" name="privacy" id="privacy"><span style="margin-top:10px;">후원한 프로젝트 목록을 공개합니다.</span><br>
 		</label>
 		<br>
 		<button type="submit" class="update-save" style="margin-top:10px;">저장</button>
