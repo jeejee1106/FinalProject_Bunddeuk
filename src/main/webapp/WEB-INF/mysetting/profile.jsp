@@ -35,11 +35,12 @@
 	<hr>
 </div>
     	
-<div class="ptofilephotoupdate">
+<!-- <div class="ptofilephotoupdate"> -->
+<div class="image-update-wrap">
 	<span class="title">
 		<b>프로필 사진</b>
 	</span>
-	<span class="close1">
+	<span class="cancle-image-update">
 		<span class="updatespan">취소</span>
 		<br>
 	</span>
@@ -242,7 +243,7 @@ function urlcheck() {
 		<span class="updatespan">취소</span>
 		<br>
 	</span>
-	<form action="updateintroduce" method="post">
+	<form action="update-introduce" method="post">
 		<input type="hidden" name="num" value="${memberDto.num}">
 		<textarea class="form-control" required="required" style="width:100%; height:200px; margin-top:10px;"id="introduce" name="introduce" placeholder="자기소개를 입력해주세요."></textarea>		
 		<button type="submit" class="update-save" style="margin-top:10px;">저장</button>
@@ -279,10 +280,10 @@ function urlcheck() {
 		<br>
 	</span>
 	<br>
-	<form action="privacyupdate" method="post">
+	<form action="update-privacy" method="post">
 		<input type="hidden" name="num" value="${memberDto.num}">
 		<label>
-			<input type="checkbox" ${memberDto.privacy == "1"?"checked":""} value="${memberDto.privacy}" name="privacy" id="privacy"><span style="margin-top:10px;">후원한 프로젝트 목록을 공개합니다.</span><br>
+			<input type="checkbox" ${memberDto.privacy == "1" ? "checked" : ""} value="${memberDto.privacy}" name="privacy" id="privacy"><span style="margin-top:10px;">후원한 프로젝트 목록을 공개합니다.</span><br>
 		</label>
 		<br>
 		<button type="submit" class="update-save" style="margin-top:10px;">저장</button>

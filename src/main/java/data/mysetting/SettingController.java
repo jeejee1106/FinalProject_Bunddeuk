@@ -72,7 +72,7 @@ public class SettingController {
 //	}
 	
 	@ResponseBody
-	@GetMapping("/setting/update-address") //??? 주소 업데이트 하는 메서드 맞어,..? 매핑은 주속 업데이트.. 메서드 내용은 업데이트 아닌 것 같은데...!
+	@GetMapping("/setting/update-address")
 	public HashMap<String, Object> updateAddress(HttpSession session, @RequestParam int num) {
 		String id = (String) session.getAttribute("sessionId");
 		
@@ -143,18 +143,17 @@ public class SettingController {
 		return "redirect:main";
 	}
 	
-	@PostMapping("/setting/updateintroduce")
-	public String updateIntroduce(HttpSession session, String introduce) {
+	@PostMapping("/setting/update-introduce")
+	public String updateIntroduce(HttpSession session, String introduce, @ModelAttribute MemberDTO memberDto) {
 		String id = (String) session.getAttribute("sessionId");
-//		String content = dto.getIntroduce().replaceAll("\r\n","<br>");
-//		dto.setIntroduce(content);
-		System.out.println("칸트롤러의 id : " + id);
-		System.out.println("칸트롤러의 introduce : " + introduce);
+		introduce = memberDto.getIntroduce().replaceAll("\r\n","<br>"); //이렇게 안바꿔주면 프론트 단에서 js가 안먹힘.
+		memberDto.setIntroduce(introduce);
+		
 		memberService.updateIntroduce(introduce, id);
 		return "redirect:main";
 	}
 	
-	@PostMapping("/setting/privacyupdate")
+	@PostMapping("/setting/update-privacy")
 	public String privacyupdate(@ModelAttribute MemberDTO dto, HttpSession session) {
 		String id = (String) session.getAttribute("sessionId");
 		dto.setId(id);
@@ -163,8 +162,7 @@ public class SettingController {
 		}else {
 			dto.setPrivacy("1");
 		}
-		System.out.println(dto.getPrivacy());
-//		memberService.updatePrivacyCheck(privacy, num);
+		memberService.updatePrivacyCheck(dto);
 		return "redirect:main";
 	}
 	

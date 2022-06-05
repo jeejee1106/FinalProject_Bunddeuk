@@ -71,18 +71,23 @@ $(function(){
 		$('#Email_div').hide();
 	});
  
-	$('div.ptofilephotoupdate').hide();
+	<!-- 이미지 업데이트 -->
+	$('div.image-update-wrap').hide();
+	
 	$("span.updatePhoto").click(function(){
-		$("div.ptofilephotoupdate").show();
+		$("div.image-update-wrap").show();
 		$("div.profilephoto").hide();
 	});
 	
-	$("span.close1").click(function(){
+	$("span.cancle-image-update").click(function(){
 		$("div.profilephoto").show();
-		$("div.ptofilephotoupdate").hide();
+		$("div.image-update-wrap").hide();
 	});
 	
+	
+	<!-- 이름 업데이트 -->
 	$('div.ptofilenameupdate').hide();
+	
 	$("span.updateName").click(function(){
 		$("#name").val("${memberDto.name}");
 		$("div.ptofilenameupdate").show();
@@ -94,8 +99,9 @@ $(function(){
 		$("div.ptofilenameupdate").hide();
 	});
 
-	
+	<!-- url 업데이트 -->
 	$('div.profileurlupdate').hide();
+	
 	$("span.updateUrl").click(function(){
 		$("#url").val("${memberDto.url}");
 		$("div.profileurlupdate").show();
@@ -108,7 +114,10 @@ $(function(){
 		$("b.urlmsg").html("");
 	});
 
+	
+	<!-- 자기소개 업데이트 -->
 	$('div.introduceupdate').hide();
+	
 	$("span.updateIntroduce").click(function(){
 	//	$("#introduce").val("${memberDto.introduce}");
 		var content = "${memberDto.introduce}";
@@ -123,7 +132,10 @@ $(function(){
 		$("div.introduceupdate").hide();
 	});
 	
+	
+	<!-- 프라이버시 업데이트 -->
 	$('div.privacyupdate').hide();
+	
 	$("span.updatePrivacy").click(function(){
 		$("div.privacyupdate").show();
 		$("div.privacy").hide();
@@ -141,7 +153,10 @@ $(function(){
 		$("div.privacyupdate").hide();
 	});
 	
+	
+	<!-- 이메일 업데이트 -->
 	$('div.ptofileemailupdate').hide();
+	
 	$("span.updateEmail").click(function(){
 		$("#emailupdate").val("${memberDto.email}");
 		$("b.emailmsg").html("");
@@ -154,7 +169,10 @@ $(function(){
 		$("div.ptofileemailupdate").hide();
 	});
 	
+	
+	<!-- 비밀번호 업데이트 -->
 	$('div.passupdate').hide();
+	
 	$("span.updatePass").click(function(){
 		$("b.pass1msg").html("");
 		$("b.passmsg2").html("");
@@ -168,7 +186,10 @@ $(function(){
 		$("div.passupdate").hide();
 	});
 	
+	
+	<!-- 핸드폰 번호 업데이트 -->
 	$('div.hpupdate').hide();
+	
 	$("span.updateHp").click(function(){
 		$("#hp").val("${memberDto.hp}");
 		$("b.hpmsg").html("");

@@ -70,8 +70,6 @@ public class MemberService {
 	}
 	
 	public void updateIntroduce(String introduce, String id) {
-		System.out.println("서비스의 id : " + id);
-		System.out.println("서비스의 introduce : " + introduce);
 		memberMapper.updateIntroduce(introduce, id);
 	}
 	
@@ -80,7 +78,6 @@ public class MemberService {
 	}
 	
 	public void updatePrivacyCheck(MemberDTO dto) {
-		System.out.println(dto.getPrivacy());
 		memberMapper.updatePrivacyCheck(dto);
 	}
 	
