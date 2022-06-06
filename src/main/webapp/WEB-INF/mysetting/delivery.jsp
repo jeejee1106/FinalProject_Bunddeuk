@@ -5,11 +5,13 @@
 
 <style>
 	.drop{
-	float:right;
+		float:right;
 	}
+	
 	.drop:hover{
 		background-color: silver;
 	}
+	
 	select {
 		float:right;
 	    width: 35px; /* 원하는 너비설정 */
@@ -27,7 +29,6 @@
 	select::-ms-expand {
 	    display: none;
 	}
-	
 	
 	.update-save{
 		width: 55px;
@@ -469,18 +470,4 @@
         }).open();
     }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

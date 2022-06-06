@@ -32,9 +32,9 @@
 	<span class="updateEmail">
 	<span class="updatespan">변경</span>
 	<br></span><br>
-	<div style="margin-top: 10px;">${dto.email}</div>
+	<div style="margin-top: 10px;">${memberDto.email}</div>
 	
-	<c:if test="${dto.auth_status == 0 }">
+	<c:if test="${memberDto.auth_status == 0 }">
 	<div class="CommonStyled__CheckedSynced-bpcmiq-31 cIhcRD">
 		<div name="error-1" class="Icon__SVGICON-sc-1xkf9cp-01 ccxeYs baseline">
 			<svg viewBox="0 0 48 48">
@@ -45,7 +45,7 @@
 	</div>
 	</c:if>
 	
-	<c:if test="${dto.auth_status == 1 }">
+	<c:if test="${memberDto.auth_status == 1 }">
 	<div class="CommonStyled__CheckedSynced-bpcmiq-3 eYgKHf">
 		<div name="check" class="Icon__SVGICON-sc-1xkf9cp-0 ccxeYs baseline">
 			<svg viewBox="0 0 48 48">
@@ -64,10 +64,10 @@
 		<span class="updatespan">취소</span>
 <br>	</span><br>
 <!--  	<form action="mail" method="post" onsubmit="return emailcheck()"> -->
-		<input type="hidden" name="auth_status" id="auth_status" value="${dto.auth_status}">
-		<input type="hidden" name="num" id="num" value="${dto.num}">
+		<input type="hidden" name="auth_status" id="auth_status" value="${memberDto.auth_status}">
+		<input type="hidden" name="num" id="num" value="${memberDto.num}">
 		<input type="text" class="form-control" style="height:39px; margin-top:10px;" id="emailupdate" name="email" maxlength="50"
-			style="width: 100%; margin-top: 10px;" required="required" value="${dto.email}">
+			style="width: 100%; margin-top: 10px;" required="required" value="${memberDto.email}">
 		<b class="emailmsg"></b><br>
 		<button type="submit" class="update-save2 emailupdatebtn" style="margin-top: 10px;">인증메일 전송</button>
 <!--	</form> -->
@@ -158,10 +158,10 @@ $("button.emailupdatebtn").click(function(){
 			<span class="updatespan">취소</span>
 	<br>	</span><br>
 		<form action="updatepass" method="post" onsubmit="return lastcheck(this)">
-			<input type="hidden" name="num" value="${dto.num}">
+			<input type="hidden" name="num" value="${memberDto.num}">
 			<div class="form-group">
 				<div style="margin-top:10px;">현재 비밀번호</div>
-				<input id="passcheck" type="hidden" name="passcheck" value="${dto.pass}">
+				<input id="passcheck" type="hidden" name="passcheck" value="${memberDto.pass}">
 				<input type="password" style="height:39px; margin-top:10px;"
 					class="form-control" id="pass1" name="pass1" maxlength="20"
 					placeholder="현재 비밀번호" required="required">
@@ -214,11 +214,11 @@ $("button.emailupdatebtn").click(function(){
     			<span class="updatespan">변경</span>
     	<br>	</span><br>
     		<div style="margin-top:10px; color:gray;">
-		    	<c:if test="${dto.hp == null}">
+		    	<c:if test="${memberDto.hp == null}">
 		    		<span style="margin-top:10px;">등록된 연락처가 없습니다.</span>
 		    	</c:if>
-		    	<c:if test="${dto.hp != null}">
-		    		<div style="margin-top:10px;">${dto.hp}</div>
+		    	<c:if test="${memberDto.hp != null}">
+		    		<div style="margin-top:10px;">${memberDto.hp}</div>
 		    	</c:if>
 	    	</div>
     		<hr>
@@ -230,8 +230,8 @@ $("button.emailupdatebtn").click(function(){
     			<span class="updatespan">취소</span>
     	<br>	</span><br>
 			<form action="updatehp" method="post">
-				<input type="hidden" name="num" value="${dto.num}">
-				<input type="text" required="required" class="form-control phoneNumber" id="hp" name="hp" maxlength="13" style="height:39px; margin-top:10px;" placeholder="휴대폰 번호를 입력해주세요." value="${dto.hp}">
+				<input type="hidden" name="num" value="${memberDto.num}">
+				<input type="text" required="required" class="form-control phoneNumber" id="hp" name="hp" maxlength="13" style="height:39px; margin-top:10px;" placeholder="휴대폰 번호를 입력해주세요." value="${memberDto.hp}">
 				<b class="hpmsg"></b><br>
 				<button type="submit" class="update-save" style="margin-top:10px;">저장</button>
 			</form>

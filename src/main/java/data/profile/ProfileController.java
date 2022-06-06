@@ -72,10 +72,8 @@ public class ProfileController {
 			
 		} else {
 			return "redirect:profile/"+url;
-			
 		}
 	}
-	
 	
 	@PostMapping("/profile2")
 	public String moveProfile3(HttpSession session,Model model, String id) {
@@ -111,9 +109,8 @@ public class ProfileController {
 			map.put("id", id);
 			map.put("url", url);
 			MemberDTO dto = memberService.getAllProfile(map);
+			model.addAttribute("id",id);
 			model.addAttribute("dto", dto);
-			
-			//String url = memberService.getUrl(id);
 			
 			return "/profile/introduction";
 	}

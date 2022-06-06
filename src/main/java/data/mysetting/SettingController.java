@@ -37,12 +37,12 @@ public class SettingController {
 		
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO memberDto = memberService.getMemberInfo(id);
-//		List<DeliveryDTO> addrList = deliveryService.addrListOfPinDesc(id); ///쓰는 곳 없다고 판단되어 일단 주석 처리함
-//		int addrCount = deliveryService.getAddrCount(id); //쓰는 곳 없다고 판단되어 일단 주석 처리함
+		List<DeliveryDTO> addrList = deliveryService.addrListOfPinDesc(id); ///쓰는 곳 없다고 판단되어 일단 주석 처리함
+		int addrCount = deliveryService.getAddrCount(id); //쓰는 곳 없다고 판단되어 일단 주석 처리함
 		
 		model.addAttribute("memberDto", memberDto);
-//		model.addAttribute("addrList", addrList); //원래 변수명 : list
-//		model.addAttribute("addrCount", addrCount); //원래 변수명 : totalCount
+		model.addAttribute("addrList", addrList); //원래 변수명 : list
+		model.addAttribute("addrCount", addrCount); //원래 변수명 : totalCount
 		return "/mysetting/settingForm";
 	}
 	
