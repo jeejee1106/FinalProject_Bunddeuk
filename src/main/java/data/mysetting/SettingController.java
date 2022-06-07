@@ -60,17 +60,6 @@ public class SettingController {
 		return "/mysetting/delivery";
 	}
 	
-	/**
-	 * 이건 또 어디에 쓰이는 메서드일꼬...
-	 */
-//	@ResponseBody
-//	@GetMapping("/setting/alist")
-//	public List<DeliveryDTO> alist(HttpSession session){
-//		String id = (String) session.getAttribute("sessionId");
-//		List<DeliveryDTO> list = deliveryService.addrListOfPinDesc(id);
-//		return list;
-//	}
-	
 	@ResponseBody
 	@GetMapping("/setting/update-address")
 	public HashMap<String, Object> updateAddress(HttpSession session, @RequestParam int num) {
@@ -180,32 +169,25 @@ public class SettingController {
 	}
 	
 	@GetMapping("/setting/leave")
-	public ModelAndView leave(HttpSession session, Model model) {
-		ModelAndView mview = new ModelAndView();
-		
+	public String leave(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberService.getMemberInfo(id);
 		
-		mview.addObject("dto", dto);
-		mview.setViewName("/mysetting/leave");
-		return mview;
+		model.addAttribute("dto", dto);
+		return "/mysetting/leave";
 	}
 	
 	@GetMapping("/setting/validation")
-	public ModelAndView validation(HttpSession session, Model model) {
-		ModelAndView mview = new ModelAndView();
-		
+	public String validation(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberService.getMemberInfo(id);
 		
-		mview.addObject("dto", dto);
-		mview.setViewName("/mysetting/validation");
-		return mview;
+		model.addAttribute("dto", dto);
+		return "/mysetting/validation";
 	}
 	
 	@GetMapping("/setting/deliveryinsert")
 	public @ResponseBody String deliveryInsert(@ModelAttribute DeliveryDTO ddto,HttpSession session) {
-		
 		String id = (String)session.getAttribute("sessionId");
 		String pin = String.valueOf(ddto.getPin());
 		
@@ -234,7 +216,6 @@ public class SettingController {
 		map.put("pin", pin);
 		
 		int check = deliveryService.getPin(map);
-	//	System.out.println("check : "+check);
 		if(check==1) {
 			int num = deliveryService.getPinNum(map);
 			deliveryService.updateDeliveryPin(num);
