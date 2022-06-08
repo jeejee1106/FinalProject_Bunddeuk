@@ -32,7 +32,6 @@ import data.support.SupportDTO;
 import data.support.SupportService;
 
 @Controller
-//@RequestMapping("/profile")
 public class ProfileController {
 	
 	@Autowired
@@ -43,15 +42,9 @@ public class ProfileController {
 	ProjectService projectService;
 	@Autowired
 	DetailService detailService;
-	/*
-	 * @Value("${file.upload.image}") String path;
-	 */
-	
-	String profile_url = "";
 	
 	@PostMapping("/comment/profile")
 	public String moveProfile(Model model, String id) {
-		
 		MemberDTO movedto = memberService.getMemberInfo(id);
 		model.addAttribute("id",id); //원섭
 		model.addAttribute("movedto", movedto);
@@ -60,7 +53,7 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/profile")
-	public String moveProfile2(HttpSession session,Model model) {
+	public String moveProfile2(HttpSession session) {
 		String id = (String)session.getAttribute("sessionId");
 		String loginok = (String)session.getAttribute("loginok");
 		session.removeAttribute("url");
@@ -69,16 +62,14 @@ public class ProfileController {
 		
 		if(loginok == null) {
 			return "redirect:/login/main";
-			
 		} else {
 			return "redirect:profile/"+url;
 		}
 	}
 	
 	@PostMapping("/profile2")
-	public String moveProfile3(HttpSession session,Model model, String id) {
+	public String moveProfile3(HttpSession session, String id) {
 		System.out.println(id);
-		//MemberDTO movedto = memberService.getAll(id);
 		session.removeAttribute("url");
 		String url = memberService.getUrl(id);
 		session.setAttribute("url",url);
@@ -90,7 +81,6 @@ public class ProfileController {
 	
 	@PostMapping("/comment/sponsored")
 	public String moveToS(Model model, String id) {
-		
 		MemberDTO movedto = memberService.getMemberInfo(id);
 		model.addAttribute("id",id); //원섭
 		model.addAttribute("movedto", movedto);
@@ -98,12 +88,9 @@ public class ProfileController {
 		return "/profile/sponsoredProject";
 	}
 	
-	
-	
-//	소개
+	//소개
 	@GetMapping("/profile/{url}")
-	public String introduction (Model model,@PathVariable String url) {
-			
+	public String introduction (Model model, @PathVariable String url) {
 			String id = memberService.getIdUrl(url);
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", id);
@@ -115,14 +102,12 @@ public class ProfileController {
 			return "/profile/introduction";
 	}
 
-	
-//	후원한 프로젝트
+	//후원한 프로젝트
 	@GetMapping("/profile/{url}/backed")
-	public String sponsoredList (HttpSession session, Model model,@PathVariable String url) {
+	public String sponsoredList (HttpSession session, Model model, @PathVariable String url) {
 		
 		String id = memberService.getIdUrl(url);
 		String name = memberService.getName(id);
-		//System.out.println(name);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("url", url);
@@ -134,42 +119,36 @@ public class ProfileController {
 		model.addAttribute("name", name);
 		model.addAttribute("supportLsit", supportLsit);
 		model.addAttribute("count", supportLsit.size());
-		//System.out.println("후원한리스트"+supportLsit);
 		
 		return "/profile/sponsoredProject";
 	}
-//	후원한 성공 디테일
+	//후원한 성공 디테일
 	@GetMapping("/profile/{url}/support_success")
-	public ModelAndView sponsoredSuccessDetail (@RequestParam String num, @PathVariable String url) {
-		
-		ModelAndView mview = new ModelAndView();
+	public String sponsoredSuccessDetail (@RequestParam String num, @PathVariable String url, Model model) {
 		String id = memberService.getIdUrl(url);
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("url", url);
 		MemberDTO dto = memberService.getAllProfile(map);
-		mview.addObject("dto", dto);
+		model.addAttribute("dto", dto);
 		
 		SupportDetailDTO sdto = profileService.getSupportData(num);
-		mview.addObject("sdto", sdto);
-		mview.setViewName("/profile/sponsoeredDetail");
+		model.addAttribute("sdto", sdto);
 		
-		return mview;
-		
+		return "/profile/sponsoeredDetail";
 	}
 	
-//	후원한 프로젝트 삭제
+	//후원한 프로젝트 삭제
 	@ResponseBody
 	@GetMapping("/profile/{url}/support_cancel")
 	public void supportCancel(@RequestParam String num, @PathVariable String url) {
-		
 		profileService.minusTotalAmountNumberPeople(num);
 		profileService.deleteSupport(num);
 	}
 	
-//	내가 올린 프로젝트
+	//내가 올린 프로젝트
 	@GetMapping("/profile/{url}/created")
-	public ModelAndView uploadeList (HttpSession session, @RequestParam HashMap<String, String> map,@PathVariable String url) {
+	public String uploadeList (HttpSession session, @RequestParam HashMap<String, String> map, @PathVariable String url, Model model) {
 		
 		String id = memberService.getIdUrl(url);
 		System.out.println("아이디 "+id);
@@ -178,12 +157,10 @@ public class ProfileController {
 		map1.put("url", url);
 		MemberDTO dto = memberService.getAllProfile(map1);
 		
-		ModelAndView mview = new ModelAndView();
 		String name = memberService.getName(id);
 		
 		List<ProjectDTO> creativeList = profileService.getCreativeProject(id);
 		System.out.println("창작한 리스트: "+creativeList);
-		//System.out.println("창작한 갯수: "+creativeList.size());
 		
 		map.put("write", "0");
 		map.put("audit", "1");
@@ -199,69 +176,52 @@ public class ProfileController {
 		String companion_count = profileService.getCreativeAuditCount(companion, id);
 		String approval_count = profileService.getCreativeAuditCount(approval, id);
 		
-		mview.addObject("dto", dto);
-		mview.addObject("name", name);
-		mview.addObject("creativeList", creativeList);
-		mview.addObject("creativeCont", creativeList.size());
-		mview.addObject("write_count", write_count);
-		mview.addObject("audit_count", audit_count);
-		mview.addObject("companion_count", companion_count);
-		mview.addObject("approval_count", approval_count);
-		mview.setViewName("/profile/uploadedProject");
-		return mview;
+		model.addAttribute("dto", dto);
+		model.addAttribute("name", name);
+		model.addAttribute("creativeList", creativeList);
+		model.addAttribute("creativeCont", creativeList.size());
+		model.addAttribute("write_count", write_count);
+		model.addAttribute("audit_count", audit_count);
+		model.addAttribute("companion_count", companion_count);
+		model.addAttribute("approval_count", approval_count);
+		return "/profile/uploadedProject";
 	}
 	
 	
-//	내가 올린 프로젝트 삭제 -사진삭제 추가하기
+	//내가 올린 프로젝트 삭제 -사진삭제 추가하기
 	@GetMapping("/profile/{url}/created_delete")
 	@ResponseBody
 	public void delete(@RequestParam String idx, HttpSession session,@PathVariable String url) {
-		
 		// 실제 업로드 폴더의 경로
 		String path = session.getServletContext().getRealPath("/thumbnail_image");
-		//System.out.println(path);
-		//String path = "/home/ec2-user/backup/thumbnail_image";
+
 		// 업로드된 파일명
 		ProjectDTO pdto = projectService.getData(idx);
 		String thumbnail = pdto.getThumbnail();
-		//System.out.println(thumbnail);
+
 		// file 객체 생성
 		File file = new File(path +"/"+ thumbnail);
+		
 		// 파일 삭제
 		file.delete();
 		
-		
 		profileService.deleteCreativeProject(idx);
-		
 	}
 	
-//	올린 프로젝트 관리 디테일 페이지
+	//올린 프로젝트 관리 디테일 페이지
 	@GetMapping("/profile/{url}/created_management")
-	public ModelAndView getProject (@RequestParam String idx, @PathVariable String url) {
-		
-		ModelAndView mview = new ModelAndView();
-		//ProjectDTO dto = profileService.getProject(idx);
+	public String getProject (@RequestParam String idx, @PathVariable String url, Model model) {
 		ProjectDTO pdto = projectService.getData(idx);
-		//System.out.println("idx: "+idx);
-		//System.out.println(pdto.getThumbnail());
-		
-		mview.addObject("pdto", pdto);
-		mview.setViewName("/profile/uploadedProjectModify");
-		
-		
-		return mview;
+		model.addAttribute("pdto", pdto);
+		return "/profile/uploadedProjectModify";
 	}
 	
-//
-//	후원자 리스트
+	//후원자 리스트
 	@GetMapping("/profile/{url}/created_sponsorlist")
-	public ModelAndView sponsorList(
-			@RequestParam(defaultValue = "1") int currentPage,
-			String idx,
-			@PathVariable String url
-			) {
+	public String sponsorList(
+			@RequestParam(defaultValue = "1") int currentPage, String idx,
+			@PathVariable String url, Model model) {
 		
-		ModelAndView mview = new ModelAndView();
 		ProjectDTO pdto = projectService.getData(idx);
 		
 		String name = pdto.getName();
@@ -286,37 +246,32 @@ public class ProfileController {
 		
 		List<SupportDetailDTO> sponsorList = profileService.getSponsorList(idx, name, start, perPage);
 		
-		mview.addObject("pdto", pdto);
-		mview.addObject("sponsorList", sponsorList);
-		mview.addObject("startPage", startPage);
-		mview.addObject("endPage", endPage);
-		mview.addObject("totalPage", totalPage);
-		mview.addObject("currentPage", currentPage);
-		mview.addObject("totalCount", totalCount);
-		mview.setViewName("/profile/sponsorMemberList");
-		
-		return mview;
+		model.addAttribute("pdto", pdto);
+		model.addAttribute("sponsorList", sponsorList);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalCount", totalCount);
+
+		return "/profile/sponsorMemberList";
 	}
 	
-//	후원자 디테일
+	//후원자 디테일
 	@GetMapping("/profile/created_sponsorDetail")
-	public ModelAndView sponsorDetail(
+	public String sponsorDetail(
 			@RequestParam (defaultValue = "1") int currentPage,
-			String num
-			) {
+			String num, Model model) {
 		
-		ModelAndView mview = new ModelAndView();
 		SupportDetailDTO dto = profileService.getSponsorMemberData(num);
 		
-		mview.addObject("dto", dto);
-		mview.addObject("currentPage", currentPage);
-		mview.setViewName("/profile/sponsorMemberDetail");
+		model.addAttribute("dto", dto);
+		model.addAttribute("currentPage", currentPage);
 		
-		return mview;
+		return "/profile/sponsorMemberDetail";
 	}
-//	
-	
-//	관심있는 프로젝트
+
+	//관심있는 프로젝트
 	@GetMapping("/profile/{url}/liked")
 	public String interestList (HttpSession session, Model model, String idx,@PathVariable String url) {
 		
@@ -327,34 +282,22 @@ public class ProfileController {
 		MemberDTO dto = memberService.getAllProfile(map);
 		
 		String name = memberService.getName(id);
-		//System.out.println(name);
-		
 		
 		List<LikedDTO> likeList = profileService.getLikedProject(id);
 		ProjectDTO pdto = projectService.getData(idx);
-		
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date today = Date.valueOf(sdf.format(new java.util.Date()));
-//		float totalAmount = pdto.getTotal_amount();
-//		float targetAmount = pdto.getTarget_amount();
-//		int percentageAchieved = (int)Math.round((totalAmount / targetAmount * 100));
 		
 		model.addAttribute("likeList", likeList);
 		model.addAttribute("likecount", likeList.size());
 		model.addAttribute("dto", dto);
 		model.addAttribute("name", name);
-//		model.addAttribute("today", today);
-//		model.addAttribute("percentageAchieved", percentageAchieved);
-//		System.out.println(percentageAchieved);
-		
+
 		return "/profile/projectInterest";
 	}
 	
-//	관심 프로젝트 삭제
+	//관심 프로젝트 삭제
 	@GetMapping("/profile/{url}/liked_delete")
 	@ResponseBody
 	public void deleteLiked (@RequestParam String num, @PathVariable String url) {
-		
 		profileService.deleteLikedProject(num);
 	}
 	
