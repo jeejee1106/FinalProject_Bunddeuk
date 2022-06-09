@@ -223,7 +223,7 @@
 <!-- end message modal -->
 
 <!-- 작가의 프로필 페이지로 이동 하기 위한 form -->
-<form class="sub-profile" action="/profile2" method = "post">
+<form class="sub-profile" action="/creator-profile" method = "post">
 	<input id="creator-id" type="hidden" name="id">
 </form>
 

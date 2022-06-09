@@ -43,17 +43,9 @@ public class ProfileController {
 	@Autowired
 	DetailService detailService;
 	
-	@PostMapping("/comment/profile")
-	public String moveProfile(Model model, String id) {
-		MemberDTO movedto = memberService.getMemberInfo(id);
-		model.addAttribute("id",id); //원섭
-		model.addAttribute("movedto", movedto);
-		
-		return "/profile/introduction";
-	}
-	
+	//내 프로필 페이지로 이동
 	@GetMapping("/profile")
-	public String moveProfile2(HttpSession session) {
+	public String myProfile(HttpSession session) {
 		String id = (String)session.getAttribute("sessionId");
 		String loginok = (String)session.getAttribute("loginok");
 		session.removeAttribute("url");
@@ -67,8 +59,9 @@ public class ProfileController {
 		}
 	}
 	
-	@PostMapping("/profile2")
-	public String moveProfile3(HttpSession session, String id) {
+	//작가의 프로필 페이지로 이동
+	@PostMapping("/creator-profile")
+	public String creatorProfile(HttpSession session, String id) {
 		System.out.println(id);
 		session.removeAttribute("url");
 		String url = memberService.getUrl(id);
@@ -78,15 +71,34 @@ public class ProfileController {
 			return "redirect:profile/"+url;
 	}
 	
+	////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * 
+	 * 매핑이 어디에 쓰이는 지 모르겠다.
+	 * 실제로 쓰이고 있는 매핑인지 알 수 없고, 쓰이고 있다면 어디에 쓰이는지 모르겠다.
+	 * 댓글쪽인 것 같기도 하고... 일단 주석 처리 후 계속 진행 후
+	 * 어느 부분인지 찾았을 때 다시 사용하기
+	 * 
+	 */
+//	@PostMapping("/comment/profile")
+//	public String moveProfile(Model model, String id) {
+//		MemberDTO movedto = memberService.getMemberInfo(id);
+//		model.addAttribute("id",id); //원섭
+//		model.addAttribute("movedto", movedto);
+//		
+//		return "/profile/introduction";
+//	}
+//	
+//	@PostMapping("/comment/sponsored")
+//	public String moveToS(Model model, String id) {
+//		MemberDTO movedto = memberService.getMemberInfo(id);
+//		model.addAttribute("id",id); //원섭
+//		model.addAttribute("movedto", movedto);
+//		
+//		return "/profile/sponsoredProject";
+//	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	@PostMapping("/comment/sponsored")
-	public String moveToS(Model model, String id) {
-		MemberDTO movedto = memberService.getMemberInfo(id);
-		model.addAttribute("id",id); //원섭
-		model.addAttribute("movedto", movedto);
-		
-		return "/profile/sponsoredProject";
-	}
 	
 	//소개
 	@GetMapping("/profile/{url}")
@@ -122,6 +134,7 @@ public class ProfileController {
 		
 		return "/profile/sponsoredProject";
 	}
+	
 	//후원한 성공 디테일
 	@GetMapping("/profile/{url}/support_success")
 	public String sponsoredSuccessDetail (@RequestParam String num, @PathVariable String url, Model model) {
@@ -162,28 +175,19 @@ public class ProfileController {
 		List<ProjectDTO> creativeList = profileService.getCreativeProject(id);
 		System.out.println("창작한 리스트: "+creativeList);
 		
-		map.put("write", "0");
-		map.put("audit", "1");
-		map.put("companion", "2");
-		map.put("approval", "3");
-		
-		String write = (String) map.get("write");
-		String audit = (String) map.get("audit");
-		String companion = (String) map.get("companion");
-		String approval = (String) map.get("approval");
-		String write_count = profileService.getCreativeAuditCount(write, id);
-		String audit_count = profileService.getCreativeAuditCount(audit, id);
-		String companion_count = profileService.getCreativeAuditCount(companion, id);
-		String approval_count = profileService.getCreativeAuditCount(approval, id);
+		String creatingProjectCnt = profileService.getCreativeAuditCount("0", id);
+		String reviewingProjectCnt = profileService.getCreativeAuditCount("1", id);
+		String companionProjectCnt = profileService.getCreativeAuditCount("2", id);
+		String approvalProjectCnt = profileService.getCreativeAuditCount("3", id); //이걸 이렇게 따로따로 가져오는 방법밖에는 없나??? 더 연구하기
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("name", name);
 		model.addAttribute("creativeList", creativeList);
-		model.addAttribute("creativeCont", creativeList.size());
-		model.addAttribute("write_count", write_count);
-		model.addAttribute("audit_count", audit_count);
-		model.addAttribute("companion_count", companion_count);
-		model.addAttribute("approval_count", approval_count);
+		model.addAttribute("myTotalProjectCnt", creativeList.size());
+		model.addAttribute("creatingProjectCnt", creatingProjectCnt);
+		model.addAttribute("reviewingProjectCnt", reviewingProjectCnt);
+		model.addAttribute("companionProjectCnt", companionProjectCnt);
+		model.addAttribute("approvalProjectCnt", approvalProjectCnt);
 		return "/profile/uploadedProject";
 	}
 	
@@ -208,7 +212,7 @@ public class ProfileController {
 		profileService.deleteCreativeProject(idx);
 	}
 	
-	//올린 프로젝트 관리 디테일 페이지
+	//올린 프로젝트 - 관리 디테일 페이지
 	@GetMapping("/profile/{url}/created_management")
 	public String getProject (@RequestParam String idx, @PathVariable String url, Model model) {
 		ProjectDTO pdto = projectService.getData(idx);
