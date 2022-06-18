@@ -1,16 +1,14 @@
 package data.admin;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,7 +23,7 @@ import data.project.ProjectDTO;
 public class AdminController {
 
 	@Autowired
-	AdminService service;
+	AdminService adminService;
 	@Autowired
 	MemberService memberSerivce;
 	@Autowired
@@ -41,7 +39,7 @@ public class AdminController {
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
-		int totalCount = service.getTotalCount();
+		int totalCount = adminService.getTotalCount();
 		
 		int perPage = 10; // 한페이지에 보여질 글의 갯수
 		int totalPage; // 총 페이지수
@@ -60,9 +58,9 @@ public class AdminController {
 		// 각 페이지에서 불러올 시작번호
 		start = (currentPage - 1) * perPage;
 		
-		List<ProjectDTO> list = service.getProjectList(start, perPage);
+		List<ProjectDTO> list = adminService.getProjectList(start, perPage);
 		//System.out.println(list);
-		String count = service.getAuditCount();
+		String count = adminService.getAuditCount();
 		
 		mview.addObject("dto", dto);
 		mview.addObject("list", list);
@@ -81,42 +79,39 @@ public class AdminController {
 	@ResponseBody
 	public void updateAprvl(@ModelAttribute ProjectDTO pdto) {
 		
-		service.updateAuditAprvl(pdto);
+		adminService.updateAuditAprvl(pdto);
 	}
 	
 	@GetMapping("/admin/project_refusal")
 	@ResponseBody
 	public void updateRefusal(@ModelAttribute ProjectDTO pdto) {
 		
-		service.updateAuditRefusal(pdto);
+		adminService.updateAuditRefusal(pdto);
 	}
 	
 	@GetMapping("/admin/audit_detail")
 	@ResponseBody
-	public ModelAndView auditDetail (
+	public String auditDetail (
 			@RequestParam String idx,
-			@RequestParam (defaultValue = "1") int currentPage) {
+			@RequestParam (defaultValue = "1") int currentPage, Model model) {
 		
-		ModelAndView mview = new ModelAndView();
 		ProjectDTO pdto = profileSerivce.getProject(idx);
 		
-		mview.addObject("pdto", pdto);
-		mview.addObject("currentPage", currentPage);
-		mview.setViewName("/admin/auditDetail");
+		model.addAttribute("pdto", pdto);
+		model.addAttribute("currentPage", currentPage);
 		
-		return mview;
+		return "/admin/auditDetail";
 	}
 	
 	@GetMapping("/admin/member_management")
 	public ModelAndView memberList(
 			@RequestParam(defaultValue = "1") int currentPage,
-			HttpSession session
-			) {
+			HttpSession session) {
 		
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
-		int totalCount = service.getTotalMemberCount();
+		int totalCount = adminService.getTotalMemberCount();
 		
 		int perPage = 10; // 한페이지에 보여질 글의 갯수
 		int totalPage; // 총 페이지수
@@ -136,7 +131,7 @@ public class AdminController {
 		start = (currentPage - 1) * perPage;
 		
 		ModelAndView mview = new ModelAndView();
-		List<MemberDTO> mlist = service.getMemberList(start, perPage);
+		List<MemberDTO> mlist = adminService.getMemberList(start, perPage);
 		
 		mview.addObject("id", id);
 		mview.addObject("dto", dto);
@@ -151,27 +146,19 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/member_info")
-	public ModelAndView memberInfo(
+	public String memberInfo(
 			@RequestParam String id,
-			@RequestParam (defaultValue = "1") int currentPage
-			) {
+			@RequestParam (defaultValue = "1") int currentPage, Model model) {
 		
-		ModelAndView mview = new ModelAndView();
 		MemberDTO mdto = memberSerivce.getMemberInfo(id);
-		System.out.println(id);
-		mview.addObject("mdto", mdto);
-		mview.addObject("currentPage", currentPage);
-		mview.setViewName("/admin/memberInfoDetail");
-		return mview;
+		model.addAttribute("mdto", mdto);
+		model.addAttribute("currentPage", currentPage);
+		return "/admin/memberInfoDetail";
 	}
 	
 	@GetMapping("/admin/member_info_delete")
 	public String deleteMember(String num) {
-		
-		service.deleteMember(num);
-		
+		adminService.deleteMember(num);
 		return "/admin/memberList";
 	}
-	
-	
 }
