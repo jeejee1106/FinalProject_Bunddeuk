@@ -1,5 +1,6 @@
 package data.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -17,7 +18,7 @@ public interface AdminMapper {
 	public String getAuditCount();
 	
 	public int getTotalMemberCount();
-	public List<MemberDTO> getMemberList(int start, int perpage);
+	public List<MemberDTO> getMemberList(HashMap<String, Object> map);
 	public void deleteMember(String num);
 	
 

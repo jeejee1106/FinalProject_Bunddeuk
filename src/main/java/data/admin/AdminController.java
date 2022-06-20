@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.member.MemberDTO;
 import data.member.MemberService;
+import data.paging.PagingHandler;
 import data.profile.ProfileService;
 import data.project.ProjectDTO;
 
@@ -104,45 +105,44 @@ public class AdminController {
 	}
 	
 	@GetMapping("/admin/member_management")
-	public ModelAndView memberList(
-			@RequestParam(defaultValue = "1") int currentPage,
-			HttpSession session) {
+	public String memberList(HttpSession session, Model model,
+			@RequestParam(defaultValue = "1") int currentPage, 
+			@RequestParam(defaultValue = "5") int pageSize) {
 		
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
 		int totalCount = adminService.getTotalMemberCount();
+		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);
+//		int perPage = 10; // 한페이지에 보여질 글의 갯수
+//		int totalPage; // 총 페이지수
+//		int start; // 각페이지에서 불러올 db 의 시작번호
+//		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
+//		int startPage; // 각 블럭에 표시할 시작페이지
+//		int endPage; // 각 블럭에 표시할 마지막페이지
+//		
+//		// 총 페이지 갯수 구하기
+//		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
+//		// 각 블럭의 시작페이지
+//		startPage = (currentPage - 1) / perBlock * perBlock + 1;
+//		endPage = startPage + perBlock - 1;
+//		if (endPage > totalPage)
+//			endPage = totalPage;
+//		// 각 페이지에서 불러올 시작번호
+//		start = (currentPage - 1) * perPage;
 		
-		int perPage = 10; // 한페이지에 보여질 글의 갯수
-		int totalPage; // 총 페이지수
-		int start; // 각페이지에서 불러올 db 의 시작번호
-		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
-		int startPage; // 각 블럭에 표시할 시작페이지
-		int endPage; // 각 블럭에 표시할 마지막페이지
+		List<MemberDTO> mlist = adminService.getMemberList(currentPage, pageSize);
 		
-		// 총 페이지 갯수 구하기
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-		// 각 블럭의 시작페이지
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-		if (endPage > totalPage)
-			endPage = totalPage;
-		// 각 페이지에서 불러올 시작번호
-		start = (currentPage - 1) * perPage;
-		
-		ModelAndView mview = new ModelAndView();
-		List<MemberDTO> mlist = adminService.getMemberList(start, perPage);
-		
-		mview.addObject("id", id);
-		mview.addObject("dto", dto);
-		mview.addObject("totalCount", totalCount);
-		mview.addObject("mlist", mlist);
-		mview.addObject("startPage", startPage);
-		mview.addObject("endPage", endPage);
-		mview.addObject("totalPage", totalPage);
-		mview.addObject("currentPage", currentPage);
-		mview.setViewName("/admin/memberList");
-		return mview;
+		model.addAttribute("id", id);
+		model.addAttribute("dto", dto);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("mlist", mlist);
+		model.addAttribute("ph", pagingHandler);
+//		model.addAttribute("startPage", startPage);
+//		model.addAttribute("endPage", endPage);
+//		model.addAttribute("totalPage", totalPage);
+//		model.addAttribute("currentPage", currentPage);
+		return "/admin/memberList";
 	}
 	
 	@GetMapping("/admin/member_info")

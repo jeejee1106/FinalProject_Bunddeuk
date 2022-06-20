@@ -1,5 +1,6 @@
 package data.admin;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,11 @@ public class AdminService {
 		
 		return mapper.getTotalMemberCount();
 	}
-	public List<MemberDTO> getMemberList(int start, int perpage) {
-		
-		return mapper.getMemberList(start, perpage);
+	public List<MemberDTO> getMemberList(int currentPage, int pageSize) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", (currentPage-1) * pageSize);
+		map.put("pageSize", pageSize);
+		return mapper.getMemberList(map);
 	}
 	public void deleteMember(String num) {
 		

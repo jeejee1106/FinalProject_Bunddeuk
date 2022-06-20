@@ -27,7 +27,10 @@ public class MessageController {
 	
 	// 받은 메세지 리스트
 	@GetMapping("/message/receivedMessage")
-	public String receivedList (HttpSession session, @RequestParam(defaultValue = "1") int currentPage, @RequestParam(defaultValue = "5") int pageSize, Model model) {
+	public String receivedList (HttpSession session, Model model,
+			@RequestParam(defaultValue = "1") int currentPage, 
+			@RequestParam(defaultValue = "5") int pageSize) {
+		
 		String id = (String)session.getAttribute("sessionId");
 		String name = memberService.getName(id);
 		
