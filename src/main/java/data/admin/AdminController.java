@@ -107,7 +107,7 @@ public class AdminController {
 	@GetMapping("/admin/member_management")
 	public String memberList(HttpSession session, Model model,
 			@RequestParam(defaultValue = "1") int currentPage, 
-			@RequestParam(defaultValue = "5") int pageSize) {
+			@RequestParam(defaultValue = "10") int pageSize) {
 		
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberSerivce.getMemberInfo(id);
@@ -135,13 +135,12 @@ public class AdminController {
 		
 		model.addAttribute("id", id);
 		model.addAttribute("dto", dto);
-		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("mlist", mlist);
 		model.addAttribute("ph", pagingHandler);
 //		model.addAttribute("startPage", startPage);
 //		model.addAttribute("endPage", endPage);
 //		model.addAttribute("totalPage", totalPage);
-//		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("currentPage", currentPage);
 		return "/admin/memberList";
 	}
 	

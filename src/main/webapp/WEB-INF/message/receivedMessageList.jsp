@@ -226,7 +226,7 @@ function onSubmit(){
 			<ul class="pagination justify-content-center">
 				<!-- 이전 -->
 				<c:if test="${ph.showPrev}">
-					<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${ph.beginPage-1}"
+					<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${ph.beginPage - 1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
 					</li>
 				</c:if>
@@ -239,6 +239,7 @@ function onSubmit(){
 						<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${i}">${i}</a></li>
 					</c:if>
 				</c:forEach>
+				
 				<!-- 다음 -->
 				<c:if test="${ph.showNext}">
 					<li class="page-item"><a class="page-link" href="receivedMessage?currentPage=${ph.endPage + 1}"

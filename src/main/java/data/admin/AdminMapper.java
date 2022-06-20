@@ -16,7 +16,6 @@ public interface AdminMapper {
 	public void updateAuditAprvl(ProjectDTO pdto);
 	public void updateAuditRefusal(ProjectDTO pdto);
 	public String getAuditCount();
-	
 	public int getTotalMemberCount();
 	public List<MemberDTO> getMemberList(HashMap<String, Object> map);
 	public void deleteMember(String num);

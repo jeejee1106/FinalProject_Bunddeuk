@@ -8,68 +8,65 @@
 <link rel="stylesheet" type="text/css" href="/css/admin.css">
 
 <div class="container">
-
 	<div class="header-profile">
-	
 		<div class="container-user">
- 				<div class="user-photo" style="width: 100px; height: 100px;">
-					<c:if test="${dto.photo == null}">
-		    			<img class="img1" src="../../profile_image/basic.jpg"/>
-		    		</c:if>
-		    		<c:if test="${dto.photo != null}">
-		    			<img class="img1" src="../../profile_image/${dto.photo }"/>
-		    		</c:if>
-	    		</div>
-				<div class="a">
-					<div class="user-name">
-							<span>${dto.name }</span>
-						<c:if test="${sessionScope.sessionId == dto.id }">
-							<a class="user-info" href="/setting/main">
-								<div name="setting">
-									<img src="${root }/image/settings.png">
-								</div>
-							</a>
-						</c:if>
-					</div>
+			<div class="user-photo" style="width: 100px; height: 100px;">
+				<c:if test="${dto.photo == null}">
+	    			<img class="img1" src="../../profile_image/basic.jpg"/>
+	    		</c:if>
+	    		<c:if test="${dto.photo != null}">
+	    			<img class="img1" src="../../profile_image/${dto.photo }"/>
+	    		</c:if>
+    		</div>
+			<div class="a">
+				<div class="user-name">
+						<span>${dto.name }</span>
+					<c:if test="${sessionScope.sessionId == dto.id }">
+						<a class="user-info" href="/setting/main">
+							<div name="setting">
+								<img src="${root }/image/settings.png">
+							</div>
+						</a>
+					</c:if>
 				</div>
+			</div>
 		</div>
-		
 		<div class="container-tab">
 			<div class="tab-warpper">
-			<!-- 관리자 -->
-			<c:if test="${sessionScope.sessionId == 'admin' && sessionScope.loginok == 'yes'}">
-				<div class="tab-warpper-in">
-					<span class="tab current">
-						<div class="link-wrapper">
-							<a href="/admin/member_management" class="select">회원목록</a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/admin/project_management">프로젝트 </a>
-						</div>
-					</span>
-				</div>
-			</c:if>
+				<!-- 관리자 -->
+				<c:if test="${sessionScope.sessionId == 'admin' && sessionScope.loginok == 'yes'}">
+					<div class="tab-warpper-in">
+						<span class="tab current">
+							<div class="link-wrapper">
+								<a href="/admin/member_management" class="select">회원목록</a>
+							</div>
+						</span>
+						<span class="tab">
+							<div class="link-wrapper">
+								<a href="/admin/project_management">프로젝트 </a>
+							</div>
+						</span>
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
-							<form name="popForm">
-							<input type="hidden" name="id" value="${dto.id}" />
-						</form>
-
+	<form name="popForm">
+		<input type="hidden" name="id" value="${dto.id}" />
+	</form>
 </div>
 
 <!-- 회원리스트 -->
 <div class="WarrantyFilterHeader">
 	<div class="resultCounter1">
-		<span>${totalCount }</span>&nbsp;명의 회원이 있습니다.
+		<span>${ph.totalCount}</span>&nbsp;명의 회원이 있습니다.
 	</div>
 </div>
 <div class="table-container">
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
+				<th>번호</th>
 				<th>아이디</th>
 				<th>닉네임</th>
 				<th>가입일</th>
@@ -77,18 +74,20 @@
 			</tr>
 		</thead>
 		<tbody>
- 			<c:if test="${totalCount == 0}">
+ 			<c:if test="${ph.totalCount == 0}">
 				<tr>
-				<td colspan="4">회원이 없습니다</td>
+					<td colspan="4">회원이 없습니다</td>
 				</tr>
 			</c:if>
-			<c:if test="${totalCount > 0}">
-				<c:forEach var="m" items="${mlist }">
+			<c:if test="${ph.totalCount > 0}">
+				<c:forEach var="m" items="${mlist}" varStatus="status">
 						<tr>
+						
+							<td>${(currentPage * ph.pageSize) + status.count - ph.pageSize}</td>
 							<td class="meminfo" a="${m.id }">${m.id }</td>
 							<td class="meminfo" a="${m.id }">${m.name }</td>
-							<td><fmt:formatDate value="${m.join_date }" pattern="yyyy-MM-dd"/> </td>
-							<td><button type="button" class="btn btn-danger remove" num="${m.num }" myid="${m.id }">삭제</button></td>
+							<td><fmt:formatDate value="${m.join_date}" pattern="yyyy-MM-dd"/> </td>
+							<td><button type="button" class="btn btn-danger remove" num="${m.num}" myid="${m.id}">삭제</button></td>
 						</tr>
 				</c:forEach>
 			</c:if>
@@ -97,31 +96,28 @@
 	
 	<!-- 페이징  -->
 	<div class="pagination-wrap" style="margin: 20px auto;">
-	<c:if test="${totalCount>0 }">
+	<c:if test="${ph.totalCount > 0 }">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<!-- 이전 -->
-				<c:if test="${startPage>1 }">
-					<li class="page-item"><a class="page-link" href="member_management?currentPage=${startPage-1}"
+				<c:if test="${ph.showPrev}">
+					<li class="page-item"><a class="page-link" href="member_management?currentPage=${ph.beginPage - 1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
 					</li>
 				</c:if>
 
-				<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-					<c:if test="${currentPage==pp}">
-						<li class="page-item active"><a class="page-link"
-							href="notice?currentPage=${pp}">${pp}</a></li>
+				<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+					<c:if test="${currentPage == i}">
+						<li class="page-item active"><a class="page-link" href="notice?currentPage=${i}">${i}</a></li>
 					</c:if>
-					<c:if test="${currentPage!=pp}">
-						<li class="page-item"><a class="page-link"
-							href="member_management?currentPage=${pp}">${pp}</a></li>
+					<c:if test="${currentPage != i}">
+						<li class="page-item"><a class="page-link" href="member_management?currentPage=${i}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				
 				<!-- 다음 -->
-				<c:if test="${endPage<totalPage }">
-					<li class="page-item"><a class="page-link"
-						href="member_management?currentPage=${endPage+1}"
+				<c:if test="${ph.showNext}">
+					<li class="page-item"><a class="page-link" href="member_management?currentPage=${ph.endPage + 1}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>
@@ -130,7 +126,6 @@
 	</c:if>
 	</div>
 	<!-- /페이징 -->
-	
 </div>
 
 <script type="text/javascript">
@@ -140,32 +135,29 @@
 		location.href = "/admin/member_info?id=" + id + "&currentPage=" + ${currentPage}+"&key=memberList";
 	});
 
-	$(".remove")
-			.click(
-					function() {
-						var num = $(this).attr("num");
-						var myid = $(this).attr("myid");
-						//alert(num);
-						if (myid == 'admin') {
-							alert("관리자는 삭제할수 없습니다.")
-						} else {
-							var a = confirm("회원을 삭제하시겠습니까?");
-							if (a == true) {
-								var quary = {"num" : num};
-
-								$.ajax ({
-									type : "get",
-									url : "member_info_delete",
-									data : quary,
-									dataType : "text",
-									success : function(data) {
-										//alert("회원삭제 성공!");
-										location.href = "/admin/member_management?currentPage=" + ${currentPage} +"&key=memberList";
-									}, error : function() {
-										alert("code = "+ request.status+ " message="+ request.responseText+ " error = " + error); // 실패 시 처리
-										}
-									});
-							}
-						}
-					});
+	$(".remove").click(function() {
+		var num = $(this).attr("num");
+		var myid = $(this).attr("myid");
+		//alert(num);
+		if (myid == 'admin') {
+			alert("관리자는 삭제할수 없습니다.")
+		} else {
+			var a = confirm("회원을 삭제하시겠습니까?");
+			if (a == true) {
+				var quary = {"num" : num};
+				$.ajax ({
+					type : "get",
+					url : "member_info_delete",
+					data : quary,
+					dataType : "text",
+					success : function(data) {
+						//alert("회원삭제 성공!");
+						location.href = "/admin/member_management?currentPage=" + ${currentPage} +"&key=memberList";
+					}, error : function() {
+						alert("code = "+ request.status+ " message="+ request.responseText+ " error = " + error); // 실패 시 처리
+					}
+				});
+			}
+		}
+	});
 </script>
