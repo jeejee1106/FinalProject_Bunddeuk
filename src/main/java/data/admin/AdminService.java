@@ -15,9 +15,11 @@ public class AdminService {
 	@Autowired
 	AdminMapper mapper;
 	
-	public List<ProjectDTO> getProjectList(int start, int perpage){
-		
-		return mapper.getProjectList(start, perpage);
+	public List<ProjectDTO> getProjectList(int currentPage, int pageSize){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", (currentPage-1) * pageSize);
+		map.put("pageSize", pageSize);
+		return mapper.getProjectList(map);
 	}
 	public int getTotalCount() {
 		

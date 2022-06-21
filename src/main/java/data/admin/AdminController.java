@@ -31,49 +31,26 @@ public class AdminController {
 	ProfileService profileSerivce;
 	
 	@GetMapping("/admin/project_management")
-	public ModelAndView projectList(
-			@RequestParam(defaultValue = "1") int currentPage,
-			HttpSession session
-			) {
+	public String projectList(HttpSession session, Model model,
+			@RequestParam(defaultValue = "1") int currentPage, 
+			@RequestParam(defaultValue = "10") int pageSize) {
 		
-		ModelAndView mview = new ModelAndView();
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO dto = memberSerivce.getMemberInfo(id);
 		
 		int totalCount = adminService.getTotalCount();
 		
-		int perPage = 10; // 한페이지에 보여질 글의 갯수
-		int totalPage; // 총 페이지수
-		int start; // 각페이지에서 불러올 db 의 시작번호
-		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
-		int startPage; // 각 블럭에 표시할 시작페이지
-		int endPage; // 각 블럭에 표시할 마지막페이지
+		List<ProjectDTO> list = adminService.getProjectList(currentPage, pageSize);
+		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);
+		String waitingProject = adminService.getAuditCount();
 		
-		// 총 페이지 갯수 구하기
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-		// 각 블럭의 시작페이지
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-		if (endPage > totalPage)
-			endPage = totalPage;
-		// 각 페이지에서 불러올 시작번호
-		start = (currentPage - 1) * perPage;
+		model.addAttribute("dto", dto);
+		model.addAttribute("list", list);
+		model.addAttribute("waitingProject", waitingProject);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("ph", pagingHandler);
 		
-		List<ProjectDTO> list = adminService.getProjectList(start, perPage);
-		//System.out.println(list);
-		String count = adminService.getAuditCount();
-		
-		mview.addObject("dto", dto);
-		mview.addObject("list", list);
-		mview.addObject("count", count);
-		mview.addObject("startPage", startPage);
-		mview.addObject("endPage", endPage);
-		mview.addObject("totalPage", totalPage);
-		mview.addObject("currentPage", currentPage);
-		mview.addObject("totalCount", totalCount);
-		mview.setViewName("/admin/auditManagement");
-		
-		return mview;
+		return "/admin/auditManagement";
 	}
 	
 	@GetMapping("/admin/project_aprvl")
@@ -114,32 +91,12 @@ public class AdminController {
 		
 		int totalCount = adminService.getTotalMemberCount();
 		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);
-//		int perPage = 10; // 한페이지에 보여질 글의 갯수
-//		int totalPage; // 총 페이지수
-//		int start; // 각페이지에서 불러올 db 의 시작번호
-//		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
-//		int startPage; // 각 블럭에 표시할 시작페이지
-//		int endPage; // 각 블럭에 표시할 마지막페이지
-//		
-//		// 총 페이지 갯수 구하기
-//		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-//		// 각 블럭의 시작페이지
-//		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-//		endPage = startPage + perBlock - 1;
-//		if (endPage > totalPage)
-//			endPage = totalPage;
-//		// 각 페이지에서 불러올 시작번호
-//		start = (currentPage - 1) * perPage;
-		
 		List<MemberDTO> mlist = adminService.getMemberList(currentPage, pageSize);
 		
 		model.addAttribute("id", id);
 		model.addAttribute("dto", dto);
 		model.addAttribute("mlist", mlist);
 		model.addAttribute("ph", pagingHandler);
-//		model.addAttribute("startPage", startPage);
-//		model.addAttribute("endPage", endPage);
-//		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("currentPage", currentPage);
 		return "/admin/memberList";
 	}

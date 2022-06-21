@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.admin.AdminMapper">
 	<!-- 프로젝트 -->
-	<select id="getProjectList" parameterType="int" resultType="pdto">
-		SELECT * FROM project WHERE NOT audit=0 ORDER BY audit ASC, idx DESC LIMIT #{start}, #{perpage}
+	<select id="getProjectList" parameterType="HashMap" resultType="pdto">
+		SELECT * FROM project WHERE NOT audit=0 ORDER BY audit ASC, idx DESC LIMIT #{offset}, #{pageSize}
 	</select>
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) FROM project WHERE NOT audit=0

@@ -11,13 +11,13 @@ import data.project.ProjectDTO;
 @Mapper
 public interface AdminMapper {
 	
-	public List<ProjectDTO> getProjectList(int start, int perpage);
+	public List<MemberDTO> getMemberList(HashMap<String, Object> map);
+	public List<ProjectDTO> getProjectList(HashMap<String, Object> map);
 	public int getTotalCount();
 	public void updateAuditAprvl(ProjectDTO pdto);
 	public void updateAuditRefusal(ProjectDTO pdto);
 	public String getAuditCount();
 	public int getTotalMemberCount();
-	public List<MemberDTO> getMemberList(HashMap<String, Object> map);
 	public void deleteMember(String num);
 	
 

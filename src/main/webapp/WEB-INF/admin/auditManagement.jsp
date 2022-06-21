@@ -128,7 +128,6 @@ $(function(){
 			});
 		}
 	});
-	
 });
 
 $(document).on("click", "td.title", function() {
@@ -150,32 +149,29 @@ $(document).on("click", "td.title", function() {
 
 <!-- 메뉴 -->
 <div class="container">
-
 	<div class="header-profile">
-	
 		<div class="container-user">
- 				<div class="user-photo" style="width: 100px; height: 100px;">
-					<c:if test="${dto.photo == null}">
-		    			<img class="img1" src="../../profile_image/basic.jpg"/>
-		    		</c:if>
-		    		<c:if test="${dto.photo != null}">
-		    			<img class="img1" src="../../profile_image/${dto.photo }"/>
-		    		</c:if>
-	    		</div>
-				<div class="a">
-					<div class="user-name">
-							<span>${dto.name }</span>
-						<c:if test="${sessionScope.sessionId == id }">
-							<a class="user-info" href="/setting/main">
-								<div name="setting">
-									<img src="${root }/image/settings.png">
-								</div>
-							</a>
-						</c:if>
-					</div>
+			<div class="user-photo" style="width: 100px; height: 100px;">
+				<c:if test="${dto.photo == null}">
+	    			<img class="img1" src="../../profile_image/basic.jpg"/>
+	    		</c:if>
+	    		<c:if test="${dto.photo != null}">
+	    			<img class="img1" src="../../profile_image/${dto.photo }"/>
+	    		</c:if>
+    		</div>
+			<div class="a">
+				<div class="user-name">
+					<span>${dto.name }</span>
+					<c:if test="${sessionScope.sessionId == id }">
+						<a class="user-info" href="/setting/main">
+							<div name="setting">
+								<img src="${root }/image/settings.png">
+							</div>
+						</a>
+					</c:if>
 				</div>
+			</div>
 		</div>
-		
 		<div class="container-tab">
 			<div class="tab-warpper">
 			<!-- 관리자 -->
@@ -196,42 +192,41 @@ $(document).on("click", "td.title", function() {
 			</div>
 		</div>
 	</div>
-							<form name="popForm">
-							<input type="hidden" name="id" value="${id}" />
-						</form>
-
+	<form name="popForm">
+		<input type="hidden" name="id" value="${id}" />
+	</form>
 </div>
 
 <!-- 리스트 -->
-	<div class="WarrantyFilterHeader">
-		<div class="resultCounter1">
-			총&nbsp;${totalCount}&nbsp;개 중&nbsp;<span>${count }</span>&nbsp;건의 대기중인 프로젝트가 있습니다.
-		</div>
+<div class="WarrantyFilterHeader">
+	<div class="resultCounter1">
+		총&nbsp;${ph.totalCount}&nbsp;개 중&nbsp;<span>${waitingProject}</span>&nbsp;건의 대기중인 프로젝트가 있습니다.
 	</div>
-	<div class="table-container">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>카테고리</th>
-					<th>프로젝트명</th>
-					<th>창작자명</th>
-					<th>시작일</th>
-					<th colspan="2">심사여부</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:if test="${totalCount == 0 }">
+</div>
+<div class="table-container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>카테고리</th>
+				<th>프로젝트명</th>
+				<th>창작자명</th>
+				<th>시작일</th>
+				<th colspan="2">심사여부</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:if test="${ph.totalCount == 0 }">
 				<td colspan="6" style="text-align: center;">등록된 프로젝트가 없습니다.</td>
 			</c:if>
-				<c:forEach var="p" items="${list }">
-					<c:if test="${totalCount > 0}">
+				<c:forEach var="p" items="${list}">
+					<c:if test="${ph.totalCount > 0}">
 					<tr>
-						<td idx="${p.idx }">${p.idx }</td>
+						<td idx="${p.idx}">${p.idx}</td>
 						<td>${p.category }</td>
-						<td class="title" idx="${p.idx }">${p.title }</td>
-						<td>${p.name }</td>
-						<td>${p.start_date }</td>
+						<td class="title" idx="${p.idx}">${p.title}</td>
+						<td>${p.name}</td>
+						<td>${p.start_date}</td>
 						<td>
 							<c:choose>
 								<c:when test="${p.audit == 1}">
@@ -246,49 +241,47 @@ $(document).on("click", "td.title", function() {
 							</c:choose>
 						<td>
 							<c:if test="${p.audit == 1}">
-							<div class="btn-group">
-								<button type="button" class="btn btn-success dropdown-toggle btn-xs" data-toggle="dropdown">
-									승인/반려 <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li class="aprvl" idx="${p.idx }">승인</li>
-									<li class="refusal" idx="${p.idx }">반려</li>
-								</ul>
-							</div>
+								<div class="btn-group">
+									<button type="button" class="btn btn-success dropdown-toggle btn-xs" data-toggle="dropdown">
+										승인/반려 <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li class="aprvl" idx="${p.idx}">승인</li>
+										<li class="refusal" idx="${p.idx}">반려</li>
+									</ul>
+								</div>
 							</c:if>
 						</td>
 					</tr>
 					</c:if>
 				</c:forEach>
-			</tbody>
-		</table>
-			<!-- 페이징  -->
+		</tbody>
+	</table>
+	
+	<!-- 페이징  -->
 	<div class="pagination-wrap" style="margin: 20px auto;">
-	<c:if test="${totalCount>0 }">
+	<c:if test="${ph.totalCount > 0}">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<!-- 이전 -->
-				<c:if test="${startPage>1 }">
-					<li class="page-item"><a class="page-link" href="project_management?currentPage=${startPage-1}"
+				<c:if test="${ph.showPrev}">
+					<li class="page-item"><a class="page-link" href="project_management?currentPage=${ph.beginPage - 1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
 					</li>
 				</c:if>
-
-				<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-					<c:if test="${currentPage==pp}">
-						<li class="page-item active"><a class="page-link"
-							href="project_management?currentPage=${pp}">${pp}</a></li>
+	
+				<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+					<c:if test="${currentPage == i}">
+						<li class="page-item active"><a class="page-link" href="project_management?currentPage=${i}">${i}</a></li>
 					</c:if>
-					<c:if test="${currentPage!=pp}">
-						<li class="page-item"><a class="page-link"
-							href="project_management?currentPage=${pp}">${pp}</a></li>
+					<c:if test="${currentPage != i}">
+						<li class="page-item"><a class="page-link" href="project_management?currentPage=${i}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				
 				<!-- 다음 -->
-				<c:if test="${endPage<totalPage }">
-					<li class="page-item"><a class="page-link"
-						href="project_management?currentPage=${endPage+1}"
+				<c:if test="${ph.showNext}">
+					<li class="page-item"><a class="page-link" href="project_management?currentPage=${ph.endPage + 1}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>
@@ -297,4 +290,4 @@ $(document).on("click", "td.title", function() {
 	</c:if>
 	</div>
 	<!-- /페이징 -->
-	</div>
+</div>

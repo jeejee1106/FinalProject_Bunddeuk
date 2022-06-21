@@ -82,7 +82,6 @@
 			<c:if test="${ph.totalCount > 0}">
 				<c:forEach var="m" items="${mlist}" varStatus="status">
 						<tr>
-						
 							<td>${(currentPage * ph.pageSize) + status.count - ph.pageSize}</td>
 							<td class="meminfo" a="${m.id }">${m.id }</td>
 							<td class="meminfo" a="${m.id }">${m.name }</td>
@@ -108,7 +107,7 @@
 
 				<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
 					<c:if test="${currentPage == i}">
-						<li class="page-item active"><a class="page-link" href="notice?currentPage=${i}">${i}</a></li>
+						<li class="page-item active"><a class="page-link" href="member_management?currentPage=${i}">${i}</a></li>
 					</c:if>
 					<c:if test="${currentPage != i}">
 						<li class="page-item"><a class="page-link" href="member_management?currentPage=${i}">${i}</a></li>
