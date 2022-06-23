@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.notice.NoticeMapper">
-	<select id="getNoticeList" parameterType="int" resultType="ndto">
-		SELECT * FROM notice ORDER BY num DESC limit #{start}, #{perpage}
+	<select id="getNoticeList" parameterType="HashMap" resultType="ndto">
+		SELECT * FROM notice ORDER BY num DESC LIMIT #{offset}, #{pageSize}
 	</select>
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM notice

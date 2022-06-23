@@ -21,34 +21,35 @@ public class AdminService {
 		map.put("pageSize", pageSize);
 		return mapper.getProjectList(map);
 	}
+	
 	public int getTotalCount() {
-		
 		return mapper.getTotalCount();
 	}
+	
 	public void updateAuditAprvl(ProjectDTO pdto) {
-		
 		mapper.updateAuditAprvl(pdto);
 	}
+	
 	public void updateAuditRefusal(ProjectDTO pdto) {
-		
 		mapper.updateAuditRefusal(pdto);
 	}
+	
 	public String getAuditCount() {
-		
 		return mapper.getAuditCount();
 	}
+	
 	public int getTotalMemberCount() {
-		
 		return mapper.getTotalMemberCount();
 	}
+	
 	public List<MemberDTO> getMemberList(int currentPage, int pageSize) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", (currentPage-1) * pageSize);
 		map.put("pageSize", pageSize);
 		return mapper.getMemberList(map);
 	}
+	
 	public void deleteMember(String num) {
-		
 		mapper.deleteMember(num);
 	}
 }

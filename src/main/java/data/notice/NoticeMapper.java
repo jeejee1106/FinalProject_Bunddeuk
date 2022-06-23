@@ -1,5 +1,6 @@
 package data.notice;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -7,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface NoticeMapper {
 
-	public List<NoticeDTO> getNoticeList(int start, int perpage);
+	public List<NoticeDTO> getNoticeList(HashMap<String, Object> map);
 	public int getTotalCount();
 	public void insertNotice(NoticeDTO dto);
 	

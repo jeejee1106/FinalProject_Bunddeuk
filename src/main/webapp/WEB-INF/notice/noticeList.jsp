@@ -21,7 +21,7 @@
 <div class="Container_list">
 	<div class="list-wrapper">
 		<ul class="List_StyledList">
-		<c:if test="${totalCount == 0}">
+		<c:if test="${ph.totalCount == 0}">
 		<li style="margin-right:100px; text-align: center;">
 		<span class="title-box">
 		<span class="title" style="text-decoration: none; margin-top: 30px;">
@@ -30,19 +30,19 @@
 		</span>
 		</li>
 		</c:if>
-		<c:if test="${totalCount >0}">
-			<c:forEach var="n" items="${noticeList }">
+		<c:if test="${ph.totalCount > 0}">
+			<c:forEach var="n" items="${noticeList}">
 			<li class="">
-				<a href="/notice/detail?num=${n.num }&currentPage=${currentPage}&key=noticeList">
+				<a href="/notice/detail?num=${n.num}&currentPage=${currentPage}&key=noticeList">
 					<span class="title-box">
 						<span class="group">
 							공지사항<em class="empty"></em>
 						</span>
 						<span class="title">
-							${n.subject }
+							${n.subject}
 						</span>
 						<span class="date">
-							<fmt:formatDate value="${n.writeday }" pattern="yyyy-MM-dd"/></span>
+							<fmt:formatDate value="${n.writeday}" pattern="yyyy-MM-dd"/></span>
 					</span>
 				</a>
 			</li>
@@ -57,31 +57,28 @@
 	</div>
 		<!-- 페이징  -->
 	<div class="pagination-wrap" style="margin: 25px auto;">
-	<c:if test="${totalCount>0 }">
+	<c:if test="${ph.totalCount > 0 }">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<!-- 이전 -->
-				<c:if test="${startPage>1 }">
-					<li class="page-item"><a class="page-link" href="notice?currentPage=${startPage-1}"
+				<c:if test="${ph.showPrev}">
+					<li class="page-item"><a class="page-link" href="notice?currentPage=${ph.beginPage - 1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
 					</li>
 				</c:if>
 
-				<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-					<c:if test="${currentPage==pp}">
-						<li class="page-item active"><a class="page-link"
-							href="notice?currentPage=${pp}">${pp}</a></li>
+				<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+					<c:if test="${currentPage == i}">
+						<li class="page-item active"><a class="page-link" href="notice?currentPage=${i}">${i}</a></li>
 					</c:if>
-					<c:if test="${currentPage!=pp}">
-						<li class="page-item"><a class="page-link"
-							href="notice?currentPage=${pp}">${pp}</a></li>
+					<c:if test="${currentPage != i}">
+						<li class="page-item"><a class="page-link" href="notice?currentPage=${i}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				
 				<!-- 다음 -->
-				<c:if test="${endPage<totalPage }">
-					<li class="page-item"><a class="page-link"
-						href="notice?currentPage=${endPage+1}"
+				<c:if test="${ph.showNext}">
+					<li class="page-item"><a class="page-link" href="notice?currentPage=${ph.endPage + 1}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>
