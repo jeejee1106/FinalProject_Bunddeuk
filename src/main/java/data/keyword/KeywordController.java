@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class KeywordController {
 	@Autowired
 	keywordService keywordService;
+	
 	@ResponseBody
 	@GetMapping("/keyword/insert")
 	public void insertKeyword(String keyword) {
 		keywordService.insertKeyword(keyword);
 	}
+	
 	@ResponseBody
 	@GetMapping("/keyword/getKeyword")
 	public List<KeywordDTO> getKeywordList(){

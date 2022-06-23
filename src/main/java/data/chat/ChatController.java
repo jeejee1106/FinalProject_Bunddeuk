@@ -17,6 +17,7 @@ import data.member.MemberMapper;
 
 @Controller
 public class ChatController {
+	
 	@Autowired
 	ChatService chatService;
 	@Autowired
@@ -24,28 +25,21 @@ public class ChatController {
 	
 	@PostMapping("/chat/personalChat")
 	public String openPersonalChat(Model model, String id) {
-		
-		/* System.out.println(id); */
 		MemberDTO dto = memberMapper.getMemberInfo(id);
 		model.addAttribute("dto", dto);
 		return "/chat/chat/personalChat";
 	}
 	
-	
 	@GetMapping("/chat/list")
 	public String getChatList(Model model, HttpSession session) {
-		List<ChatDTO> list = chatService.getChatList((String)session.getAttribute("sessionId"));
-		for(ChatDTO dto:list) {
+		List<ChatDTO> chatList = chatService.getChatList((String)session.getAttribute("sessionId"));
+		for(ChatDTO dto:chatList) {
 			dto.setId((String)session.getAttribute("sessionId"));
 			dto.setPhoto(chatService.getOtherProfile(dto));
 			dto.setUnread(chatService.countUnreadMessage(dto));
-			/* System.out.println(dto.getPhoto()); */
 		}
 		
-		
-		model.addAttribute("list",list);
-		
-		System.out.println(list.size()+"리스트사이즈");
+		model.addAttribute("chatList",chatList);
 		return "/chat/chat/message";
 	}
 
@@ -61,10 +55,10 @@ public class ChatController {
 		List<ChatDTO> list = chatService.getRoomContentList(dto);
 		return list;
 	}
+	
 	@ResponseBody
 	@PostMapping("/chat/read")
 	public void readMessage(String send_id, int room) {
-		System.out.println("읽음처리"+send_id+","+room);
 		ChatDTO dto = new ChatDTO();
 		
 		dto.setId(send_id);

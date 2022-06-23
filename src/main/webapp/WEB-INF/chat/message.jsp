@@ -14,7 +14,7 @@
 			<span class="title"><i class="fa fa-comments-o"></i> 채팅</span>
 		</div>
 		<c:choose>
-			<c:when test="${list.size() == 0}">
+			<c:when test="${chatList.size() == 0}">
 				<p class="empty-message">
 					참여중인 채팅이 없습니다. <br> <span class="empty-message2">맴버와
 						채팅을 시작해보세요</span>
@@ -22,7 +22,7 @@
 			</c:when>
 			<c:otherwise>
 				<ul>
-					<c:forEach var="messageInfo" items="${list}">
+					<c:forEach var="messageInfo" items="${chatList}">
 						<%-- <c:if test="${messageInfo.exit_id != sessionScope.sessionId}"> --%>
 						<li class="info-container">
 							<div class="open-chat">

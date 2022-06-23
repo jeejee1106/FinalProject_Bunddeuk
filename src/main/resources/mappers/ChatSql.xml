@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="data.chat.ChatMapper">
 
-	<select id="getRoomNumber"  parameterType="CDTO" resultType="String">
+	<select id="getRoomNumber"  parameterType="cdto" resultType="String">
 	    select room from chat
 	    where (recv_id = #{recv_id} and send_id=#{send_id} and exit_count != 1) or (send_id = #{recv_id} and recv_id=#{send_id} and exit_count != 1)
 	    limit 0,1
@@ -11,7 +11,7 @@
 	    select ifnull(max(room),0) from chat
 	</select>
 	
-	<insert id="sendMessage" parameterType="CDTO">
+	<insert id="sendMessage" parameterType="cdto">
 	    <choose>
 	        <when test="room != 0">
 	            insert into chat values(0, #{room}, #{send_id}, #{recv_id}, now(), now(), #{content}, 0, 0, 0);
@@ -22,7 +22,7 @@
 	    </choose>
 	</insert>
 	
-	<select id="getRoomContentList" parameterType="CDTO" resultType="CDTO">
+	<select id="getRoomContentList" parameterType="cdto" resultType="cdto">
 	    select c.num, c.room, c.send_id, c.recv_id, date_format(c.send_time, '%Y-%m-%d %H:%i') send_time, c.read_time, c.content, c.read_check, m.photo,
 	    c.exit_id, c.exit_count from chat c left outer join member m
 	    on c.send_id = m.id where room=#{room}
@@ -35,7 +35,7 @@
 	        </otherwise>
 	    </choose> -->
 	</select>
-	<select id="getChatList" parameterType="CDTO" resultType="CDTO">
+	<select id="getChatList" parameterType="cdto" resultType="cdto">
 	    select num, room, send_id, recv_id, date_format(send_time, '%Y-%m-%d %H:%i') send_time, read_time, content, read_check,
 	    exit_id, exit_count
 	    from chat
@@ -45,23 +45,23 @@
 	</select>
 	
 	<!-- get number of unread message-->
-	<select id="countUnreadMessage" parameterType="CDTO" resultType="Int">
+	<select id="countUnreadMessage" parameterType="cdto" resultType="Int">
 	    select count(num) from chat 
 	    where recv_id=#{id} and read_check=0 and room=#{room}
 	</select>
 	
 	<!--change message status from unread to read-->
-	<update id="changeMessageReadCheck" parameterType="CDTO">
+	<update id="changeMessageReadCheck" parameterType="cdto">
 	    update chat set read_check=1  where room=#{room} and read_check=0 and recv_id=#{id}
 	</update>
 	
 	<!-- readtime -->
-	<update id="changeMessageReadTime" parameterType="CDTO">
+	<update id="changeMessageReadTime" parameterType="cdto">
 	    update chat set read_time = now()  where room=#{room} and read_check=0 and recv_id=#{id}
 	</update>
 	
 	<!-- profile   -->
-	<select id="getOtherProfile" parameterType="CDTO" resultType="String">
+	<select id="getOtherProfile" parameterType="cdto" resultType="String">
 	    select photo from member
 	    <choose>
 	        <when test="send_id == id">

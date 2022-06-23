@@ -6,7 +6,7 @@ import org.apache.ibatis.type.Alias;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Alias("CMDTO")
+@Alias("cmdto")
 public class CommentDTO {
 	private int num;
 	private int pnum;
@@ -22,6 +22,7 @@ public class CommentDTO {
 	private String content;
 	@JsonFormat(pattern = "yyyy.MM.dd hh:mm")
 	private Timestamp writetime;
+	
 	public int getNum() {
 		return num;
 	}
