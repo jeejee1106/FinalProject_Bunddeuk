@@ -32,27 +32,23 @@ public class NoticeController implements ServletContextAware {
 	@Autowired
 	NoticeService noticeService;
 	
+	private ServletContext servletContext;
+	
 	@GetMapping("/notice")
 	public String noticeList(HttpSession session, Model model,
 			@RequestParam(defaultValue = "1") int currentPage, 
 			@RequestParam(defaultValue = "10") int pageSize) {
-		
-//		String id = (String) session.getAttribute("sessionId");
-//		String loginok = (String) session.getAttribute("loginok");
 		
 		int totalCount = noticeService.getTotalCount();
 		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);
 		List<NoticeDTO> noticeList = noticeService.getNoticeList(currentPage, pageSize);
 		
 		model.addAttribute("noticeList", noticeList);
-//		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("ph", pagingHandler);
 		model.addAttribute("currentPage", currentPage);
 		
 		return "/notice/noticeList";
 	}
-	
-	private ServletContext servletContext;
 	
 	@GetMapping("/notice/wrtieform")
 	public String writeForm() {
@@ -60,7 +56,7 @@ public class NoticeController implements ServletContextAware {
 	}
 	
 	@PostMapping(value = "/notice/upload_ckeditor", produces = { MimeTypeUtils.APPLICATION_JSON_VALUE })
-	public ResponseEntity<JSONFileUpload> UploadCKEditor(@RequestParam("upload") MultipartFile upload) {
+	public ResponseEntity<JSONFileUpload> uploadCKEditor(@RequestParam("upload") MultipartFile upload) {
 		try {
 			String fileName = UploadFileHelper.upload(servletContext, upload);
 			return new ResponseEntity<JSONFileUpload>(new JSONFileUpload("/webapp/ckupload/" + fileName), HttpStatus.OK);
@@ -91,9 +87,8 @@ public class NoticeController implements ServletContextAware {
 	
 	@GetMapping("/notice/detail")
 	public String getData( @RequestParam String num,  HttpSession session, Model model,
-								 @RequestParam (defaultValue = "1") int currentPage) {
+						   @RequestParam (defaultValue = "1") int currentPage) {
 		
-//		String id = (String) session.getAttribute("sessionId");
 		NoticeDTO ndto = noticeService.getNoticeData(num);
 		
 		model.addAttribute("ndto", ndto);
@@ -107,8 +102,6 @@ public class NoticeController implements ServletContextAware {
 	@GetMapping("/notice/updateform")
 	public String updateForm(@RequestParam String num, HttpSession session, String currentPage, Model model) {
 		
-//		String id = (String) session.getAttribute("sessionId");
-//		String login = (String) session.getAttribute("login");
 		NoticeDTO ndto = noticeService.getNoticeData(num);
 		
 		model.addAttribute("ndto", ndto);
