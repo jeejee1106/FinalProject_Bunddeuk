@@ -5,17 +5,21 @@
 	<select id="getProjectList" parameterType="HashMap" resultType="pdto">
 		SELECT * FROM project WHERE NOT audit=0 ORDER BY audit ASC, idx DESC LIMIT #{offset}, #{pageSize}
 	</select>
+	
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) FROM project WHERE NOT audit=0
 	</select>
+	
 	<!-- 승인 -->
 	<update id="updateAuditAprvl" parameterType="pdto">
 		UPDATE project SET audit=3 WHERE idx=#{idx}
 	</update>
+	
 	<!-- 반려됨 -->
 	<update id="updateAuditRefusal" parameterType="pdto">
 		UPDATE project SET audit=2 WHERE idx=#{idx}
 	</update>
+	
 	<!-- 대기 갯수 -->
 	<select id="getAuditCount" resultType="String" >
 		SELECT count(*) FROM project WHERE audit=1

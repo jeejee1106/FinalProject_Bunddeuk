@@ -11,7 +11,6 @@ public interface NoticeMapper {
 	public List<NoticeDTO> getNoticeList(HashMap<String, Object> map);
 	public int getTotalCount();
 	public void insertNotice(NoticeDTO dto);
-	
 	public NoticeDTO getNoticeData(String num);
 	public int getMaxNum();
 	public void updateNotice(NoticeDTO dto);

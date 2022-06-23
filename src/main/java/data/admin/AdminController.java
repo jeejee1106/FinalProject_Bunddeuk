@@ -56,14 +56,12 @@ public class AdminController {
 	@GetMapping("/admin/project_aprvl")
 	@ResponseBody
 	public void updateAprvl(@ModelAttribute ProjectDTO pdto) {
-		
 		adminService.updateAuditAprvl(pdto);
 	}
 	
 	@GetMapping("/admin/project_refusal")
 	@ResponseBody
 	public void updateRefusal(@ModelAttribute ProjectDTO pdto) {
-		
 		adminService.updateAuditRefusal(pdto);
 	}
 	
