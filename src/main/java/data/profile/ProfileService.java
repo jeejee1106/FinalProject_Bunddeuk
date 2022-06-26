@@ -59,13 +59,13 @@ public class ProfileService {
 		mapper.deleteLikedProject(num);
 	}
 	
-	public List<SupportDetailDTO> getSponsorList (String idx, String name, int start, int perpage) {
+	public List<SupportDetailDTO> getSponsorList (String idx, String name, int currentPage, int pageSize) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("idx", idx);
 		map.put("name", name);
-		map.put("start", start);
-		map.put("perpage", perpage);
+		map.put("offset", (currentPage-1) * pageSize);
+		map.put("pageSize", pageSize);
 		
 		return mapper.getSponsorList(map);
 	}

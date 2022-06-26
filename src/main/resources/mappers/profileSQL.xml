@@ -37,7 +37,7 @@
 	
 	<!-- 후원자 리스트 -->
  	<select id="getSponsorList" parameterType="HashMap" resultType="sdetaildto">
-		SELECT s.*, p.name, p.idx FROM support AS s JOIN project AS p ON s.idx=p.idx WHERE p.idx=#{idx} AND p.name=#{name} ORDER BY num DESC LIMIT #{start}, #{perpage}
+		SELECT s.*, p.name, p.idx FROM support AS s JOIN project AS p ON s.idx=p.idx WHERE p.idx=#{idx} AND p.name=#{name} ORDER BY num DESC LIMIT #{offset}, #{pageSize}
 	</select>
 	<!-- 후원자 총 명수 -->
 	<select id="getTotalSponsorCount" parameterType="String" resultType="int">

@@ -22,8 +22,6 @@ $(function(){
 </script>
 <!-- /script -->
 
-
-
 <!-- top info -->
 <div class="TopContents">
 	<div class="Header">
@@ -38,8 +36,6 @@ $(function(){
 			</a>
 		</div>
 	</div>
-
-
 	<div class="TopContentsWrap">
 		<div class="TopContentsCenter">
 			<div class="ButtonsWrap">
@@ -148,12 +144,12 @@ $(function(){
       </tr>
     </thead>
     <tbody>
-    <c:if test="${totalCount == 0}">
+    <c:if test="${ph.totalCount == 0}">
     	<tr>
     		<td colspan="5" align="center">후원한 회원이 없습니다</td>
     	</tr>
     </c:if>
-    <c:if test="${totalCount > 0}">
+    <c:if test="${ph.totalCount > 0}">
      <c:forEach var="s" items="${sponsorList}">
       <tr class="num" num="${s.num }">
         <td>${s.num }</td>
@@ -172,33 +168,33 @@ $(function(){
     </tbody>
   </table>
   <!-- /리스트 -->
-		<!-- 페이징  -->
+	<!-- 페이징  -->
 	<div class="pagination-wrap" style="margin: 20px auto;">
-	<c:if test="${totalCount>0 }">
+	<c:if test="${ph.totalCount>0}">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<!-- 이전 -->
-				<c:if test="${startPage>1 }">
-					<li class="page-item"><a class="page-link" href="created_sponsorlist?idx=${pdto.idx }&currentPage=${startPage-1}"
+				<c:if test="${ph.showPrev}">
+					<li class="page-item"><a class="page-link" href="created_sponsorlist?idx=${pdto.idx}&currentPage=${ph.beginPage - 1}"
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a>
 					</li>
 				</c:if>
 
-				<c:forEach var="pp" begin="${startPage}" end="${endPage}">
-					<c:if test="${currentPage==pp}">
+				<c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+					<c:if test="${currentPage == i}">
 						<li class="page-item active"><a class="page-link"
-							href="created_sponsorlist?idx=${pdto.idx }&currentPage=${pp}">${pp}</a></li>
+							href="created_sponsorlist?idx=${pdto.idx}&currentPage=${i}">${i}</a></li>
 					</c:if>
-					<c:if test="${currentPage!=pp}">
+					<c:if test="${currentPage != i}">
 						<li class="page-item"><a class="page-link"
-							href="created_sponsorlist?idx=${pdto.idx }&currentPage=${pp}">${pp}</a></li>
+							href="created_sponsorlist?idx=${pdto.idx}&currentPage=${i}">${i}</a></li>
 					</c:if>
 				</c:forEach>
 				
 				<!-- 다음 -->
-				<c:if test="${endPage<totalPage }">
+				<c:if test="${ph.showNext}">
 					<li class="page-item"><a class="page-link"
-						href="created_sponsorlist?idx=${pdto.idx }&currentPage=${endPage+1}"
+						href="created_sponsorlist?idx=${pdto.idx }&currentPage=${ph.endPage + 1}"
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>

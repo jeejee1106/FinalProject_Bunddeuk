@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import data.member.MemberDTO;
 import data.member.MemberMapper;
 import data.member.MemberService;
+import data.paging.PagingHandler;
 import data.project.DetailService;
 import data.project.ProjectDTO;
 import data.project.ProjectMapper;
@@ -222,41 +223,23 @@ public class ProfileController {
 	
 	//후원자 리스트
 	@GetMapping("/profile/{url}/created_sponsorlist")
-	public String sponsorList(
-			@RequestParam(defaultValue = "1") int currentPage, String idx,
-			@PathVariable String url, Model model) {
+	public String sponsorList(Model model, String idx,
+			@RequestParam(defaultValue = "1") int currentPage, 
+			@RequestParam(defaultValue = "10") int pageSize,
+			@PathVariable String url) {
 		
 		ProjectDTO pdto = projectService.getData(idx);
 		
 		String name = pdto.getName();
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + name);
 		int totalCount = profileService.getTotalSponsorCount(idx, name);
-		
-		int perPage = 10; // 한페이지에 보여질 글의 갯수
-		int totalPage; // 총 페이지수
-		int start; // 각페이지에서 불러올 db 의 시작번호
-		int perBlock = 5; // 몇개의 페이지번호씩 표현할것인가
-		int startPage; // 각 블럭에 표시할 시작페이지
-		int endPage; // 각 블럭에 표시할 마지막페이지
-		
-		// 총 페이지 갯수 구하기
-		totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-		// 각 블럭의 시작페이지
-		startPage = (currentPage - 1) / perBlock * perBlock + 1;
-		endPage = startPage + perBlock - 1;
-		if (endPage > totalPage)
-			endPage = totalPage;
-		// 각 페이지에서 불러올 시작번호
-		start = (currentPage - 1) * perPage;
-		
-		List<SupportDetailDTO> sponsorList = profileService.getSponsorList(idx, name, start, perPage);
+		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);
+		List<SupportDetailDTO> sponsorList = profileService.getSponsorList(idx, name, currentPage, pageSize);
 		
 		model.addAttribute("pdto", pdto);
 		model.addAttribute("sponsorList", sponsorList);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("ph", pagingHandler);
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("totalCount", totalCount);
 
 		return "/profile/sponsorMemberList";
 	}
