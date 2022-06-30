@@ -231,7 +231,6 @@ public class ProfileController {
 		ProjectDTO pdto = projectService.getData(idx);
 		
 		String name = pdto.getName();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + name);
 		int totalCount = profileService.getTotalSponsorCount(idx, name);
 		PagingHandler pagingHandler = new PagingHandler(totalCount, currentPage, pageSize);
 		List<SupportDetailDTO> sponsorList = profileService.getSponsorList(idx, name, currentPage, pageSize);
