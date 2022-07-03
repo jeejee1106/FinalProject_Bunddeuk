@@ -5,7 +5,6 @@
 <!-- 올린 프로젝트 관리 -->
 <link rel="stylesheet" type="text/css" href="/css/project-modify.css">
 
-<!--  -->
 <div class="TopContents">
 	<div class="Header">
 		<div class="HeaderWrap">
@@ -19,8 +18,6 @@
 			</a>
 		</div>
 	</div>
-
-
 	<div class="TopContentsWrap">
 		<div class="TopContentsCenter">
 			<div class="ButtonsWrap">
@@ -45,9 +42,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
 	<!-- button -->
 	<div class="PlanTabs">
 		<div class="PlanTabsWrap" width="81">

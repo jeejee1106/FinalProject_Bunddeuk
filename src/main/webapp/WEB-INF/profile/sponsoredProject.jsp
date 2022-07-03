@@ -3,18 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- 후원한 프로젝트 -->
-
 <link rel="stylesheet" type="text/css" href="/css/profile.css">
 
 <!-- 스크립트 -->
 <script type="text/javascript">
 $(function () {
    $(".personal-chat").click(function() {
-      /* let num = ${num}; */
-      /* var win = window.open("../chat/personalChat?num="+num, "PopupWin", "width=480,height=765 , left = 400px, top = 100px");  */
       onSubmit()
-      
-      
    });
 });
 
@@ -28,99 +23,81 @@ function onSubmit(){
  myForm.submit();
 }
 </script>
+
 <!-- 메뉴 -->
 <div class="container">
-
 	<div class="header-profile">
-	
 		<div class="container-user">
- 				<div class="user-photo" style="width: 100px; height: 100px;">
- 					<c:if test="${dto.photo == null}">
-		    			<img class="img1" src="../../profile_image/basic.jpg"/>
-		    		</c:if>
-		    		<c:if test="${dto.photo != null}">
-		    			<img class="img1" src="../../profile_image/${dto.photo }"/>
-		    		</c:if>
-	    		</div>
-				<div class="a">
-					<div class="user-name">
-							<span>${dto.name }</span>
-						<c:if test="${sessionScope.sessionId == dto.id }">
-							<a class="user-info" href="/setting/main">
-								<div name="setting">
-									<img src="${root }/image/settings.png">
-								</div>
-							</a>
-						</c:if>
-					</div>
+			<div class="user-photo" style="width: 100px; height: 100px;">
+				<c:if test="${dto.photo == null}">
+    				<img class="img1" src="../../profile_image/basic.jpg"/>
+    			</c:if>
+    			<c:if test="${dto.photo != null}">
+    				<img class="img1" src="../../profile_image/${dto.photo }"/>
+    			</c:if>
+    		</div>
+			<div class="a">
+				<div class="user-name">
+					<span>${dto.name }</span>
+					<c:if test="${sessionScope.sessionId == dto.id }">
+						<a class="user-info" href="/setting/main">
+							<div name="setting">
+								<img src="${root }/image/settings.png">
+							</div>
+						</a>
+					</c:if>
 				</div>
+			</div>
 		</div>
-		
 		<div class="container-tab">
 			<div class="tab-warpper">
-			<c:if test="${ sessionScope.sessionId != 'admin'}">
-				<div class="tab-warpper-in">
-					<span class="tab current">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}">소개</a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}/backed" class="select">후원한 프로젝트 </a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}/created">올린 프로젝트
-							</a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}/liked">관심프로젝트 </a>
-						</div>
-					</span>
-					<c:if test="${sessionScope.sessionId == dto.id }">
-						<span class="tab">
+				<c:if test="${ sessionScope.sessionId != 'admin'}">
+					<div class="tab-warpper-in">
+						<span class="tab current">
 							<div class="link-wrapper">
-								<a href="/message/receivedMessage">문의 메세지 </a>
+								<a href="/profile/${sessionScope.url}">소개</a>
 							</div>
 						</span>
-						</c:if>
-					<c:if test="${sessionScope.loginok == 'yes'}">
-						<c:if test="${dto.id != sessionScope.sessionId}">
+						<span class="tab">
+							<div class="link-wrapper">
+								<a href="/profile/${sessionScope.url}/backed" class="select">후원한 프로젝트 </a>
+							</div>
+						</span>
+						<span class="tab">
+							<div class="link-wrapper">
+								<a href="/profile/${sessionScope.url}/created">올린 프로젝트
+								</a>
+							</div>
+						</span>
+						<span class="tab">
+							<div class="link-wrapper">
+								<a href="/profile/${sessionScope.url}/liked">관심프로젝트 </a>
+							</div>
+						</span>
+						<c:if test="${sessionScope.sessionId == dto.id }">
 							<span class="tab">
 								<div class="link-wrapper">
-									<a class='personal-chat'>채팅 </a>
+									<a href="/message/receivedMessage">문의 메세지 </a>
 								</div>
 							</span>
 						</c:if>
-					</c:if>
+						<c:if test="${sessionScope.loginok == 'yes'}">
+							<c:if test="${dto.id != sessionScope.sessionId}">
+								<span class="tab">
+									<div class="link-wrapper">
+										<a class='personal-chat'>채팅 </a>
+									</div>
+								</span>
+							</c:if>
+						</c:if>
 					</div>
-			</c:if>
-			<!-- 관리자 -->
-<%-- 			<c:if test="${sessionScope.sessionId == 'admin'}">
-				<div class="tab-warpper-in">
-					<span class="tab current">
-						<div class="link-wrapper">
-							<a href="#">회원목록</a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}/admin/project_management">프로젝트 </a>
-						</div>
-					</span>
-				</div>
-			</c:if> --%>
+				</c:if>
 			</div>
 		</div>
 	</div>
-							<form name="popForm">
-							<input type="hidden" name="id" value="${dto.id}" />
-						</form>
-
+	<form name="popForm">
+		<input type="hidden" name="id" value="${dto.id}" />
+	</form>
 </div>
 
 <!-- 후원한 리스트 없을때 -->
@@ -141,7 +118,6 @@ function onSubmit(){
 	</div>
 </c:if>
 <!-- /후원한 리스트 없을때 -->
-
 
 <!-- 후원한 리스트 있을때 -->
 <c:if test="${count>0 && dto.privacy != 1 }">

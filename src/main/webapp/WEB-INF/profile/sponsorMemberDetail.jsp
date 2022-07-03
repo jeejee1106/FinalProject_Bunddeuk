@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 후원자 디테일 -->
-
 <link rel="stylesheet" type="text/css" href="/css/support-profile.css">
 
 <script type="text/javascript">
@@ -142,4 +141,3 @@ $(function(){
 		</div>
 	</div>
 </div>
-

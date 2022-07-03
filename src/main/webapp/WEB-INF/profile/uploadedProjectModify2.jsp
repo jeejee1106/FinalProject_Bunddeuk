@@ -111,7 +111,8 @@
 	font-weight: bold;
 	color: rgb(61, 61, 61);
 	}
-</style>   
+</style>
+
 <script>
 $(function() {
 	projectlist();
@@ -121,69 +122,66 @@ $(function() {
 	})
 	$(".btn1").click(function() {
 		$(".showBox").show();
-		
 	})
-
-	
 }) 
 function projectlist() {
-		var idx = $("#idx").val();
-		$.ajax({
-			dataType	: "json",
-			url			: "/project/presentList",
-			data		: {"idx" : idx},
-			success		: function(presentData){
-				var count = presentData.length;
-				$("#db_present").val(count);
-				//기본정보
-				var title = $("#titl2").val();
-				var thumbnail = $("#db_thumbnail2").val();
-				//펀딩계획
-				var target = $("#db_target2").val(); //값없으면 0
-				//선물
-				var present = $("#db_present").val();
-				//목표
-				var goal = $("#db_project_goal2").val();
-				//예상문제
-				var policy = $("#db_policy2").val();
-				def = 0;
-				fund = 0;
-				presen = 0;
-				projectGoal = 0;
-				polic = 0;
-				
-				if(title != '') {
-					def += 48;
-				}
-				if(thumbnail != '') {
-					def += 52;
-				}
-				if(target != '' || target != 0) {
-					fund += 100;
-				}
-				if(present != '') {
-					presen += 100;
-				}
-				if(goal != '') {
-					projectGoal += 100;
-				}
-				if(policy != '') {
-					polic += 100;
-				}
-				$("#defaultPercent").html(def + "% 작성완료");
-				$("#fundingPercent").html(fund + "% 작성완료");
-				$("#rewardPercent").html(presen + "% 작성완료");
-				$("#storyPercent").html(projectGoal + "% 작성완료");
-				$("#policyPercent").html(polic + "% 작성완료");
-			},
-			error		:function(request,status,error){
-		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		    }
-		})
+	var idx = $("#idx").val();
+	$.ajax({
+		dataType	: "json",
+		url			: "/project/presentList",
+		data		: {"idx" : idx},
+		success		: function(presentData){
+			var count = presentData.length;
+			$("#db_present").val(count);
+			//기본정보
+			var title = $("#titl2").val();
+			var thumbnail = $("#db_thumbnail2").val();
+			//펀딩계획
+			var target = $("#db_target2").val(); //값없으면 0
+			//선물
+			var present = $("#db_present").val();
+			//목표
+			var goal = $("#db_project_goal2").val();
+			//예상문제
+			var policy = $("#db_policy2").val();
+			def = 0;
+			fund = 0;
+			presen = 0;
+			projectGoal = 0;
+			polic = 0;
+			
+			if(title != '') {
+				def += 48;
+			}
+			if(thumbnail != '') {
+				def += 52;
+			}
+			if(target != '' || target != 0) {
+				fund += 100;
+			}
+			if(present != '') {
+				presen += 100;
+			}
+			if(goal != '') {
+				projectGoal += 100;
+			}
+			if(policy != '') {
+				polic += 100;
+			}
+			$("#defaultPercent").html(def + "% 작성완료");
+			$("#fundingPercent").html(fund + "% 작성완료");
+			$("#rewardPercent").html(presen + "% 작성완료");
+			$("#storyPercent").html(projectGoal + "% 작성완료");
+			$("#policyPercent").html(polic + "% 작성완료");
+		},
+		error		:function(request,status,error){
+	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    }
+	})
 }
 </script> 
-<!-- 올린 프로젝트 관리 하단 -->
 
+<!-- 올린 프로젝트 관리 하단 -->
 <link rel="stylesheet" type="text/css" href="/css/project-modify.css">
 
 <div class="ProjectEditorWrap">
@@ -325,11 +323,11 @@ function projectlist() {
 </div>
 <div style="height: 60px;"></div>
 <div id="data_pdto">
-<input type="hidden" id="idx" value="${pdto.idx }">
-<input type="hidden" id="titl2" value="${pdto.title }">
-<input type="hidden" id="db_thumbnail2" value="${pdto.thumbnail }">
-<input type="hidden" id="db_target2" value="${pdto.target_amount }">
-<input type="hidden" id="db_project_goal2" value="${pdto.project_goal }">
-<input type="hidden" id="db_present">
-<input type="hidden" id="db_policy2" value="${pdto.anticipated_problem }">
+	<input type="hidden" id="idx" value="${pdto.idx }">
+	<input type="hidden" id="titl2" value="${pdto.title }">
+	<input type="hidden" id="db_thumbnail2" value="${pdto.thumbnail }">
+	<input type="hidden" id="db_target2" value="${pdto.target_amount }">
+	<input type="hidden" id="db_project_goal2" value="${pdto.project_goal }">
+	<input type="hidden" id="db_present">
+	<input type="hidden" id="db_policy2" value="${pdto.anticipated_problem }">
 </div>

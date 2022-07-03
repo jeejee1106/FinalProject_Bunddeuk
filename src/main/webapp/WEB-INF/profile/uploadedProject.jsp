@@ -94,7 +94,6 @@ $(document).on("click", ".project-remove", function() {
 				</div>
 			</div>
 		</div>
-		
 		<div class="container-tab">
 			<div class="tab-warpper">
 				<c:if test="${ sessionScope.sessionId != 'admin'}">
@@ -321,52 +320,52 @@ $(document).on("click", ".project-remove", function() {
 						</c:if>
 						<!-- 반려 리스트 -->
 						<c:if test="${sessionScope.sessionId == dto.id }">
-						<div id="companion">
-							<br><br><br>
-							<div class="project-status">
-								<div class="project-status-tag"><b>반려됨 ${companionProjectCnt}</b></div>
-							</div>
-							<c:forEach var="c" items="${creativeList }">
-							<c:if test="${c.audit == 2 }">
-								<div class="project-card">
-								<c:if test="${c.thumbnail == null}">
-									<div class="ProjectImageWrapper">
-										<svg class="style__ProjectDefaultImage-sc-16sdzr6-3 kcoQXj" width="34" height="30" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M10.9581 4.6448C10.9581 7.21002 8.90441 9.28954 6.37101 9.28954C3.83761 9.28954 1.78388 7.21002 1.78388 4.6448C1.78388 2.07958 3.83761 6.10352e-05 6.37101 6.10352e-05C8.90441 6.10352e-05 10.9581 2.07958 10.9581 4.6448Z" fill="white"></path>
-											<path d="M33.9149 30.0001C33.9805 30.0001 34.0213 29.928 33.9883 29.8707L21.7443 8.62478C21.7114 8.56771 21.6299 8.56795 21.5973 8.62522L13.6619 22.5815C13.6324 22.6335 13.5606 22.6397 13.5229 22.5934L8.57785 16.5436C8.54116 16.4988 8.47194 16.503 8.44089 16.5521L0.0135644 29.8676C-0.0226682 29.9249 0.0179337 30.0001 0.0850861 30.0001H33.9149Z" fill="white"></path>
-										</svg>
-									</div>
-								</c:if>
-								<c:if test="${c.thumbnail != null}">
-									<div class="project-image-wrapper">
-										<img src="../../thumbnail_image/${c.thumbnail}" class="thumbnail"/>
-									</div>
-								</c:if>
-									<div class="project-container">
-										<div class="project-container-content-btn">
-											<div class="project-content-wrapper">
-												<div class="project-content">
-													<div class="project-title">
-														<span>${c.title }</span>
-													</div>
-													<div class="project-description">
-														<span>${c.category }</span>
+							<div id="companion">
+								<br><br><br>
+								<div class="project-status">
+									<div class="project-status-tag"><b>반려됨 ${companionProjectCnt}</b></div>
+								</div>
+								<c:forEach var="c" items="${creativeList }">
+								<c:if test="${c.audit == 2 }">
+									<div class="project-card">
+									<c:if test="${c.thumbnail == null}">
+										<div class="ProjectImageWrapper">
+											<svg class="style__ProjectDefaultImage-sc-16sdzr6-3 kcoQXj" width="34" height="30" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M10.9581 4.6448C10.9581 7.21002 8.90441 9.28954 6.37101 9.28954C3.83761 9.28954 1.78388 7.21002 1.78388 4.6448C1.78388 2.07958 3.83761 6.10352e-05 6.37101 6.10352e-05C8.90441 6.10352e-05 10.9581 2.07958 10.9581 4.6448Z" fill="white"></path>
+												<path d="M33.9149 30.0001C33.9805 30.0001 34.0213 29.928 33.9883 29.8707L21.7443 8.62478C21.7114 8.56771 21.6299 8.56795 21.5973 8.62522L13.6619 22.5815C13.6324 22.6335 13.5606 22.6397 13.5229 22.5934L8.57785 16.5436C8.54116 16.4988 8.47194 16.503 8.44089 16.5521L0.0135644 29.8676C-0.0226682 29.9249 0.0179337 30.0001 0.0850861 30.0001H33.9149Z" fill="white"></path>
+											</svg>
+										</div>
+									</c:if>
+									<c:if test="${c.thumbnail != null}">
+										<div class="project-image-wrapper">
+											<img src="../../thumbnail_image/${c.thumbnail}" class="thumbnail"/>
+										</div>
+									</c:if>
+										<div class="project-container">
+											<div class="project-container-content-btn">
+												<div class="project-content-wrapper">
+													<div class="project-content">
+														<div class="project-title">
+															<span>${c.title }</span>
+														</div>
+														<div class="project-description">
+															<span>${c.category }</span>
+														</div>
 													</div>
 												</div>
+												<c:if test="${sessionScope.sessionId == dto.id }">
+												<div class="project-button-section">
+													<a class="project-management"
+														href="created_management?idx=${c.idx}">관리</a>
+													<a class="project-remove" idx="${c.idx }">삭제</a>
+												</div>
+												</c:if>
 											</div>
-											<c:if test="${sessionScope.sessionId == dto.id }">
-											<div class="project-button-section">
-												<a class="project-management"
-													href="created_management?idx=${c.idx}">관리</a>
-												<a class="project-remove" idx="${c.idx }">삭제</a>
-											</div>
-											</c:if>
 										</div>
 									</div>
-								</div>
-								</c:if>
-							</c:forEach>
-						</div>
+									</c:if>
+								</c:forEach>
+							</div>
 						</c:if>
 					</c:if>
 				</div>

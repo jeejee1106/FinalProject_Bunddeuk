@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!-- 관심 프로젝트 -->
-
 <link rel="stylesheet" type="text/css" href="/css/profile.css">
 
 <!-- 스크립트 -->
@@ -14,8 +12,6 @@ $(function () {
       /* let num = ${num}; */
       /* var win = window.open("../chat/personalChat?num="+num, "PopupWin", "width=480,height=765 , left = 400px, top = 100px");  */
       onSubmit()
-      
-      
    });
 });
 
@@ -56,98 +52,80 @@ $(document).on("click",".LikedBtn", function() {
 
 <!-- 메뉴 -->
 <div class="container">
-
 	<div class="header-profile">
-	
 		<div class="container-user">
- 				<div class="user-photo" style="width: 100px; height: 100px;">
-					<c:if test="${dto.photo == null}">
-		    			<img class="" src="../../profile_image/basic.jpg"/>
-		    		</c:if>
-		    		<c:if test="${dto.photo != null}">
-    					<img class="img2" align="left" src="../../profile_image/${dto.photo }"/>
-    				</c:if>
-	    		</div>
-				<div class="a">
-					<div class="user-name">
-							<span>${dto.name }</span>
-						<c:if test="${sessionScope.sessionId == dto.id }">
-							<a class="user-info" href="/setting/main">
-								<div name="setting">
-									<img src="${root }/image/settings.png">
-								</div>
-							</a>
-						</c:if>
-					</div>
+			<div class="user-photo" style="width: 100px; height: 100px;">
+				<c:if test="${dto.photo == null}">
+	    			<img class="" src="../../profile_image/basic.jpg"/>
+	    		</c:if>
+	    		<c:if test="${dto.photo != null}">
+	  				<img class="img2" align="left" src="../../profile_image/${dto.photo }"/>
+	  			</c:if>
+	   		</div>
+			<div class="a">
+				<div class="user-name">
+					<span>${dto.name }</span>
+					<c:if test="${sessionScope.sessionId == dto.id }">
+						<a class="user-info" href="/setting/main">
+							<div name="setting">
+								<img src="${root }/image/settings.png">
+							</div>
+						</a>
+					</c:if>
 				</div>
+			</div>
 		</div>
-		
 		<div class="container-tab">
 			<div class="tab-warpper">
-			<c:if test="${ sessionScope.sessionId != 'admin'}">
-				<div class="tab-warpper-in">
-					<span class="tab current">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}">소개</a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}/backed">후원한 프로젝트 </a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}/created">올린 프로젝트
-							</a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/profile/${sessionScope.url}/liked" class="select">관심프로젝트 </a>
-						</div>
-					</span>
-					<c:if test="${sessionScope.sessionId == dto.id }">
-						<span class="tab">
+				<c:if test="${ sessionScope.sessionId != 'admin'}">
+					<div class="tab-warpper-in">
+						<span class="tab current">
 							<div class="link-wrapper">
-								<a href="/message/receivedMessage">문의 메세지 </a>
+								<a href="/profile/${sessionScope.url}">소개</a>
 							</div>
 						</span>
-						</c:if>
-						<c:if test="${sessionScope.loginok == 'yes'}">
-						<c:if test="${dto.id != sessionScope.sessionId}">
+						<span class="tab">
+							<div class="link-wrapper">
+								<a href="/profile/${sessionScope.url}/backed">후원한 프로젝트 </a>
+							</div>
+						</span>
+						<span class="tab">
+							<div class="link-wrapper">
+								<a href="/profile/${sessionScope.url}/created">올린 프로젝트
+								</a>
+							</div>
+						</span>
+						<span class="tab">
+							<div class="link-wrapper">
+								<a href="/profile/${sessionScope.url}/liked" class="select">관심프로젝트 </a>
+							</div>
+						</span>
+						<c:if test="${sessionScope.sessionId == dto.id }">
 							<span class="tab">
 								<div class="link-wrapper">
-									<a class='personal-chat'>채팅 </a>
+									<a href="/message/receivedMessage">문의 메세지 </a>
 								</div>
 							</span>
 						</c:if>
+						<c:if test="${sessionScope.loginok == 'yes'}">
+							<c:if test="${dto.id != sessionScope.sessionId}">
+								<span class="tab">
+									<div class="link-wrapper">
+										<a class='personal-chat'>채팅 </a>
+									</div>
+								</span>
+							</c:if>
 						</c:if>
 					</div>
-			</c:if>
-			<!-- 관리자 -->
-<%-- 			<c:if test="${sessionScope.sessionId == 'admin'}">
-				<div class="tab-warpper-in">
-					<span class="tab current">
-						<div class="link-wrapper">
-							<a href="/admin/member_management">회원목록</a>
-						</div>
-					</span>
-					<span class="tab">
-						<div class="link-wrapper">
-							<a href="/admin/project_management">프로젝트 </a>
-						</div>
-					</span>
-				</div>
-			</c:if> --%>
+				</c:if>
 			</div>
 		</div>
 	</div>
-							<form name="popForm">
-							<input type="hidden" name="id" value="${dto.id}" />
-						</form>
-
+	<form name="popForm">
+		<input type="hidden" name="id" value="${dto.id}" />
+	</form>
 </div>
+
 <!-- 찜한 리스트 없을때 -->
 <c:if test="${likecount == 0 }">
 	<div class="ProjectListWithCard">
@@ -169,23 +147,23 @@ $(document).on("click",".LikedBtn", function() {
 
 <!-- 찜한 리스트 있을때 -->
 <c:if test="${likecount > 0 }">
-<div class="WarrantyFilterHeader">
-	<div class="resultCounter likedHeader">
-		<span>${likecount }</span>건의 찜한 내역이 있습니다.
+	<div class="WarrantyFilterHeader">
+		<div class="resultCounter likedHeader">
+			<span>${likecount }</span>건의 찜한 내역이 있습니다.
+		</div>
 	</div>
-</div>
-		<div class="ProjectListWithCard1">
-			<div class="Container__ContainerComponent1">
+	<div class="ProjectListWithCard1">
+		<div class="Container__ContainerComponent1">
 			<c:forEach var="l" items="${likeList }">
 				<div class="card-wrapper-liked">
 					<div class="ProjectCard_Wrapper">
 						<div class="like-link-wrapper">
 							<c:if test="${sessionScope.sessionId == dto.id }">
-							<div class="LikeButton">
-								<button type="button" class="LikedBtn" num="${l.num }" myid="${l.id }">
-									<span>좋아요</span>
-								</button>
-							</div>
+								<div class="LikeButton">
+									<button type="button" class="LikedBtn" num="${l.num }" myid="${l.id }">
+										<span>좋아요</span>
+									</button>
+								</div>
 							</c:if>
 							<div class="image-wrapper">
 								<a href="/project/detail?idx=${l.idx }">
@@ -219,15 +197,15 @@ $(document).on("click",".LikedBtn", function() {
 											<path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 24C4.5 34.8 13.2 43.5 24 43.5C34.8 43.5 43.5 34.8 43.5 24C43.5 13.3 34.8 4.5 24 4.5C13.2 4.5 4.5 13.2 4.5 24ZM2 24C2 11.9 11.9 2 24 2C36.1 2 46 11.9 46 24C46 36.1 36.1 46 24 46C11.9 46 2 36.1 2 24ZM22.8002 12.5H25.2002V24.4L32.8002 30.1L31.4002 32.1L22.8002 25.6V12.5Z"></path>
 										</svg>
 									</div>
-										<fmt:formatDate value="${l.start_date }"/> ~
-										<fmt:formatDate value="${l.end_date }"/>
+									<fmt:formatDate value="${l.start_date }"/> ~
+									<fmt:formatDate value="${l.end_date }"/>
 								</span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-			</div>
 		</div>
+	</div>
 </c:if>
 <!-- /찜한 리스트 있을때 -->

@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 후원 성공 세부내역 -->
-
 <link rel="stylesheet" type="text/css" href="/css/support-profile.css">
 
 <style>
@@ -108,7 +107,6 @@ $(function(){
  		       }
  		});
  	});
- 	
 });
 
 </script>
@@ -249,11 +247,8 @@ $(function(){
 			</div>
 		</div>
 		<div class="btn-wrap">
-			<button type="button" class="WarrantyCancelButton" num="${sdto.num }">
-				후원 취소</button>
-			<button type="button" class="GoToWarrantyListButton"
-				onclick="location.href='/profile/${sessionScope.url}/backed'">
-				후원목록 보기</button>
+			<button type="button" class="WarrantyCancelButton" num="${sdto.num }">후원 취소</button>
+			<button type="button" class="GoToWarrantyListButton" onclick="location.href='/profile/${sessionScope.url}/backed'">후원목록 보기</button>
 		</div>
 	</div>
 </div>
